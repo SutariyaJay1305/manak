@@ -1,0 +1,275 @@
+{% load static %}
+{% load custom_filter %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Report</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <div class=" mt-2 justify-content-between">
+                <h1 class="title">MANAK LG-DIAMOND REPORT</h1>
+                <h4 class="title_2">Manak rerport is based on all major labs and its production of both HPHT &
+                    CVD(monthly/annually). No liability is assumed as to accuracy of this information</h4>
+                <br>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="d-flex ali justify-content-center  ">
+            <div class="d-inline-block ">
+                <h4 class="title_3">Price change : <u>Dark Cell - Increased</u> / <u>Bold - Dropped </u> </h4>
+            </div>
+            <div class="d-inline-block mx-3">
+                <span class="row">
+                    <table class="info_table">
+                        <tr>
+                            <td class="increased_cell">5.2 Increased </td>
+                            <td class="dropped_cell">5.2 Dropped </td>
+
+                        </tr>
+
+                    </table>
+
+
+
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- serction 1 start -->
+    <div class="container mt-lg-5 pt-lg-3 mt-5">
+
+        {% for x in data %}
+        {% comment %} {% if not forloop.counter|divisibleby:2 %} {% endcomment %}
+        {% if not x.postion|divisibleby:2 %}
+        
+        <div class="row">
+            <div class="col-lg-6">
+                <table class="table table-bordered">
+
+                    <thead class="table-dark">
+                        <tr class="table_title">
+                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}} CT</b></td>
+                            <td class="bg-white text-dark" colspan="2"><b> {{x.parent_table.tabel_date | date:"m/d/y" }}</b></td>
+                            <td class="bg-white text-dark text-center" colspan="3"><b>{{x.parent_table.shape}} </b></td>
+                        </tr>
+                        <tr>
+                            <th>Manak</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-white bg-dark">IF</td>
+                            {% if "D_IF" in x.dropped %}<td class="dropped_cell">{{x.D_IF}}</td>{% elif "D_IF" in x.increased %}<td class="increased_cell">{{x.D_IF}}</td> {% else %}<td>{{x.D_IF}}</td>{% endif %}
+                            {% if "E_IF" in x.dropped %}<td class="dropped_cell">{{x.E_IF}}</td>{% elif "E_IF" in x.increased %}<td class="increased_cell">{{x.E_IF}}</td> {% else %}<td>{{x.E_IF}}</td>{% endif %}
+                            {% if "F_IF" in x.dropped %}<td class="dropped_cell">{{x.F_IF}}</td>{% elif "F_IF" in x.increased %}<td class="increased_cell">{{x.F_IF}}</td> {% else %}<td>{{x.F_IF}}</td>{% endif %}
+                            {% if "G_IF" in x.dropped %}<td class="dropped_cell">{{x.G_IF}}</td>{% elif "G_IF" in x.increased %}<td class="increased_cell">{{x.G_IF}}</td> {% else %}<td>{{x.G_IF}}</td>{% endif %}
+                            {% if "H_IF" in x.dropped %}<td class="dropped_cell">{{x.H_IF}}</td>{% elif "H_IF" in x.increased %}<td class="increased_cell">{{x.H_IF}}</td> {% else %}<td>{{x.H_IF}}</td>{% endif %}
+                            {% if "I_IF" in x.dropped %}<td class="dropped_cell">{{x.I_IF}}</td>{% elif "I_IF" in x.increased %}<td class="increased_cell">{{x.I_IF}}</td> {% else %}<td>{{x.I_IF}}</td>{% endif %}
+                            {% if "J_IF" in x.dropped %}<td class="dropped_cell">{{x.J_IF}}</td>{% elif "J_IF" in x.increased %}<td class="increased_cell">{{x.J_IF}}</td> {% else %}<td>{{x.J_IF}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VV1</td>
+                            {% if "D_VV1" in x.dropped %}<td class="dropped_cell">{{x.D_VV1}}</td>{% elif "D_VV1" in x.increased %}<td class="increased_cell">{{x.D_VV1}}</td> {% else %}<td>{{x.D_VV1}}</td>{% endif %}
+                            {% if "E_VV1" in x.dropped %}<td class="dropped_cell">{{x.E_VV1}}</td>{% elif "E_VV1" in x.increased %}<td class="increased_cell">{{x.E_VV1}}</td> {% else %}<td>{{x.E_VV1}}</td>{% endif %}
+                            {% if "F_SI2" in x.dropped %}<td class="dropped_cell">{{x.F_VV1}}</td>{% elif "F_VV1" in x.increased %}<td class="increased_cell">{{x.F_VV1}}</td> {% else %}<td>{{x.F_VV1}}</td>{% endif %}
+                            {% if "G_VV1" in x.dropped %}<td class="dropped_cell">{{x.G_VV1}}</td>{% elif "G_VV1" in x.increased %}<td class="increased_cell">{{x.G_VV1}}</td> {% else %}<td>{{x.G_VV1}}</td>{% endif %}
+                            {% if "H_VV1" in x.dropped %}<td class="dropped_cell">{{x.H_VV1}}</td>{% elif "H_VV1" in x.increased %}<td class="increased_cell">{{x.H_VV1}}</td> {% else %}<td>{{x.H_VV1}}</td>{% endif %}
+                            {% if "I_VV1" in x.dropped %}<td class="dropped_cell">{{x.I_VV1}}</td>{% elif "I_VV1" in x.increased %}<td class="increased_cell">{{x.I_VV1}}</td> {% else %}<td>{{x.I_VV1}}</td>{% endif %}
+                            {% if "J_VV1" in x.dropped %}<td class="dropped_cell">{{x.J_VV1}}</td>{% elif "J_VV1" in x.increased %}<td class="increased_cell">{{x.J_VV1}}</td> {% else %}<td>{{x.J_VV1}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VV2</td>
+                            {% if "D_SI2" in x.dropped %}<td class="dropped_cell">{{x.D_VV2}}</td>{% elif "D_VV2" in x.increased %}<td class="increased_cell">{{x.D_VV2}}</td> {% else %}<td>{{x.D_VV2}}</td>{% endif %}
+                            {% if "E_VV2" in x.dropped %}<td class="dropped_cell">{{x.E_VV2}}</td>{% elif "E_VV2" in x.increased %}<td class="increased_cell">{{x.E_VV2}}</td> {% else %}<td>{{x.E_VV2}}</td>{% endif %}
+                            {% if "F_VV2" in x.dropped %}<td class="dropped_cell">{{x.F_VV2}}</td>{% elif "F_VV2" in x.increased %}<td class="increased_cell">{{x.F_VV2}}</td> {% else %}<td>{{x.F_VV2}}</td>{% endif %}
+                            {% if "G_VV2" in x.dropped %}<td class="dropped_cell">{{x.G_VV2}}</td>{% elif "G_VV2" in x.increased %}<td class="increased_cell">{{x.G_VV2}}</td> {% else %}<td>{{x.G_VV2}}</td>{% endif %}
+                            {% if "H_VV2" in x.dropped %}<td class="dropped_cell">{{x.H_VV2}}</td>{% elif "H_VV2" in x.increased %}<td class="increased_cell">{{x.H_VV2}}</td> {% else %}<td>{{x.H_VV2}}</td>{% endif %}
+                            {% if "I_VV2" in x.dropped %}<td class="dropped_cell">{{x.I_VV2}}</td>{% elif "I_VV2" in x.increased %}<td class="increased_cell">{{x.I_VV2}}</td> {% else %}<td>{{x.I_VV2}}</td>{% endif %}
+                            {% if "J_VV2" in x.dropped %}<td class="dropped_cell">{{x.J_VV2}}</td>{% elif "J_VV2" in x.increased %}<td class="increased_cell">{{x.J_VV2}}</td> {% else %}<td>{{x.J_VV2}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VS1</td>
+                            {% if "D_VS1" in x.dropped %}<td class="dropped_cell">{{x.D_VS1}}</td>{% elif "D_VS1" in x.increased %}<td class="increased_cell">{{x.D_VS1}}</td> {% else %}<td>{{x.D_VS1}}</td>{% endif %}
+                            {% if "E_VS1" in x.dropped %}<td class="dropped_cell">{{x.E_VS1}}</td>{% elif "E_VS1" in x.increased %}<td class="increased_cell">{{x.E_VS1}}</td> {% else %}<td>{{x.E_VS1}}</td>{% endif %}
+                            {% if "F_VS1" in x.dropped %}<td class="dropped_cell">{{x.F_VS1}}</td>{% elif "F_VS1" in x.increased %}<td class="increased_cell">{{x.F_VS1}}</td> {% else %}<td>{{x.F_VS1}}</td>{% endif %}
+                            {% if "G_VS1" in x.dropped %}<td class="dropped_cell">{{x.G_VS1}}</td>{% elif "G_VS1" in x.increased %}<td class="increased_cell">{{x.G_VS1}}</td> {% else %}<td>{{x.G_VS1}}</td>{% endif %}
+                            {% if "H_VS1" in x.dropped %}<td class="dropped_cell">{{x.H_VS1}}</td>{% elif "H_VS1" in x.increased %}<td class="increased_cell">{{x.H_VS1}}</td> {% else %}<td>{{x.H_VS1}}</td>{% endif %}
+                            {% if "I_VS1" in x.dropped %}<td class="dropped_cell">{{x.I_VS1}}</td>{% elif "I_VS1" in x.increased %}<td class="increased_cell">{{x.I_VS1}}</td> {% else %}<td>{{x.I_VS1}}</td>{% endif %}
+                            {% if "J_VS1" in x.dropped %}<td class="dropped_cell">{{x.J_VS1}}</td>{% elif "J_VS1" in x.increased %}<td class="increased_cell">{{x.J_VS1}}</td> {% else %}<td>{{x.J_VS1}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VS2</td>
+                            {% if "D_VS2" in x.dropped %}<td class="dropped_cell">{{x.D_VS2}}</td>{% elif "D_VS2" in x.increased %}<td class="increased_cell">{{x.D_VS2}}</td> {% else %}<td>{{x.D_VS2}}</td>{% endif %}
+                            {% if "E_VS2" in x.dropped %}<td class="dropped_cell">{{x.E_VS2}}</td>{% elif "E_VS2" in x.increased %}<td class="increased_cell">{{x.E_VS2}}</td> {% else %}<td>{{x.E_VS2}}</td>{% endif %}
+                            {% if "F_VS2" in x.dropped %}<td class="dropped_cell">{{x.F_VS2}}</td>{% elif "F_VS2" in x.increased %}<td class="increased_cell">{{x.F_VS2}}</td> {% else %}<td>{{x.F_VS2}}</td>{% endif %}
+                            {% if "G_VS2" in x.dropped %}<td class="dropped_cell">{{x.G_VS2}}</td>{% elif "G_VS2" in x.increased %}<td class="increased_cell">{{x.G_VS2}}</td> {% else %}<td>{{x.G_VS2}}</td>{% endif %}
+                            {% if "H_VS2" in x.dropped %}<td class="dropped_cell">{{x.H_VS2}}</td>{% elif "H_VS2" in x.increased %}<td class="increased_cell">{{x.H_VS2}}</td> {% else %}<td>{{x.H_VS2}}</td>{% endif %}
+                            {% if "J_VS2" in x.dropped %}<td class="dropped_cell">{{x.J_VS2}}</td>{% elif "J_VS2" in x.increased %}<td class="increased_cell">{{x.J_VS2}}</td> {% else %}<td>{{x.J_VS2}}</td>{% endif %}
+                            {% if "I_VS2" in x.dropped %}<td class="dropped_cell">{{x.I_VS2}}</td>{% elif "I_VS2" in x.increased %}<td class="increased_cell">{{x.I_VS2}}</td> {% else %}<td>{{x.I_VS2}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">SI1</td>
+                            {% if "D_SI1" in x.dropped %}<td class="dropped_cell">{{x.D_SI1}}</td>{% elif "D_SI1" in x.increased %}<td class="increased_cell">{{x.D_SI1}}</td> {% else %}<td>{{x.D_SI1}}</td>{% endif %}
+                            {% if "E_SI1" in x.dropped %}<td class="dropped_cell">{{x.E_SI1}}</td>{% elif "E_SI1" in x.increased %}<td class="increased_cell">{{x.E_SI1}}</td> {% else %}<td>{{x.E_SI1}}</td>{% endif %}
+                            {% if "F_SI1" in x.dropped %}<td class="dropped_cell">{{x.F_SI1}}</td>{% elif "F_SI1" in x.increased %}<td class="increased_cell">{{x.F_SI1}}</td> {% else %}<td>{{x.F_SI1}}</td>{% endif %}
+                            {% if "G_SI1" in x.dropped %}<td class="dropped_cell">{{x.G_SI1}}</td>{% elif "G_SI1" in x.increased %}<td class="increased_cell">{{x.G_SI1}}</td> {% else %}<td>{{x.G_SI1}}</td>{% endif %}
+                            {% if "H_SI1" in x.dropped %}<td class="dropped_cell">{{x.H_SI1}}</td>{% elif "H_SI1" in x.increased %}<td class="increased_cell">{{x.H_SI1}}</td> {% else %}<td>{{x.H_SI1}}</td>{% endif %}
+                            {% if "I_SI1" in x.dropped %}<td class="dropped_cell">{{x.I_SI1}}</td>{% elif "I_SI1" in x.increased %}<td class="increased_cell">{{x.I_SI1}}</td> {% else %}<td>{{x.I_SI1}}</td>{% endif %}
+                            {% if "J_SI1" in x.dropped %}<td class="dropped_cell">{{x.J_SI1}}</td>{% elif "J_SI1" in x.increased %}<td class="increased_cell">{{x.J_SI1}}</td> {% else %}<td>{{x.J_SI1}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">SI2</td>          
+                            {% if "D_SI2" in x.dropped %}<td class="dropped_cell">{{x.D_SI2}}</td>{% elif "D_SI2" in x.increased %}<td class="increased_cell">{{x.D_SI2}}</td> {% else %}<td>{{x.D_SI2}}</td>{% endif %}
+                            {% if "E_SI2" in x.dropped %}<td class="dropped_cell">{{x.E_SI2}}</td>{% elif "E_SI2" in x.increased %}<td class="increased_cell">{{x.E_SI2}}</td> {% else %}<td>{{x.E_SI2}}</td>{% endif %}
+                            {% if "F_SI2" in x.dropped %}<td class="dropped_cell">{{x.F_SI2}}</td>{% elif "F_SI2" in x.increased %}<td class="increased_cell">{{x.F_SI2}}</td> {% else %}<td>{{x.F_SI2}}</td>{% endif %}
+                            {% if "G_SI2" in x.dropped %}<td class="dropped_cell">{{x.G_SI2}}</td>{% elif "G_SI2" in x.increased %}<td class="increased_cell">{{x.G_SI2}}</td> {% else %}<td>{{x.G_SI2}}</td>{% endif %}
+                            {% if "H_SI2" in x.dropped %}<td class="dropped_cell">{{x.H_SI2}}</td>{% elif "H_SI2" in x.increased %}<td class="increased_cell">{{x.H_SI2}}</td> {% else %}<td>{{x.H_SI2}}</td>{% endif %}
+                            {% if "I_SI2" in x.dropped %}<td class="dropped_cell">{{x.I_SI2}}</td>{% elif "I_SI2" in x.increased %}<td class="increased_cell">{{x.I_SI2}}</td> {% else %}<td>{{x.I_SI2}}</td>{% endif %}
+                            {% if "J_SI2" in x.dropped %}<td class="dropped_cell">{{x.J_SI2}}</td>{% elif "J_SI2" in x.increased %}<td class="increased_cell">{{x.J_SI2}}</td> {% else %}<td>{{x.J_SI2}}</td>{% endif %}
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="8">{{x.parent_table.text_description}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            {% else %}
+            
+            <div class="col-lg-6">
+                <table class="table table-bordered">
+
+                    <thead class="table-dark">
+                        <tr class="table_title">
+                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}} CT</b></td>
+                            <td class="bg-white text-dark" colspan="2"><b> {{x.parent_table.tabel_date | date:"m/d/y" }}</b></td>
+                            <td class="bg-white text-dark text-center" colspan="3"><b>{{x.parent_table.shape}} </b></td>
+                        </tr>
+                        <tr>
+                            <th>Manak</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-white bg-dark">IF</td>
+                            {% if "D_IF" in x.dropped %}<td class="dropped_cell">{{x.D_IF}}</td>{% elif "D_IF" in x.increased %}<td class="increased_cell">{{x.D_IF}}</td> {% else %}<td>{{x.D_IF}}</td>{% endif %}
+                            {% if "E_IF" in x.dropped %}<td class="dropped_cell">{{x.E_IF}}</td>{% elif "E_IF" in x.increased %}<td class="increased_cell">{{x.E_IF}}</td> {% else %}<td>{{x.E_IF}}</td>{% endif %}
+                            {% if "F_IF" in x.dropped %}<td class="dropped_cell">{{x.F_IF}}</td>{% elif "F_IF" in x.increased %}<td class="increased_cell">{{x.F_IF}}</td> {% else %}<td>{{x.F_IF}}</td>{% endif %}
+                            {% if "G_IF" in x.dropped %}<td class="dropped_cell">{{x.G_IF}}</td>{% elif "G_IF" in x.increased %}<td class="increased_cell">{{x.G_IF}}</td> {% else %}<td>{{x.G_IF}}</td>{% endif %}
+                            {% if "H_IF" in x.dropped %}<td class="dropped_cell">{{x.H_IF}}</td>{% elif "H_IF" in x.increased %}<td class="increased_cell">{{x.H_IF}}</td> {% else %}<td>{{x.H_IF}}</td>{% endif %}
+                            {% if "I_IF" in x.dropped %}<td class="dropped_cell">{{x.I_IF}}</td>{% elif "I_IF" in x.increased %}<td class="increased_cell">{{x.I_IF}}</td> {% else %}<td>{{x.I_IF}}</td>{% endif %}
+                            {% if "J_IF" in x.dropped %}<td class="dropped_cell">{{x.J_IF}}</td>{% elif "J_IF" in x.increased %}<td class="increased_cell">{{x.J_IF}}</td> {% else %}<td>{{x.J_IF}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VV1</td>
+                            {% if "D_VV1" in x.dropped %}<td class="dropped_cell">{{x.D_VV1}}</td>{% elif "D_VV1" in x.increased %}<td class="increased_cell">{{x.D_VV1}}</td> {% else %}<td>{{x.D_VV1}}</td>{% endif %}
+                            {% if "E_VV1" in x.dropped %}<td class="dropped_cell">{{x.E_VV1}}</td>{% elif "E_VV1" in x.increased %}<td class="increased_cell">{{x.E_VV1}}</td> {% else %}<td>{{x.E_VV1}}</td>{% endif %}
+                            {% if "F_SI2" in x.dropped %}<td class="dropped_cell">{{x.F_VV1}}</td>{% elif "F_VV1" in x.increased %}<td class="increased_cell">{{x.F_VV1}}</td> {% else %}<td>{{x.F_VV1}}</td>{% endif %}
+                            {% if "G_VV1" in x.dropped %}<td class="dropped_cell">{{x.G_VV1}}</td>{% elif "G_VV1" in x.increased %}<td class="increased_cell">{{x.G_VV1}}</td> {% else %}<td>{{x.G_VV1}}</td>{% endif %}
+                            {% if "H_VV1" in x.dropped %}<td class="dropped_cell">{{x.H_VV1}}</td>{% elif "H_VV1" in x.increased %}<td class="increased_cell">{{x.H_VV1}}</td> {% else %}<td>{{x.H_VV1}}</td>{% endif %}
+                            {% if "I_VV1" in x.dropped %}<td class="dropped_cell">{{x.I_VV1}}</td>{% elif "I_VV1" in x.increased %}<td class="increased_cell">{{x.I_VV1}}</td> {% else %}<td>{{x.I_VV1}}</td>{% endif %}
+                            {% if "J_VV1" in x.dropped %}<td class="dropped_cell">{{x.J_VV1}}</td>{% elif "J_VV1" in x.increased %}<td class="increased_cell">{{x.J_VV1}}</td> {% else %}<td>{{x.J_VV1}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VV2</td>
+                            {% if "D_SI2" in x.dropped %}<td class="dropped_cell">{{x.D_VV2}}</td>{% elif "D_VV2" in x.increased %}<td class="increased_cell">{{x.D_VV2}}</td> {% else %}<td>{{x.D_VV2}}</td>{% endif %}
+                            {% if "E_VV2" in x.dropped %}<td class="dropped_cell">{{x.E_VV2}}</td>{% elif "E_VV2" in x.increased %}<td class="increased_cell">{{x.E_VV2}}</td> {% else %}<td>{{x.E_VV2}}</td>{% endif %}
+                            {% if "F_VV2" in x.dropped %}<td class="dropped_cell">{{x.F_VV2}}</td>{% elif "F_VV2" in x.increased %}<td class="increased_cell">{{x.F_VV2}}</td> {% else %}<td>{{x.F_VV2}}</td>{% endif %}
+                            {% if "G_VV2" in x.dropped %}<td class="dropped_cell">{{x.G_VV2}}</td>{% elif "G_VV2" in x.increased %}<td class="increased_cell">{{x.G_VV2}}</td> {% else %}<td>{{x.G_VV2}}</td>{% endif %}
+                            {% if "H_VV2" in x.dropped %}<td class="dropped_cell">{{x.H_VV2}}</td>{% elif "H_VV2" in x.increased %}<td class="increased_cell">{{x.H_VV2}}</td> {% else %}<td>{{x.H_VV2}}</td>{% endif %}
+                            {% if "I_VV2" in x.dropped %}<td class="dropped_cell">{{x.I_VV2}}</td>{% elif "I_VV2" in x.increased %}<td class="increased_cell">{{x.I_VV2}}</td> {% else %}<td>{{x.I_VV2}}</td>{% endif %}
+                            {% if "J_VV2" in x.dropped %}<td class="dropped_cell">{{x.J_VV2}}</td>{% elif "J_VV2" in x.increased %}<td class="increased_cell">{{x.J_VV2}}</td> {% else %}<td>{{x.J_VV2}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VS1</td>
+                            {% if "D_VS1" in x.dropped %}<td class="dropped_cell">{{x.D_VS1}}</td>{% elif "D_VS1" in x.increased %}<td class="increased_cell">{{x.D_VS1}}</td> {% else %}<td>{{x.D_VS1}}</td>{% endif %}
+                            {% if "E_VS1" in x.dropped %}<td class="dropped_cell">{{x.E_VS1}}</td>{% elif "E_VS1" in x.increased %}<td class="increased_cell">{{x.E_VS1}}</td> {% else %}<td>{{x.E_VS1}}</td>{% endif %}
+                            {% if "F_VS1" in x.dropped %}<td class="dropped_cell">{{x.F_VS1}}</td>{% elif "F_VS1" in x.increased %}<td class="increased_cell">{{x.F_VS1}}</td> {% else %}<td>{{x.F_VS1}}</td>{% endif %}
+                            {% if "G_VS1" in x.dropped %}<td class="dropped_cell">{{x.G_VS1}}</td>{% elif "G_VS1" in x.increased %}<td class="increased_cell">{{x.G_VS1}}</td> {% else %}<td>{{x.G_VS1}}</td>{% endif %}
+                            {% if "H_VS1" in x.dropped %}<td class="dropped_cell">{{x.H_VS1}}</td>{% elif "H_VS1" in x.increased %}<td class="increased_cell">{{x.H_VS1}}</td> {% else %}<td>{{x.H_VS1}}</td>{% endif %}
+                            {% if "I_VS1" in x.dropped %}<td class="dropped_cell">{{x.I_VS1}}</td>{% elif "I_VS1" in x.increased %}<td class="increased_cell">{{x.I_VS1}}</td> {% else %}<td>{{x.I_VS1}}</td>{% endif %}
+                            {% if "J_VS1" in x.dropped %}<td class="dropped_cell">{{x.J_VS1}}</td>{% elif "J_VS1" in x.increased %}<td class="increased_cell">{{x.J_VS1}}</td> {% else %}<td>{{x.J_VS1}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VS2</td>
+                            {% if "D_VS2" in x.dropped %}<td class="dropped_cell">{{x.D_VS2}}</td>{% elif "D_VS2" in x.increased %}<td class="increased_cell">{{x.D_VS2}}</td> {% else %}<td>{{x.D_VS2}}</td>{% endif %}
+                            {% if "E_VS2" in x.dropped %}<td class="dropped_cell">{{x.E_VS2}}</td>{% elif "E_VS2" in x.increased %}<td class="increased_cell">{{x.E_VS2}}</td> {% else %}<td>{{x.E_VS2}}</td>{% endif %}
+                            {% if "F_VS2" in x.dropped %}<td class="dropped_cell">{{x.F_VS2}}</td>{% elif "F_VS2" in x.increased %}<td class="increased_cell">{{x.F_VS2}}</td> {% else %}<td>{{x.F_VS2}}</td>{% endif %}
+                            {% if "G_VS2" in x.dropped %}<td class="dropped_cell">{{x.G_VS2}}</td>{% elif "G_VS2" in x.increased %}<td class="increased_cell">{{x.G_VS2}}</td> {% else %}<td>{{x.G_VS2}}</td>{% endif %}
+                            {% if "H_VS2" in x.dropped %}<td class="dropped_cell">{{x.H_VS2}}</td>{% elif "H_VS2" in x.increased %}<td class="increased_cell">{{x.H_VS2}}</td> {% else %}<td>{{x.H_VS2}}</td>{% endif %}
+                            {% if "J_VS2" in x.dropped %}<td class="dropped_cell">{{x.J_VS2}}</td>{% elif "J_VS2" in x.increased %}<td class="increased_cell">{{x.J_VS2}}</td> {% else %}<td>{{x.J_VS2}}</td>{% endif %}
+                            {% if "I_VS2" in x.dropped %}<td class="dropped_cell">{{x.I_VS2}}</td>{% elif "I_VS2" in x.increased %}<td class="increased_cell">{{x.I_VS2}}</td> {% else %}<td>{{x.I_VS2}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">SI1</td>
+                            {% if "D_SI1" in x.dropped %}<td class="dropped_cell">{{x.D_SI1}}</td>{% elif "D_SI1" in x.increased %}<td class="increased_cell">{{x.D_SI1}}</td> {% else %}<td>{{x.D_SI1}}</td>{% endif %}
+                            {% if "E_SI1" in x.dropped %}<td class="dropped_cell">{{x.E_SI1}}</td>{% elif "E_SI1" in x.increased %}<td class="increased_cell">{{x.E_SI1}}</td> {% else %}<td>{{x.E_SI1}}</td>{% endif %}
+                            {% if "F_SI1" in x.dropped %}<td class="dropped_cell">{{x.F_SI1}}</td>{% elif "F_SI1" in x.increased %}<td class="increased_cell">{{x.F_SI1}}</td> {% else %}<td>{{x.F_SI1}}</td>{% endif %}
+                            {% if "G_SI1" in x.dropped %}<td class="dropped_cell">{{x.G_SI1}}</td>{% elif "G_SI1" in x.increased %}<td class="increased_cell">{{x.G_SI1}}</td> {% else %}<td>{{x.G_SI1}}</td>{% endif %}
+                            {% if "H_SI1" in x.dropped %}<td class="dropped_cell">{{x.H_SI1}}</td>{% elif "H_SI1" in x.increased %}<td class="increased_cell">{{x.H_SI1}}</td> {% else %}<td>{{x.H_SI1}}</td>{% endif %}
+                            {% if "I_SI1" in x.dropped %}<td class="dropped_cell">{{x.I_SI1}}</td>{% elif "I_SI1" in x.increased %}<td class="increased_cell">{{x.I_SI1}}</td> {% else %}<td>{{x.I_SI1}}</td>{% endif %}
+                            {% if "J_SI1" in x.dropped %}<td class="dropped_cell">{{x.J_SI1}}</td>{% elif "J_SI1" in x.increased %}<td class="increased_cell">{{x.J_SI1}}</td> {% else %}<td>{{x.J_SI1}}</td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">SI2</td>          
+                            {% if "D_SI2" in x.dropped %}<td class="dropped_cell">{{x.D_SI2}}</td>{% elif "D_SI2" in x.increased %}<td class="increased_cell">{{x.D_SI2}}</td> {% else %}<td>{{x.D_SI2}}</td>{% endif %}
+                            {% if "E_SI2" in x.dropped %}<td class="dropped_cell">{{x.E_SI2}}</td>{% elif "E_SI2" in x.increased %}<td class="increased_cell">{{x.E_SI2}}</td> {% else %}<td>{{x.E_SI2}}</td>{% endif %}
+                            {% if "F_SI2" in x.dropped %}<td class="dropped_cell">{{x.F_SI2}}</td>{% elif "F_SI2" in x.increased %}<td class="increased_cell">{{x.F_SI2}}</td> {% else %}<td>{{x.F_SI2}}</td>{% endif %}
+                            {% if "G_SI2" in x.dropped %}<td class="dropped_cell">{{x.G_SI2}}</td>{% elif "G_SI2" in x.increased %}<td class="increased_cell">{{x.G_SI2}}</td> {% else %}<td>{{x.G_SI2}}</td>{% endif %}
+                            {% if "H_SI2" in x.dropped %}<td class="dropped_cell">{{x.H_SI2}}</td>{% elif "H_SI2" in x.increased %}<td class="increased_cell">{{x.H_SI2}}</td> {% else %}<td>{{x.H_SI2}}</td>{% endif %}
+                            {% if "I_SI2" in x.dropped %}<td class="dropped_cell">{{x.I_SI2}}</td>{% elif "I_SI2" in x.increased %}<td class="increased_cell">{{x.I_SI2}}</td> {% else %}<td>{{x.I_SI2}}</td>{% endif %}
+                            {% if "J_SI2" in x.dropped %}<td class="dropped_cell">{{x.J_SI2}}</td>{% elif "J_SI2" in x.increased %}<td class="increased_cell">{{x.J_SI2}}</td> {% else %}<td>{{x.J_SI2}}</td>{% endif %}
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="8">{{x.parent_table.text_description}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        {% endif %}
+        {% endfor %}
+    </div>
+    <!-- section 1 end -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.mank-nav{
+    background-color: #031cfc;
+    
+}
+.manak-txt{
+    
+    color: #FFFFFF;
+    
+}
+.lgdp-txt{
+
+  color: #FFFFFF;
+    
+}
+
+/* section 1 start */
+.manak-img-div{
+ background-color: #e6e7ed;
+}
+.log-in{
+    background-color: red;
+    color: #FFFFFF;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    width: 200px;
+    border-radius: 8px;
+}
+.Register-txt{
+    text-align: center;
+    text-decoration: none;
+    color: red;
+    font-size: 20px;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.mail-png{
+    float: right;
+}
+.manak-sec-txt{
+    font-size: 20px;
+    font-weight: 500;
+    text-align: justify;
+}
+/* section 1 end */
+/* section 2 start */
+.mtxt-1{
+    font-size: 14px;
+    font-weight: 700;
+}
+/* section 2 end */
