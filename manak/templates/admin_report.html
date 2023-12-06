@@ -1,0 +1,386 @@
+{% load static %}
+{% load custom_filter %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Report</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <a href="/logout"><p class="btn btn-secondary float-end mt-3">Logout</p></a>
+        <div class="row text-center">
+            <div class=" mt-2 justify-content-between">
+                <h1 class="title">MANAK LG-DIAMOND REPORT</h1>
+                <h4 class="title_2">Manak rerport is based on all major labs and its production of both HPHT &
+                    CVD(monthly/annually). No liability is assumed as to accuracy of this information</h4>
+                <br>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="d-flex ali justify-content-center align-items-center ">
+            <div class="d-inline-block ">
+                <h4 class="title_3">Price change : <u>Dark Cell - Increased</u> / <u>Bold - Dropped </u> </h4>
+            </div>
+            <div class="d-inline-block mx-3">
+                <span class="row">
+                    <table class="info_table">
+                        <tr>
+                            <td class="increased_cell">5.2 Increased </td>
+                            <td>5.2 Dropped </td>
+
+                        </tr>
+
+                    </table>
+                </span>
+            </div>
+            <div class="dropdown ms-4">
+                <b><label for="shapes">Select Shape:</label></b>
+                    <select name="shapes" id="shape">
+                        
+                        {% if type == "round" %}<option value="round" disabled selected>Round</option> {% else %}<option value="pear" disabled selected>Pear</option>{% endif %}
+                    <option value="round">Round</option>
+                    <option value="pear" >Pear</option>
+                    
+                    </select>
+              </div>
+              <div class="ms-4">
+                <button type="button" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                  </svg> Print </button>
+              </div>
+        </div>
+        
+    </div>
+
+    <!-- serction 1 start -->
+   
+
+    <div class="container mt-lg-5 pt-lg-3 mt-5">
+
+        {% for x in data %}
+        {% comment %} {% if not forloop.counter|divisibleby:2 %} {% endcomment %}
+        {% if not x.postion|divisibleby:2 %}
+        <form class="update">
+        {% csrf_token %}
+            <input type="hidden" name="table_position" value="{{x.postion}}"></input>
+        <div class="row">
+            <div class="col-lg-6">
+                <table class=" table table-bordered" cellpadding = "0">
+
+                    <thead class=" table-dark">
+                        <tr class=" table_title">
+                            <td class="bg-white text-dark" colspan="2"><b>{{x.parent_table.carat_range}} CT</b></td>
+                            <td class="bg-white text-dark" colspan="2"><input type="date" name="date" value="{{x.parent_table.tabel_date | date:"Y-m-d" }}"></td>
+                            <td class="bg-white text-dark text-center" colspan="2"><b>{{x.parent_table.shape}} </b></td>
+                            <td class="bg-white text-dark text-center" colspan="2"><button class="btn btn-dark " type="submit">Update</button></td>
+
+                        </tr>
+                        <tr>
+                            <th>Manak</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-white bg-dark">IF</td>
+                            {% if "D_IF" in x.dropped %}<td><input class="dropped_cell" name="D_IF" size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td>{% elif "D_IF" in x.increased %}<td class="increased_cell"><input name="D_IF"  size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_IF"  size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_IF" in x.dropped %}<td><input class="dropped_cell" name="E_IF" size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td>{% elif "E_IF" in x.increased %}<td class="increased_cell"><input name="E_IF"  size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_IF"  size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_IF" in x.dropped %}<td><input class="dropped_cell" name="F_IF" size="3" value="{{x.F_IF |floatformat:"0" }}"></imput></td>{% elif "F_IF" in x.increased %}<td class="increased_cell"><input name="F_IF"  size="3" value="{{x.F_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_IF"  size="3" value="{{x.F_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_IF" in x.dropped %}<td><input class="dropped_cell" name="G_IF" size="3" value="{{x.G_IF |floatformat:"0" }}"></imput></td>{% elif "G_IF" in x.increased %}<td class="increased_cell"><input name="G_IF"  size="3" value="{{x.G_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_IF"  size="3" value="{{x.G_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_IF" in x.dropped %}<td><input class="dropped_cell" name="H_IF" size="3" value="{{x.H_IF |floatformat:"0" }}"></imput></td>{% elif "H_IF" in x.increased %}<td class="increased_cell"><input name="H_IF"  size="3" value="{{x.H_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_IF"  size="3" value="{{x.H_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_IF" in x.dropped %}<td><input class="dropped_cell" name="I_IF" size="3" value="{{x.I_IF |floatformat:"0" }}"></imput></td>{% elif "I_IF" in x.increased %}<td class="increased_cell"><input name="I_IF"  size="3" value="{{x.I_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_IF"  size="3" value="{{x.I_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_IF" in x.dropped %}<td><input class="dropped_cell" name="J_IF" size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td>{% elif "J_IF" in x.increased %}<td class="increased_cell"><input name="J_IF"  size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_IF"  size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td>{% endif %}
+
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VV1</td>
+                            {% if "D_VV1" in x.dropped %}<td><input class="dropped_cell" name="D_VV1" size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td>{% elif "D_VV1" in x.increased %}<td class="increased_cell"><input name="D_VV1"  size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VV1"  size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_VV1" in x.dropped %}<td><input class="dropped_cell" name="E_VV1" size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td>{% elif "E_VV1" in x.increased %}<td class="increased_cell"><input name="E_VV1"  size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VV1"  size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_SI2" in x.dropped %}<td><input class="dropped_cell" name="F_VV1" size="3" value="{{x.F_VV1 |floatformat:"0" }}"></imput></td>{% elif "F_VV1" in x.increased %}<td class="increased_cell"><input name="F_VV1"  size="3" value="{{x.F_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_VV1"  size="3" value="{{x.F_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_VV1" in x.dropped %}<td><input class="dropped_cell" name="G_VV1" size="3" value="{{x.G_VV1 |floatformat:"0" }}"></imput></td>{% elif "G_VV1" in x.increased %}<td class="increased_cell"><input name="G_VV1"  size="3" value="{{x.G_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_VV1"  size="3" value="{{x.G_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_VV1" in x.dropped %}<td><input class="dropped_cell" name="H_VV1" size="3" value="{{x.H_VV1 |floatformat:"0" }}"></imput></td>{% elif "H_VV1" in x.increased %}<td class="increased_cell"><input name="H_VV1"  size="3" value="{{x.H_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_VV1"  size="3" value="{{x.H_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_VV1" in x.dropped %}<td><input class="dropped_cell" name="I_VV1" size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td>{% elif "I_VV1" in x.increased %}<td class="increased_cell"><input name="I_VV1"  size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VV1"  size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_VV1" in x.dropped %}<td><input class="dropped_cell" name="J_VV1" size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td>{% elif "J_VV1" in x.increased %}<td class="increased_cell"><input name="J_VV1"  size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VV1"  size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VV2</td>
+                            {% if "D_VV2" in x.dropped %}<td><input class="dropped_cell" name="D_VV2" size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td>{% elif "D_VV2" in x.increased %}<td class="increased_cell"><input name="D_VV2"  size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VV2"  size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_VV2" in x.dropped %}<td><input class="dropped_cell" name="E_VV2" size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td>{% elif "E_VV2" in x.increased %}<td class="increased_cell"><input name="E_VV2"  size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VV2"  size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_VV2" in x.dropped %}<td><input class="dropped_cell" name="F_VV2" size="3" value="{{x.F_VV2 |floatformat:"0" }}"></imput></td>{% elif "F_VV2" in x.increased %}<td class="increased_cell"><input name="F_VV2"  size="3" value="{{x.F_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_VV2"  size="3" value="{{x.F_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_VV2" in x.dropped %}<td><input class="dropped_cell" name="G_VV2" size="3" value="{{x.G_VV2 |floatformat:"0" }}"></imput></td>{% elif "G_VV2" in x.increased %}<td class="increased_cell"><input name="G_VV2"  size="3" value="{{x.G_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_VV2"  size="3" value="{{x.G_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_VV2" in x.dropped %}<td><input class="dropped_cell" name="H_VV2" size="3" value="{{x.H_VV2 |floatformat:"0" }}"></imput></td>{% elif "H_VV2" in x.increased %}<td class="increased_cell"><input name="H_VV2"  size="3" value="{{x.H_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_VV2"  size="3" value="{{x.H_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_VV2" in x.dropped %}<td><input class="dropped_cell" name="I_VV2" size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td>{% elif "I_VV2" in x.increased %}<td class="increased_cell"><input name="I_VV2"  size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VV2"  size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_VV2" in x.dropped %}<td><input class="dropped_cell" name="J_VV2" size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td>{% elif "J_VV2" in x.increased %}<td class="increased_cell"><input name="J_VV2"  size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VV2"  size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VS1</td>
+                            {% if "D_VS1" in x.dropped %}<td><input class="dropped_cell" name="D_VS1" size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td>{% elif "D_VS1" in x.increased %}<td class="increased_cell"><input name="D_VS1"  size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VS1"  size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_VS1" in x.dropped %}<td><input class="dropped_cell" name="E_VS1" size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td>{% elif "E_VS1" in x.increased %}<td class="increased_cell"><input name="E_VS1"  size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VS1"  size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_VS1" in x.dropped %}<td><input class="dropped_cell" name="F_VS1" size="3" value="{{x.F_VS1 |floatformat:"0" }}"></imput></td>{% elif "F_VS1" in x.increased %}<td class="increased_cell"><input name="F_VS1"  size="3" value="{{x.F_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_VS1"  size="3" value="{{x.F_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_VS1" in x.dropped %}<td><input class="dropped_cell" name="G_VS1" size="3" value="{{x.G_VS1 |floatformat:"0" }}"></imput></td>{% elif "G_VS1" in x.increased %}<td class="increased_cell"><input name="G_VS1"  size="3" value="{{x.G_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_VS1"  size="3" value="{{x.G_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_VS1" in x.dropped %}<td><input class="dropped_cell" name="H_VS1" size="3" value="{{x.H_VS1 |floatformat:"0" }}"></imput></td>{% elif "H_VS1" in x.increased %}<td class="increased_cell"><input name="H_VS1"  size="3" value="{{x.H_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_VS1"  size="3" value="{{x.H_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_VS1" in x.dropped %}<td><input class="dropped_cell" name="I_VS1" size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td>{% elif "I_VS1" in x.increased %}<td class="increased_cell"><input name="I_VS1"  size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VS1"  size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_VS1" in x.dropped %}<td><input class="dropped_cell" name="J_VS1" size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td>{% elif "J_VS1" in x.increased %}<td class="increased_cell"><input name="J_VS1"  size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VS1"  size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VS2</td>
+                            {% if "D_VS2" in x.dropped %}<td><input class="dropped_cell" name="D_VS2" size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td>{% elif "D_VS2" in x.increased %}<td class="increased_cell"><input name="D_VS2"  size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VS2"  size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_VS2" in x.dropped %}<td><input class="dropped_cell" name="E_VS2" size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td>{% elif "E_VS2" in x.increased %}<td class="increased_cell"><input name="E_VS2"  size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VS2"  size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_VS2" in x.dropped %}<td><input class="dropped_cell" name="F_VS2" size="3" value="{{x.F_VS2 |floatformat:"0" }}"></imput></td>{% elif "F_VS2" in x.increased %}<td class="increased_cell"><input name="F_VS2"  size="3" value="{{x.F_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_VS2"  size="3" value="{{x.F_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_VS2" in x.dropped %}<td><input class="dropped_cell" name="G_VS2" size="3" value="{{x.G_VS2 |floatformat:"0" }}"></imput></td>{% elif "G_VS2" in x.increased %}<td class="increased_cell"><input name="G_VS2"  size="3" value="{{x.G_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_VS2"  size="3" value="{{x.G_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_VS2" in x.dropped %}<td><input class="dropped_cell" name="H_VS2" size="3" value="{{x.H_VS2 |floatformat:"0" }}"></imput></td>{% elif "H_VS2" in x.increased %}<td class="increased_cell"><input name="H_VS2"  size="3" value="{{x.H_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_VS2"  size="3" value="{{x.H_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_VS2" in x.dropped %}<td><input class="dropped_cell" name="I_VS2" size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td>{% elif "I_VS2" in x.increased %}<td class="increased_cell"><input name="I_VS2"  size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VS2"  size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_VS2" in x.dropped %}<td><input class="dropped_cell" name="J_VS2" size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td>{% elif "J_VS2" in x.increased %}<td class="increased_cell"><input name="J_VS2"  size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VS2"  size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">SI1</td>
+                            {% if "D_SI1" in x.dropped %}<td><input class="dropped_cell" name="D_SI1" size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td>{% elif "D_SI1" in x.increased %}<td class="increased_cell"><input name="D_SI1"  size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_SI1"  size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_SI1" in x.dropped %}<td><input class="dropped_cell" name="E_SI1" size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td>{% elif "E_SI1" in x.increased %}<td class="increased_cell"><input name="E_SI1"  size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_SI1"  size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_SI1" in x.dropped %}<td><input class="dropped_cell" name="F_SI1" size="3" value="{{x.F_SI1 |floatformat:"0" }}"></imput></td>{% elif "F_SI1" in x.increased %}<td class="increased_cell"><input name="F_SI1"  size="3" value="{{x.F_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_SI1"  size="3" value="{{x.F_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_SI1" in x.dropped %}<td><input class="dropped_cell" name="G_SI1" size="3" value="{{x.G_SI1 |floatformat:"0" }}"></imput></td>{% elif "G_SI1" in x.increased %} <td class="increased_cell"><input name="G_SI1"  size="3" value="{{x.G_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_SI1"  size="3" value="{{x.G_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_SI1" in x.dropped %}<td><input class="dropped_cell" name="H_SI1" size="3" value="{{x.H_SI1 |floatformat:"0" }}"></imput></td>{% elif "H_SI1" in x.increased %}<td class="increased_cell"><input name="H_SI1"  size="3" value="{{x.H_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_SI1"  size="3" value="{{x.H_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_SI1" in x.dropped %}<td><input class="dropped_cell" name="I_SI1" size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td>{% elif "I_SI1" in x.increased %}<td class="increased_cell"><input name="I_SI1"  size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_SI1"  size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_SI1" in x.dropped %}<td><input class="dropped_cell" name="J_SI1" size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td>{% elif "J_SI1" in x.increased %}<td class="increased_cell"><input name="J_SI1"  size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_SI1"  size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">SI2</td>          
+                            {% if "D_SI2" in x.dropped %}<td><input class="dropped_cell" name="D_SI2" size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td>{% elif "D_SI2" in x.increased %}<td class="increased_cell"><input name="D_SI2"  size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_SI2"  size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_SI2" in x.dropped %}<td><input class="dropped_cell" name="E_SI2" size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td>{% elif "E_SI2" in x.increased %}<td class="increased_cell"><input name="E_SI2"  size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_SI2"  size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_SI2" in x.dropped %}<td><input class="dropped_cell" name="F_SI2" size="3" value="{{x.F_SI2 |floatformat:"0" }}"></imput></td>{% elif "F_SI2" in x.increased %}<td class="increased_cell"><input name="F_SI2"  size="3" value="{{x.F_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_SI2"  size="3" value="{{x.F_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_SI2" in x.dropped %}<td><input class="dropped_cell" name="G_SI2" size="3" value="{{x.G_SI2 |floatformat:"0" }}"></imput></td>{% elif "G_SI2" in x.increased %}<td class="increased_cell"><input name="G_SI2"  size="3" value="{{x.G_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_SI2"  size="3" value="{{x.G_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_SI2" in x.dropped %}<td><input class="dropped_cell" name="H_SI2" size="3" value="{{x.H_SI2 |floatformat:"0" }}"></imput></td>{% elif "H_SI2" in x.increased %}<td class="increased_cell"><input name="H_SI2"  size="3" value="{{x.H_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_SI2"  size="3" value="{{x.H_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_SI2" in x.dropped %}<td><input class="dropped_cell" name="I_SI2" size="3" value="{{x.I_SI2 |floatformat:"0" }}"></imput></td>{% elif "I_SI2" in x.increased %}<td class="increased_cell"><input name="I_SI2"  size="3" value="{{x.I_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_SI2"  size="3" value="{{x.I_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_SI2" in x.dropped %}<td><input class="dropped_cell" name="J_SI2" size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td>{% elif "J_SI2" in x.increased %}<td class="increased_cell"><input name="J_SI2"  size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_SI2"  size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="8">{{x.parent_table.text_description }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </form>
+
+            {% else %}
+            
+            <div class="col-lg-6">
+                <form class="update">
+                    {% csrf_token %}
+                        <input type="hidden" name="table_position" value="{{x.postion}}"></input>
+                <table class="table table-bordered">
+
+                    <thead class="table-dark">
+                        <tr class="table_title">
+                            <td class="bg-white text-dark" colspan="2"><b>{{x.parent_table.carat_range}} CT</b></td>
+                            <td class="bg-white text-dark" colspan="2"><input type="date" value="{{x.parent_table.tabel_date | date:"Y-m-d" }}"></td>
+                            <td class="bg-white text-dark text-center" colspan="2"><b>{{x.parent_table.shape}} </b></td>
+                            <td class="bg-white text-dark text-center" colspan="2"><button class="btn btn-dark " type="submit">Update</button></td>
+                            
+
+                        </tr>
+                        <tr>
+                            <th>Manak</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-white bg-dark">IF</td>
+                            {% if "D_IF" in x.dropped %}<td><input class="dropped_cell" name="D_IF" size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td>{% elif "D_IF" in x.increased %}<td class="increased_cell"><input name="D_IF"  size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_IF"  size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_IF" in x.dropped %}<td><input class="dropped_cell" name="E_IF" size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td>{% elif "E_IF" in x.increased %}<td class="increased_cell"><input name="E_IF"  size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_IF"  size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_IF" in x.dropped %}<td><input class="dropped_cell" name="F_IF" size="3" value="{{x.F_IF |floatformat:"0" }}"></imput></td>{% elif "F_IF" in x.increased %}<td class="increased_cell"><input name="F_IF"  size="3" value="{{x.F_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_IF"  size="3" value="{{x.F_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_IF" in x.dropped %}<td><input class="dropped_cell" name="G_IF" size="3" value="{{x.G_IF |floatformat:"0" }}"></imput></td>{% elif "G_IF" in x.increased %}<td class="increased_cell"><input name="G_IF"  size="3" value="{{x.G_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_IF"  size="3" value="{{x.G_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_IF" in x.dropped %}<td><input class="dropped_cell" name="H_IF" size="3" value="{{x.H_IF |floatformat:"0" }}"></imput></td>{% elif "H_IF" in x.increased %}<td class="increased_cell"><input name="H_IF"  size="3" value="{{x.H_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_IF"  size="3" value="{{x.H_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_IF" in x.dropped %}<td><input class="dropped_cell" name="I_IF" size="3" value="{{x.I_IF |floatformat:"0" }}"></imput></td>{% elif "I_IF" in x.increased %}<td class="increased_cell"><input name="I_IF"  size="3" value="{{x.I_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_IF"  size="3" value="{{x.I_IF |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_IF" in x.dropped %}<td><input class="dropped_cell" name="J_IF" size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td>{% elif "J_IF" in x.increased %}<td class="increased_cell"><input name="J_IF"  size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_IF"  size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td>{% endif %}
+
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VV1</td>
+                            {% if "D_VV1" in x.dropped %}<td><input class="dropped_cell" name="D_VV1" size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td>{% elif "D_VV1" in x.increased %}<td class="increased_cell"><input name="D_VV1"  size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VV1"  size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_VV1" in x.dropped %}<td><input class="dropped_cell" name="E_VV1" size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td>{% elif "E_VV1" in x.increased %}<td class="increased_cell"><input name="E_VV1"  size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VV1"  size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_SI2" in x.dropped %}<td><input class="dropped_cell" name="F_VV1" size="3" value="{{x.F_VV1 |floatformat:"0" }}"></imput></td>{% elif "F_VV1" in x.increased %}<td class="increased_cell"><input name="F_VV1"  size="3" value="{{x.F_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_VV1"  size="3" value="{{x.F_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_VV1" in x.dropped %}<td><input class="dropped_cell" name="G_VV1" size="3" value="{{x.G_VV1 |floatformat:"0" }}"></imput></td>{% elif "G_VV1" in x.increased %}<td class="increased_cell"><input name="G_VV1"  size="3" value="{{x.G_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_VV1"  size="3" value="{{x.G_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_VV1" in x.dropped %}<td><input class="dropped_cell" name="H_VV1" size="3" value="{{x.H_VV1 |floatformat:"0" }}"></imput></td>{% elif "H_VV1" in x.increased %}<td class="increased_cell"><input name="H_VV1"  size="3" value="{{x.H_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_VV1"  size="3" value="{{x.H_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_VV1" in x.dropped %}<td><input class="dropped_cell" name="I_VV1" size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td>{% elif "I_VV1" in x.increased %}<td class="increased_cell"><input name="I_VV1"  size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VV1"  size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_VV1" in x.dropped %}<td><input class="dropped_cell" name="J_VV1" size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td>{% elif "J_VV1" in x.increased %}<td class="increased_cell"><input name="J_VV1"  size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VV1"  size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VV2</td>
+                            {% if "D_VV2" in x.dropped %}<td><input class="dropped_cell" name="D_VV2" size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td>{% elif "D_VV2" in x.increased %}<td class="increased_cell"><input name="D_VV2"  size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VV2"  size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_VV2" in x.dropped %}<td><input class="dropped_cell" name="E_VV2" size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td>{% elif "E_VV2" in x.increased %}<td class="increased_cell"><input name="E_VV2"  size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VV2"  size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_VV2" in x.dropped %}<td><input class="dropped_cell" name="F_VV2" size="3" value="{{x.F_VV2 |floatformat:"0" }}"></imput></td>{% elif "F_VV2" in x.increased %}<td class="increased_cell"><input name="F_VV2"  size="3" value="{{x.F_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_VV2"  size="3" value="{{x.F_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_VV2" in x.dropped %}<td><input class="dropped_cell" name="G_VV2" size="3" value="{{x.G_VV2 |floatformat:"0" }}"></imput></td>{% elif "G_VV2" in x.increased %}<td class="increased_cell"><input name="G_VV2"  size="3" value="{{x.G_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_VV2"  size="3" value="{{x.G_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_VV2" in x.dropped %}<td><input class="dropped_cell" name="H_VV2" size="3" value="{{x.H_VV2 |floatformat:"0" }}"></imput></td>{% elif "H_VV2" in x.increased %}<td class="increased_cell"><input name="H_VV2"  size="3" value="{{x.H_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_VV2"  size="3" value="{{x.H_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_VV2" in x.dropped %}<td><input class="dropped_cell" name="I_VV2" size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td>{% elif "I_VV2" in x.increased %}<td class="increased_cell"><input name="I_VV2"  size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VV2"  size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_VV2" in x.dropped %}<td><input class="dropped_cell" name="J_VV2" size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td>{% elif "J_VV2" in x.increased %}<td class="increased_cell"><input name="J_VV2"  size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VV2"  size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VS1</td>
+                            {% if "D_VS1" in x.dropped %}<td><input class="dropped_cell" name="D_VS1" size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td>{% elif "D_VS1" in x.increased %}<td class="increased_cell"><input name="D_VS1"  size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VS1"  size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_VS1" in x.dropped %}<td><input class="dropped_cell" name="E_VS1" size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td>{% elif "E_VS1" in x.increased %}<td class="increased_cell"><input name="E_VS1"  size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VS1"  size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_VS1" in x.dropped %}<td><input class="dropped_cell" name="F_VS1" size="3" value="{{x.F_VS1 |floatformat:"0" }}"></imput></td>{% elif "F_VS1" in x.increased %}<td class="increased_cell"><input name="F_VS1"  size="3" value="{{x.F_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_VS1"  size="3" value="{{x.F_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_VS1" in x.dropped %}<td><input class="dropped_cell" name="G_VS1" size="3" value="{{x.G_VS1 |floatformat:"0" }}"></imput></td>{% elif "G_VS1" in x.increased %}<td class="increased_cell"><input name="G_VS1"  size="3" value="{{x.G_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_VS1"  size="3" value="{{x.G_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_VS1" in x.dropped %}<td><input class="dropped_cell" name="H_VS1" size="3" value="{{x.H_VS1 |floatformat:"0" }}"></imput></td>{% elif "H_VS1" in x.increased %}<td class="increased_cell"><input name="H_VS1"  size="3" value="{{x.H_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_VS1"  size="3" value="{{x.H_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_VS1" in x.dropped %}<td><input class="dropped_cell" name="I_VS1" size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td>{% elif "I_VS1" in x.increased %}<td class="increased_cell"><input name="I_VS1"  size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VS1"  size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_VS1" in x.dropped %}<td><input class="dropped_cell" name="J_VS1" size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td>{% elif "J_VS1" in x.increased %}<td class="increased_cell"><input name="J_VS1"  size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VS1"  size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">VS2</td>
+                            {% if "D_VS2" in x.dropped %}<td><input class="dropped_cell" name="D_VS2" size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td>{% elif "D_VS2" in x.increased %}<td class="increased_cell"><input name="D_VS2"  size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VS2"  size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_VS2" in x.dropped %}<td><input class="dropped_cell" name="E_VS2" size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td>{% elif "E_VS2" in x.increased %}<td class="increased_cell"><input name="E_VS2"  size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VS2"  size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_VS2" in x.dropped %}<td><input class="dropped_cell" name="F_VS2" size="3" value="{{x.F_VS2 |floatformat:"0" }}"></imput></td>{% elif "F_VS2" in x.increased %}<td class="increased_cell"><input name="F_VS2"  size="3" value="{{x.F_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_VS2"  size="3" value="{{x.F_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_VS2" in x.dropped %}<td><input class="dropped_cell" name="G_VS2" size="3" value="{{x.G_VS2 |floatformat:"0" }}"></imput></td>{% elif "G_VS2" in x.increased %}<td class="increased_cell"><input name="G_VS2"  size="3" value="{{x.G_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_VS2"  size="3" value="{{x.G_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_VS2" in x.dropped %}<td><input class="dropped_cell" name="H_VS2" size="3" value="{{x.H_VS2 |floatformat:"0" }}"></imput></td>{% elif "H_VS2" in x.increased %}<td class="increased_cell"><input name="H_VS2"  size="3" value="{{x.H_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_VS2"  size="3" value="{{x.H_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_VS2" in x.dropped %}<td><input class="dropped_cell" name="I_VS2" size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td>{% elif "I_VS2" in x.increased %}<td class="increased_cell"><input name="I_VS2"  size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VS2"  size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_VS2" in x.dropped %}<td><input class="dropped_cell" name="J_VS2" size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td>{% elif "J_VS2" in x.increased %}<td class="increased_cell"><input name="J_VS2"  size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VS2"  size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">SI1</td>
+                            {% if "D_SI1" in x.dropped %}<td><input class="dropped_cell" name="D_SI1" size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td>{% elif "D_SI1" in x.increased %}<td class="increased_cell"><input name="D_SI1"  size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_SI1"  size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_SI1" in x.dropped %}<td><input class="dropped_cell" name="E_SI1" size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td>{% elif "E_SI1" in x.increased %}<td class="increased_cell"><input name="E_SI1"  size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_SI1"  size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_SI1" in x.dropped %}<td><input class="dropped_cell" name="F_SI1" size="3" value="{{x.F_SI1 |floatformat:"0" }}"></imput></td>{% elif "F_SI1" in x.increased %}<td class="increased_cell"><input name="F_SI1"  size="3" value="{{x.F_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_SI1"  size="3" value="{{x.F_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_SI1" in x.dropped %}<td><input class="dropped_cell" name="G_SI1" size="3" value="{{x.G_SI1 |floatformat:"0" }}"></imput></td>{% elif "G_SI1" in x.increased %} <td class="increased_cell"><input name="G_SI1"  size="3" value="{{x.G_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_SI1"  size="3" value="{{x.G_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_SI1" in x.dropped %}<td><input class="dropped_cell" name="H_SI1" size="3" value="{{x.H_SI1 |floatformat:"0" }}"></imput></td>{% elif "H_SI1" in x.increased %}<td class="increased_cell"><input name="H_SI1"  size="3" value="{{x.H_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_SI1"  size="3" value="{{x.H_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_SI1" in x.dropped %}<td><input class="dropped_cell" name="I_SI1" size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td>{% elif "I_SI1" in x.increased %}<td class="increased_cell"><input name="I_SI1"  size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_SI1"  size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_SI1" in x.dropped %}<td><input class="dropped_cell" name="J_SI1" size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td>{% elif "J_SI1" in x.increased %}<td class="increased_cell"><input name="J_SI1"  size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_SI1"  size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
+                        </tr>
+                        <tr>
+                            <td class="text-white bg-dark">SI2</td>          
+                            {% if "D_SI2" in x.dropped %}<td><input class="dropped_cell" name="D_SI2" size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td>{% elif "D_SI2" in x.increased %}<td class="increased_cell"><input name="D_SI2"  size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_SI2"  size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "E_SI2" in x.dropped %}<td><input class="dropped_cell" name="E_SI2" size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td>{% elif "E_SI2" in x.increased %}<td class="increased_cell"><input name="E_SI2"  size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_SI2"  size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "F_SI2" in x.dropped %}<td><input class="dropped_cell" name="F_SI2" size="3" value="{{x.F_SI2 |floatformat:"0" }}"></imput></td>{% elif "F_SI2" in x.increased %}<td class="increased_cell"><input name="F_SI2"  size="3" value="{{x.F_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="F_SI2"  size="3" value="{{x.F_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "G_SI2" in x.dropped %}<td><input class="dropped_cell" name="G_SI2" size="3" value="{{x.G_SI2 |floatformat:"0" }}"></imput></td>{% elif "G_SI2" in x.increased %}<td class="increased_cell"><input name="G_SI2"  size="3" value="{{x.G_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="G_SI2"  size="3" value="{{x.G_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "H_SI2" in x.dropped %}<td><input class="dropped_cell" name="H_SI2" size="3" value="{{x.H_SI2 |floatformat:"0" }}"></imput></td>{% elif "H_SI2" in x.increased %}<td class="increased_cell"><input name="H_SI2"  size="3" value="{{x.H_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="H_SI2"  size="3" value="{{x.H_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "I_SI2" in x.dropped %}<td><input class="dropped_cell" name="I_SI2" size="3" value="{{x.I_SI2 |floatformat:"0" }}"></imput></td>{% elif "I_SI2" in x.increased %}<td class="increased_cell"><input name="I_SI2"  size="3" value="{{x.I_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_SI2"  size="3" value="{{x.I_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            {% if "J_SI2" in x.dropped %}<td><input class="dropped_cell" name="J_SI2" size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td>{% elif "J_SI2" in x.increased %}<td class="increased_cell"><input name="J_SI2"  size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_SI2"  size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="8">{{x.parent_table.text_description }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+            </div>
+        
+            
+
+        </div>
+
+        {% endif %}
+        {% endfor %}
+
+        <div class="mb-5">
+            <p>For Price update: <b>ManakReport.com</b></p>
+        </div>
+
+
+        <form class="row g-3 mb-5" id="changeform">
+            {% csrf_token %}
+            <div class="col-md-3">
+                <input type="text" name="per_change" class="form-control" id="validationCustom01" placeholder="All prices will be changed" required>
+              </div>
+              <div class="col-md-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="change" id="increase" value="increase" required>
+                    <label class="form-check-label" for="increase">Increase</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="change" id="decrease" value="decrease">
+                    <label class="form-check-label" for="decrease">Decrease</label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-dark " type="submit">Update</button>
+
+              </div>
+        </form>
+    </div>
+   
+
+    
+    <!-- section 1 end -->
+    
+    <script>
+        $(document).ready(function () {
+
+        $('#changeform').submit(function (event) {
+            
+            event.preventDefault();
+            var change_data = ($(this).serialize())
+            
+            var shape = $('#shape :selected').val();
+
+            console.log(shape)
+            
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'update_price' %}",
+                data: change_data + "&shape="+shape,
+                success: function (response) {
+                    location.reload();
+                }
+            });
+          });
+            
+          $('.update').submit(function (event) {
+            event.preventDefault();
+            var data = ($(this).serialize())
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'update' %}",
+                data: data,
+                success: function (response) {
+                    location.reload();
+                }
+            });
+          });
+
+            $("#shape").change(function () {
+                var end = this.value;
+                $("#shape").value = end;
+
+                if (end == "round"){
+                    window.location.href = "{% url 'admin_report' %}?shape=round";
+                }else{
+                    window.location.href = "{% url 'admin_report' %}?shape=pear";
+                }
+            });
+        })
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

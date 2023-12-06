@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UIManager,MainTables,DataManager
+from .models import UIManager,MainTables,DataManager,User
 
 # Register your models here.
 class UIManagerAdmin(admin.ModelAdmin):
@@ -12,7 +12,11 @@ class MainTablesAdmin(admin.ModelAdmin):
 class DataManagerAdmin(admin.ModelAdmin):
     pass
 
+class UserAdmin(admin.ModelAdmin):
+    pass
 
+
+admin.site.register(User)
 admin.site.register(UIManager, UIManagerAdmin)
 admin.site.register(MainTables, MainTablesAdmin)
 admin.site.register(DataManager, DataManagerAdmin)

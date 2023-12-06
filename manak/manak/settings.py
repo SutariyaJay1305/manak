@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main",
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "manak.urls"
+AUTH_USER_MODEL = "main.User"
+PHINENUMBER_DEFAULT_REGION = "GB"
+PHINENUMBER_DB_FORMAT = "NATIONAL"
 
 TEMPLATES = [
     {

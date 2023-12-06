@@ -1,0 +1,131 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="{% static 'css/simplebar.css' %}">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="{% static 'css/feather.css'%}">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="{% static 'css/daterangepicker.css'%}">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="{% static 'css/app-light.css'%}" id="lightTheme">
+    <link rel="stylesheet" href="{% static 'css/app-dark.css'%}" id="darkTheme" disabled>
+  </head>
+  <body class="light ">
+    <div class="wrapper vh-100">
+      <div class="row align-items-center h-100">
+        <form class="col-lg-6 col-md-8 col-10 mx-auto" method="POST">
+          {% csrf_token %}
+          <div class="mx-auto text-center my-4">
+            {% comment %} <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{% url 'index'%}">
+              <img src="{% static 'image/logo.png' %}"
+                                alt="" height="50px" width="50px"><b class="text-dark">MANAK</b>
+            </a> {% endcomment %}
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{% url 'index'%}">
+            {% comment %} <img src="{% static 'image/logo.png' %}"alt="Dispute Bills" height="50px" width="50px">{% endcomment %}
+            <h2 class="my-3">Register</h2>
+          </a>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" name="inputEmail4" required="">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="firstname">Firstname</label>
+              <input type="text" id="firstname" class="form-control" name="firstname" required="">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="lastname">Lastname</label>
+              <input type="text" id="lastname" class="form-control" name="lastname" required="">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="mobile">Mobile No.</label>
+              <input type="text" id="mobile" class="form-control" name="mobile" required="">
+            </div>
+          </div>
+          <hr class="my-4">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputPassword5">New Password</label>
+                <input type="password" class="form-control" id="inputPassword5" name="inputPassword5" required="">
+              </div>
+              <div class="form-group">
+                <label for="inputPassword6">Confirm Password</label>
+                <input type="password" class="form-control" id="inputPassword6" name="inputPassword6" required=""> 
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p class="mb-2">Password requirements</p>
+              <p class="small text-muted mb-2"> To create a new password, you have to meet all of the following requirements: </p>
+              <ul class="small text-muted pl-4 mb-0">
+                <li> Minimum 8 character </li>
+                <li>At least one special character</li>
+                <li>At least one number</li>
+                <li>Can’t be the same as a previous password </li>
+              </ul>
+            </div>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" onclick=matchPassword() type="submit">Sign up</button>
+          {% if message %}
+          <div class="alert alert-danger" role="alert">
+            {{message}}
+          </div>
+          {% endif %}
+          <p class="mt-5 mb-3 text-muted text-center">© manak</p>
+        </form>
+      </div>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/simplebar.min.js' %}"></script>
+    <script src="{% static 'js/daterangepicker.js' %}"></script>
+    <script src="{% static 'js/jquery.stickOnScroll.js' %}"></script>
+    <script src="{% static 'js/tinycolor-min.js' %}"></script>
+    <script src="{% static 'js/config.js' %}"></script>
+    <script src="{% static 'js/apps.js' %}"></script>
+     <script>  
+      function matchPassword() {  
+        var pw1 = document.getElementById("inputPassword5").value;  
+        var pw2 = document.getElementById("inputPassword6").value;  
+        if(pw1==" " or pw2=" ")
+        {
+          document.getElementById("inputPassword5").style.bordercolor="red";
+          document.getElementById("inputPassword6").style.bordercolor="red";
+          alert("Passwords can not be empty");
+        }
+        else if(pw1 != pw2)  
+        {   
+          document.getElementById("inputPassword5").value="";
+          document.getElementById("inputPassword6").value="";
+          document.getElementById("inputPassword5").style.bordercolor="red";
+          document.getElementById("inputPassword6").style.bordercolor="red";
+          alert("Passwords did not match");  
+        }
+        else
+        {
+          document.getElementById("inputPassword5").style.bordercolor="";
+          document.getElementById("inputPassword6").style.bordercolor="";
+        }
+      }  
+      </script>  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+   
+  </body>
+</html>
+</body>
+</html>
