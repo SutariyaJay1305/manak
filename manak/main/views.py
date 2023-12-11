@@ -10,6 +10,63 @@ import xlsxwriter
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+from django.shortcuts import render,HttpResponse,redirect
+
+
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
+from django.template import Context
+from django.conf import settings
+import os
+import pandas as pd
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+
+@csrf_exempt  # Use this decorator for simplicity. Consider proper CSRF protection in production.
+def print(request):
+    from pathlib import Path
+
+    # Build paths inside the project like this: BASE_DIR / 'subdir'.
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    
+    excel_file_path = os.path.join(BASE_DIR,'files/hello.xlsx')
+    # Specify the path to your Excel file
+
+    # Read the Excel file into a DataFrame using pandas
+    df = pd.read_excel(excel_file_path)
+
+    # Create a PDF file
+    pdf_file_path = os.path.join(settings.MEDIA_ROOT, 'output_file.pdf')
+    pdf_canvas = canvas.Canvas(pdf_file_path, pagesize=letter)
+
+    # Set the starting position for drawing in the PDF
+    x_position = 50
+    y_position = letter[1] - 50
+
+    # Loop through the DataFrame and write to the PDF
+    for _, row in df.iterrows():
+        for col_name, cell_value in row.items():
+            pdf_canvas.drawString(x_position, y_position, f"{col_name}: {cell_value}")
+            x_position += 150  # Adjust as needed for your layout
+
+        x_position = 50  # Reset X position for the next row
+        y_position -= 20  # Move to the next row
+
+    # Save the PDF
+    pdf_canvas.save()
+
+    # Prepare the response
+    with open(pdf_file_path, 'rb') as file:
+        pdf_content = file.read()
+
+    response = HttpResponse(pdf_content, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{os.path.basename(pdf_file_path)}"'
+
+    # Delete the generated PDF file after sending it in the response
+    os.remove(pdf_file_path)
+
+    return response
 
 
 # Create your views here.
@@ -94,7 +151,7 @@ def logoutUser(request):
     return redirect('index')
 
 def report(request):
-    excel_creation()
+    convert_excel_to_pdf()
     if request.method == "GET":
         try:
             shape = request.GET['shape']
@@ -334,14 +391,18 @@ def update_report(request):
         q.update(**query)
         return JsonResponse({'success': True})
 
+def remove_changes(request):
+    DataManager.objects.all().update(increased="",dropped="")
+    return JsonResponse({'success': True})
 
 
-
+    
 
 
 
 def excel_creation():
-    workbook = xlsxwriter.Workbook('hello.xlsx')
+    
+    workbook = xlsxwriter.Workbook('files/hello.xlsx')
     worksheet = workbook.add_worksheet()
 
     # Cell Merging
@@ -666,6 +727,100 @@ def excel_creation():
 
 
     workbook.close()
+    import os
+    from pathlib import Path
+
+    # Build paths inside the project like this: BASE_DIR / 'subdir'.
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    
+    excel_path = os.path.join(BASE_DIR,'hello.xlsx')
+    
+
+def convert_excel_to_pdf():
+    import os
+    from pathlib import Path
+
+    # Build paths inside the project like this: BASE_DIR / 'subdir'.
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    
+    excel_file_path = os.path.join(BASE_DIR,'files/hello.xlsx')
+    # Read the Excel file into a DataFrame using pandas
+    df = pd.read_excel(excel_file_path)
+    pdf_file_path = "oyi.pdf"
+
+    # Create a PDF file
+    pdf_canvas = canvas.Canvas(pdf_file_path, pagesize=letter)
+
+    # Set the starting position for drawing in the PDF
+    x_position = 50
+    y_position = letter[1] - 50
+
+    # Loop through the DataFrame and write to the PDF
+    for _, row in df.iterrows():
+        for col_name, cell_value in row.items():
+            pdf_canvas.drawString(x_position, y_position, f"{col_name}: {cell_value}")
+            x_position += 150  # Adjust as needed for your layout
+
+        x_position = 50  # Reset X position for the next row
+        y_position -= 20  # Move to the next row
+
+    # Save the PDF
+    pdf_canvas.save()
+
+    print(f"Conversion from {excel_file_path} to {pdf_file_path} complete.")
+
+
+
+def perform_excel_to_pdf():
+        import os
+        from pathlib import Path
+
+        # Build paths inside the project like this: BASE_DIR / 'subdir'.
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        
+        excel_file = os.path.join(BASE_DIR,'files/hello.xlsx')
+       
+                
+        if True: # excel_file.name.endswith('.xls') or excel_file.name.endswith('.xlsx'):
+            try:
+                df = pd.read_excel(excel_file)
+            except FileNotFoundError:
+                print("Excel file not found.")
+                return
+            except Exception as e:
+                print("Error reading Excel file:", e)
+                return
+
+            pdf = FPDF()
+            pdf.add_page()
+
+            pdf.set_font("Arial", size=12)
+
+            col_width = 40
+            row_height = 10
+
+            for col in df.columns:
+                pdf.cell(col_width, row_height, txt=str(col), border=1)
+            pdf.ln(row_height)
+
+            for index, row in df.iterrows():
+                for col in df.columns:
+                    pdf.cell(col_width, row_height, txt=str(row[col]), border=1)
+                pdf.ln(row_height)
+
+            try:
+                pdf_file="output_pdf_file.pdf"
+                pdf.output(pdf_file)
+                print(f"PDF file '{pdf_file}' created successfully.")
+                with open("output_pdf_file.pdf", 'rb') as pdf:
+                    response = HttpResponse(pdf.read(), content_type='application/pdf')
+                    response['Content-Disposition'] = 'attachment; filename="output_pdf_file.pdf"'
+                    return response
+
+            except Exception as e:
+                print("Error creating PDF file:", e)
+
+        return HttpResponse("Excel uploaded successfully")
 
 
 

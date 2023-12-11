@@ -36,7 +36,7 @@
             <div class="d-inline-block mx-3">
                 <span class="row">
                     <table class="info_table">
-                        <tr>
+                        <tr class="text-center">
                             <td class="increased_cell">5.2 Increased </td>
                             <td>5.2 Dropped </td>
 
@@ -46,7 +46,7 @@
                 </span>
             </div>
             <div class="dropdown ms-4">
-                <b><label for="shapes">Select Shape:</label></b>
+                <b><label for="shapes">Select Report:</label></b>
                     <select name="shapes" id="shape">
                         
                         {% if type == "round" %}<option value="round" disabled selected>Round</option> {% else %}<option value="pear" disabled selected>Pear</option>{% endif %}
@@ -60,6 +60,10 @@
                     <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
                     <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
                   </svg> Print </button>
+
+                <button type="button" id="remove_btn" class="btn btn-dark">Clear</button>
+
+                  
               </div>
         </div>
         
@@ -88,8 +92,8 @@
                             <td class="bg-white text-dark text-center" colspan="2"><button class="btn btn-dark " type="submit">Update</button></td>
 
                         </tr>
-                        <tr>
-                            <th>Manak</th>
+                        <tr class="text-center">
+                            <th style="font-size: 10px;" >Manak</th>
                             <th>D</th>
                             <th>E</th>
                             <th>F</th>
@@ -100,7 +104,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">IF</td>
                             {% if "D_IF" in x.dropped %}<td><input class="dropped_cell" name="D_IF" size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td>{% elif "D_IF" in x.increased %}<td class="increased_cell"><input name="D_IF"  size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_IF"  size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_IF" in x.dropped %}<td><input class="dropped_cell" name="E_IF" size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td>{% elif "E_IF" in x.increased %}<td class="increased_cell"><input name="E_IF"  size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_IF"  size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td>{% endif %}
@@ -111,7 +115,7 @@
                             {% if "J_IF" in x.dropped %}<td><input class="dropped_cell" name="J_IF" size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td>{% elif "J_IF" in x.increased %}<td class="increased_cell"><input name="J_IF"  size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_IF"  size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td>{% endif %}
 
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">VV1</td>
                             {% if "D_VV1" in x.dropped %}<td><input class="dropped_cell" name="D_VV1" size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td>{% elif "D_VV1" in x.increased %}<td class="increased_cell"><input name="D_VV1"  size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VV1"  size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_VV1" in x.dropped %}<td><input class="dropped_cell" name="E_VV1" size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td>{% elif "E_VV1" in x.increased %}<td class="increased_cell"><input name="E_VV1"  size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VV1"  size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -121,7 +125,7 @@
                             {% if "I_VV1" in x.dropped %}<td><input class="dropped_cell" name="I_VV1" size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td>{% elif "I_VV1" in x.increased %}<td class="increased_cell"><input name="I_VV1"  size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VV1"  size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_VV1" in x.dropped %}<td><input class="dropped_cell" name="J_VV1" size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td>{% elif "J_VV1" in x.increased %}<td class="increased_cell"><input name="J_VV1"  size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VV1"  size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">VV2</td>
                             {% if "D_VV2" in x.dropped %}<td><input class="dropped_cell" name="D_VV2" size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td>{% elif "D_VV2" in x.increased %}<td class="increased_cell"><input name="D_VV2"  size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VV2"  size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_VV2" in x.dropped %}<td><input class="dropped_cell" name="E_VV2" size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td>{% elif "E_VV2" in x.increased %}<td class="increased_cell"><input name="E_VV2"  size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VV2"  size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -131,7 +135,7 @@
                             {% if "I_VV2" in x.dropped %}<td><input class="dropped_cell" name="I_VV2" size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td>{% elif "I_VV2" in x.increased %}<td class="increased_cell"><input name="I_VV2"  size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VV2"  size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_VV2" in x.dropped %}<td><input class="dropped_cell" name="J_VV2" size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td>{% elif "J_VV2" in x.increased %}<td class="increased_cell"><input name="J_VV2"  size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VV2"  size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">VS1</td>
                             {% if "D_VS1" in x.dropped %}<td><input class="dropped_cell" name="D_VS1" size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td>{% elif "D_VS1" in x.increased %}<td class="increased_cell"><input name="D_VS1"  size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VS1"  size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_VS1" in x.dropped %}<td><input class="dropped_cell" name="E_VS1" size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td>{% elif "E_VS1" in x.increased %}<td class="increased_cell"><input name="E_VS1"  size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VS1"  size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -141,7 +145,7 @@
                             {% if "I_VS1" in x.dropped %}<td><input class="dropped_cell" name="I_VS1" size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td>{% elif "I_VS1" in x.increased %}<td class="increased_cell"><input name="I_VS1"  size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VS1"  size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_VS1" in x.dropped %}<td><input class="dropped_cell" name="J_VS1" size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td>{% elif "J_VS1" in x.increased %}<td class="increased_cell"><input name="J_VS1"  size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VS1"  size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">VS2</td>
                             {% if "D_VS2" in x.dropped %}<td><input class="dropped_cell" name="D_VS2" size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td>{% elif "D_VS2" in x.increased %}<td class="increased_cell"><input name="D_VS2"  size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VS2"  size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_VS2" in x.dropped %}<td><input class="dropped_cell" name="E_VS2" size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td>{% elif "E_VS2" in x.increased %}<td class="increased_cell"><input name="E_VS2"  size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VS2"  size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -151,7 +155,7 @@
                             {% if "I_VS2" in x.dropped %}<td><input class="dropped_cell" name="I_VS2" size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td>{% elif "I_VS2" in x.increased %}<td class="increased_cell"><input name="I_VS2"  size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VS2"  size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_VS2" in x.dropped %}<td><input class="dropped_cell" name="J_VS2" size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td>{% elif "J_VS2" in x.increased %}<td class="increased_cell"><input name="J_VS2"  size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VS2"  size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">SI1</td>
                             {% if "D_SI1" in x.dropped %}<td><input class="dropped_cell" name="D_SI1" size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td>{% elif "D_SI1" in x.increased %}<td class="increased_cell"><input name="D_SI1"  size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_SI1"  size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_SI1" in x.dropped %}<td><input class="dropped_cell" name="E_SI1" size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td>{% elif "E_SI1" in x.increased %}<td class="increased_cell"><input name="E_SI1"  size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_SI1"  size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -161,7 +165,7 @@
                             {% if "I_SI1" in x.dropped %}<td><input class="dropped_cell" name="I_SI1" size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td>{% elif "I_SI1" in x.increased %}<td class="increased_cell"><input name="I_SI1"  size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_SI1"  size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_SI1" in x.dropped %}<td><input class="dropped_cell" name="J_SI1" size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td>{% elif "J_SI1" in x.increased %}<td class="increased_cell"><input name="J_SI1"  size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_SI1"  size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">SI2</td>          
                             {% if "D_SI2" in x.dropped %}<td><input class="dropped_cell" name="D_SI2" size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td>{% elif "D_SI2" in x.increased %}<td class="increased_cell"><input name="D_SI2"  size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_SI2"  size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_SI2" in x.dropped %}<td><input class="dropped_cell" name="E_SI2" size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td>{% elif "E_SI2" in x.increased %}<td class="increased_cell"><input name="E_SI2"  size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_SI2"  size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -172,7 +176,7 @@
                             {% if "J_SI2" in x.dropped %}<td><input class="dropped_cell" name="J_SI2" size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td>{% elif "J_SI2" in x.increased %}<td class="increased_cell"><input name="J_SI2"  size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_SI2"  size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
                             
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td colspan="8">{{x.parent_table.text_description }}</td>
                         </tr>
 
@@ -198,8 +202,8 @@
                             
 
                         </tr>
-                        <tr>
-                            <th>Manak</th>
+                        <tr class="text-center">
+                            <th style="font-size: 10px;" >Manak</th>
                             <th>D</th>
                             <th>E</th>
                             <th>F</th>
@@ -210,7 +214,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">IF</td>
                             {% if "D_IF" in x.dropped %}<td><input class="dropped_cell" name="D_IF" size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td>{% elif "D_IF" in x.increased %}<td class="increased_cell"><input name="D_IF"  size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_IF"  size="3" value="{{x.D_IF |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_IF" in x.dropped %}<td><input class="dropped_cell" name="E_IF" size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td>{% elif "E_IF" in x.increased %}<td class="increased_cell"><input name="E_IF"  size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_IF"  size="3" value="{{x.E_IF |floatformat:"0" }}"></imput></td>{% endif %}
@@ -221,7 +225,7 @@
                             {% if "J_IF" in x.dropped %}<td><input class="dropped_cell" name="J_IF" size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td>{% elif "J_IF" in x.increased %}<td class="increased_cell"><input name="J_IF"  size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_IF"  size="3" value="{{x.J_IF |floatformat:"0" }}"></imput></td>{% endif %}
 
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">VV1</td>
                             {% if "D_VV1" in x.dropped %}<td><input class="dropped_cell" name="D_VV1" size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td>{% elif "D_VV1" in x.increased %}<td class="increased_cell"><input name="D_VV1"  size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VV1"  size="3" value="{{x.D_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_VV1" in x.dropped %}<td><input class="dropped_cell" name="E_VV1" size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td>{% elif "E_VV1" in x.increased %}<td class="increased_cell"><input name="E_VV1"  size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VV1"  size="3" value="{{x.E_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -231,7 +235,7 @@
                             {% if "I_VV1" in x.dropped %}<td><input class="dropped_cell" name="I_VV1" size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td>{% elif "I_VV1" in x.increased %}<td class="increased_cell"><input name="I_VV1"  size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VV1"  size="3" value="{{x.I_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_VV1" in x.dropped %}<td><input class="dropped_cell" name="J_VV1" size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td>{% elif "J_VV1" in x.increased %}<td class="increased_cell"><input name="J_VV1"  size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VV1"  size="3" value="{{x.J_VV1 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">VV2</td>
                             {% if "D_VV2" in x.dropped %}<td><input class="dropped_cell" name="D_VV2" size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td>{% elif "D_VV2" in x.increased %}<td class="increased_cell"><input name="D_VV2"  size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VV2"  size="3" value="{{x.D_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_VV2" in x.dropped %}<td><input class="dropped_cell" name="E_VV2" size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td>{% elif "E_VV2" in x.increased %}<td class="increased_cell"><input name="E_VV2"  size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VV2"  size="3" value="{{x.E_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -241,7 +245,7 @@
                             {% if "I_VV2" in x.dropped %}<td><input class="dropped_cell" name="I_VV2" size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td>{% elif "I_VV2" in x.increased %}<td class="increased_cell"><input name="I_VV2"  size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VV2"  size="3" value="{{x.I_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_VV2" in x.dropped %}<td><input class="dropped_cell" name="J_VV2" size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td>{% elif "J_VV2" in x.increased %}<td class="increased_cell"><input name="J_VV2"  size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VV2"  size="3" value="{{x.J_VV2 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">VS1</td>
                             {% if "D_VS1" in x.dropped %}<td><input class="dropped_cell" name="D_VS1" size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td>{% elif "D_VS1" in x.increased %}<td class="increased_cell"><input name="D_VS1"  size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VS1"  size="3" value="{{x.D_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_VS1" in x.dropped %}<td><input class="dropped_cell" name="E_VS1" size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td>{% elif "E_VS1" in x.increased %}<td class="increased_cell"><input name="E_VS1"  size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VS1"  size="3" value="{{x.E_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -251,7 +255,7 @@
                             {% if "I_VS1" in x.dropped %}<td><input class="dropped_cell" name="I_VS1" size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td>{% elif "I_VS1" in x.increased %}<td class="increased_cell"><input name="I_VS1"  size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VS1"  size="3" value="{{x.I_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_VS1" in x.dropped %}<td><input class="dropped_cell" name="J_VS1" size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td>{% elif "J_VS1" in x.increased %}<td class="increased_cell"><input name="J_VS1"  size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VS1"  size="3" value="{{x.J_VS1 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">VS2</td>
                             {% if "D_VS2" in x.dropped %}<td><input class="dropped_cell" name="D_VS2" size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td>{% elif "D_VS2" in x.increased %}<td class="increased_cell"><input name="D_VS2"  size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_VS2"  size="3" value="{{x.D_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_VS2" in x.dropped %}<td><input class="dropped_cell" name="E_VS2" size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td>{% elif "E_VS2" in x.increased %}<td class="increased_cell"><input name="E_VS2"  size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_VS2"  size="3" value="{{x.E_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -261,7 +265,7 @@
                             {% if "I_VS2" in x.dropped %}<td><input class="dropped_cell" name="I_VS2" size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td>{% elif "I_VS2" in x.increased %}<td class="increased_cell"><input name="I_VS2"  size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_VS2"  size="3" value="{{x.I_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_VS2" in x.dropped %}<td><input class="dropped_cell" name="J_VS2" size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td>{% elif "J_VS2" in x.increased %}<td class="increased_cell"><input name="J_VS2"  size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_VS2"  size="3" value="{{x.J_VS2 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">SI1</td>
                             {% if "D_SI1" in x.dropped %}<td><input class="dropped_cell" name="D_SI1" size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td>{% elif "D_SI1" in x.increased %}<td class="increased_cell"><input name="D_SI1"  size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_SI1"  size="3" value="{{x.D_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_SI1" in x.dropped %}<td><input class="dropped_cell" name="E_SI1" size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td>{% elif "E_SI1" in x.increased %}<td class="increased_cell"><input name="E_SI1"  size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_SI1"  size="3" value="{{x.E_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -271,7 +275,7 @@
                             {% if "I_SI1" in x.dropped %}<td><input class="dropped_cell" name="I_SI1" size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td>{% elif "I_SI1" in x.increased %}<td class="increased_cell"><input name="I_SI1"  size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="I_SI1"  size="3" value="{{x.I_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "J_SI1" in x.dropped %}<td><input class="dropped_cell" name="J_SI1" size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td>{% elif "J_SI1" in x.increased %}<td class="increased_cell"><input name="J_SI1"  size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_SI1"  size="3" value="{{x.J_SI1 |floatformat:"0" }}"></imput></td>{% endif %}
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-white bg-dark">SI2</td>          
                             {% if "D_SI2" in x.dropped %}<td><input class="dropped_cell" name="D_SI2" size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td>{% elif "D_SI2" in x.increased %}<td class="increased_cell"><input name="D_SI2"  size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="D_SI2"  size="3" value="{{x.D_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
                             {% if "E_SI2" in x.dropped %}<td><input class="dropped_cell" name="E_SI2" size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td>{% elif "E_SI2" in x.increased %}<td class="increased_cell"><input name="E_SI2"  size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="E_SI2"  size="3" value="{{x.E_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
@@ -282,7 +286,7 @@
                             {% if "J_SI2" in x.dropped %}<td><input class="dropped_cell" name="J_SI2" size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td>{% elif "J_SI2" in x.increased %}<td class="increased_cell"><input name="J_SI2"  size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td> {% else %}<td><input name="J_SI2"  size="3" value="{{x.J_SI2 |floatformat:"0" }}"></imput></td>{% endif %}
                             
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td colspan="8">{{x.parent_table.text_description }}</td>
                         </tr>
 
@@ -330,8 +334,24 @@
     <!-- section 1 end -->
     
     <script>
+
+        
         $(document).ready(function () {
 
+        var myEl = document.getElementById('remove_btn');
+
+        myEl.addEventListener('click', function() {
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'remove_changes' %}",
+                success: function (response) {
+                    location.reload();
+                }
+            });
+        }, false);
+        
+        
+    
         $('#changeform').submit(function (event) {
             
             event.preventDefault();
