@@ -22,9 +22,10 @@ import os
 import pandas as pd
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from user_payment.models import UserPayment
 
 @csrf_exempt  # Use this decorator for simplicity. Consider proper CSRF protection in production.
-def print(request):
+def printf(request):
     from pathlib import Path
 
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,7 +81,7 @@ def custom_round_up(decimal_value):
         return integer_part
     
 def index(request):
-
+    
     text1 = UIManager.objects.get(UI_position=1).text_description
     text2 = UIManager.objects.get(UI_position=2).text_description
     context = {
@@ -114,43 +115,49 @@ def register(request):
       return render(request,'register.html')
    
 def login(request):
-        if request.method=="POST":
-            form=loginForm(request.POST)
-            if form.is_valid:
-                username = request.POST["username"]
-                password = request.POST["password"]
-                user= authenticate(username=username,password=password)
+    if request.method=="POST":
+        form=loginForm(request.POST)
+        if form.is_valid:
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user= authenticate(username=username,password=password)
 
-                if user is not None:
-                    print("Login done")
-                    auth_login(request,user)
-                   
-                    if user.is_superuser == True:
-                        return redirect('admin_report')
-                    else:
-                        return redirect('report')
-                else:
-                    return render(request,'login.html',{'message':"Username Or Password Is Incorrect"})
-        
-        else:
-            print(request.user.is_authenticated)
-            if request.user.is_authenticated:
-                user=request.user
-                print(user)
-
+            if user is not None:
+                print("Login done")
+                auth_login(request,user)
+                is_paid= UserPayment.objects.filter(app_user = request.user,stripe_checkout_id__isnull=False)
+                if not is_paid.exists():
+                    return redirect("product_page")
+                
                 if user.is_superuser == True:
                     return redirect('admin_report')
                 else:
                     return redirect('report')
-                
             else:
-                return render(request,'login.html')
+                return render(request,'login.html',{'message':"Username Or Password Is Incorrect"})
+    
+    else:
+        print(request.user.is_authenticated)
+        if request.user.is_authenticated:
+            user=request.user
+            print(user)
+
+            if user.is_superuser == True:
+                return redirect('admin_report')
+            else:
+                return redirect('report')
+            
+        else:
+            return render(request,'login.html')
     
 def logoutUser(request):
     logout(request)
     return redirect('index')
 
 def report(request):
+    is_paid= UserPayment.objects.filter(app_user = request.user,stripe_checkout_id__isnull=False)
+    if not is_paid.exists():
+        return redirect("product_page")
     convert_excel_to_pdf()
     if request.method == "GET":
         try:

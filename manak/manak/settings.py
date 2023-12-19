@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "main",
     "phonenumber_field",
+    "user_payment"
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,12 @@ STATIC_ROOT = os.path.join(BASE_DIR,'assets')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+## Stripe
+STRIPE_PUBLIC_KEY_TEST = 'pk_test_51OMtsXSFHK4FQej3iyztwejADjhajdOSAds9e4BTz3zDVV1akJ0tY7DBqiLNx4e330AGFPRp9qgKEX5fjduNv7nC00eNW3a0uR'
+STRIPE_SECRET_KEY_TEST = 'sk_test_51OMtsXSFHK4FQej3D0Qg25HJQqYgdawG9Q6jklsenb64PVOgsOomxGUd3aSPw5PeI4UAqsInVVDVhaqeJqn53byt00r6E93VE7'
+STRIPE_WEBHOOK_SECRET_TEST = 'whsec_568e186636e2868d09cad2e55c993e3a163aa02d4a50dfd9b1fe8d117769283e'
+PRODUCT_PRICE = 'price_1OOBwhSFHK4FQej3WVpwasGd'
+
+
+REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
