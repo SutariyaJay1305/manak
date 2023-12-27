@@ -15,34 +15,38 @@ def product_page(request):
 	if is_paid.exists():
 		return redirect("/")
 
-	if request.method == 'POST':
-		checkout_session = stripe.checkout.Session.create(
-			payment_method_types = ['card'],
-			line_items = [
-				{
-					'price': settings.PRODUCT_PRICE,
-					'quantity': 1,
-				},
-			],
-			mode = 'payment',
-			customer_creation = 'always',
-			success_url = settings.REDIRECT_DOMAIN + '/payment_successful?session_id={CHECKOUT_SESSION_ID}',
-			cancel_url = settings.REDIRECT_DOMAIN + '/payment_cancelled',
-		)
-		return redirect(checkout_session.url, code=303)
-	return render(request, 'user_payment/product_page.html')
+	# if request.method == 'POST':
+	checkout_session = stripe.checkout.Session.create(
+		payment_method_types = ['card'],
+		line_items = [
+			{
+				'price': settings.PRODUCT_PRICE,
+				'quantity': 1,
+			},
+		],
+		mode = 'payment',
+		customer_creation = 'always',
+		success_url = settings.REDIRECT_DOMAIN + '/payment_successful?session_id={CHECKOUT_SESSION_ID}',
+		cancel_url = settings.REDIRECT_DOMAIN + '/payment_cancelled',
+	)
+	return redirect(checkout_session.url, code=303)
+	# return render(request, 'user_payment/product_page.html')
 
 
 ## use Stripe dummy card: 4242 4242 4242 4242
 def payment_successful(request):
-	stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
-	checkout_session_id = request.GET.get('session_id', None)
-	session = stripe.checkout.Session.retrieve(checkout_session_id)
-	customer = stripe.Customer.retrieve(session.customer)
-	user = request.user
-	user_payment = UserPayment.objects.get(app_user=user)
-	user_payment.stripe_checkout_id = checkout_session_id
-	user_payment.save()
+	try:
+		stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
+		checkout_session_id = request.GET.get('session_id', None)
+		session = stripe.checkout.Session.retrieve(checkout_session_id)
+		customer = stripe.Customer.retrieve(session.customer)	
+		user = request.user
+		user_payment = UserPayment.objects.get(app_user=user.id)
+		user_payment.stripe_checkout_id = checkout_session_id
+		user_payment.save()
+		print(user_payment)
+	except Exception as e:
+		print(e)
 	return render(request, 'user_payment/payment_successful.html', {'customer': customer})
 
 

@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
 .mank-nav{
     background-color: #031cfc;
     
@@ -16,14 +17,22 @@
   color: #FFFFFF;
     
 }
-/* @font-face {
-    font-family: myFirstFont;
-    src: url(AgencyFB.ttf);
+@font-face {
+    font-family: AGENCYR;
+    src: url(/fonts/AGENCYR.ttf) format('ttf');
+}
+
+@font-face {
+    font-family: AgencyFB;
+    src: url(/fonts/agencyfb_reg.ttf) format('ttf');
 }
 
 body {
-    font-family: myFirstFont !important;
-  } */
+    background-color: #0f2187;
+    font-family: AgencyFB !important;
+    font-weight: regular !important;
+
+  } 
 
 
 /* section 1 start */
@@ -73,7 +82,7 @@ body {
 }
 
 .title_2{
-    font-size: xx-small;
+    font-size: medium;
 }
 
 .title_3{

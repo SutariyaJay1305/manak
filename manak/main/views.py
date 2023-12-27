@@ -109,7 +109,7 @@ def register(request):
                 created = User.objects.create_user(username=email,email=email,first_name=firstname,last_name=lastname,password=password,phone_number=mobile)
                 auth_login(request,created)
                 user=request.user
-                return redirect('report')
+                return redirect('checkout')
    else:
       print(type(User))
       return render(request,'register.html')
@@ -127,7 +127,7 @@ def login(request):
                 auth_login(request,user)
                 is_paid= UserPayment.objects.filter(app_user = request.user,stripe_checkout_id__isnull=False)
                 if not is_paid.exists():
-                    return redirect("product_page")
+                    return redirect("checkout")
                 
                 if user.is_superuser == True:
                     return redirect('admin_report')
@@ -155,9 +155,9 @@ def logoutUser(request):
     return redirect('index')
 
 def report(request):
-    is_paid= UserPayment.objects.filter(app_user = request.user,stripe_checkout_id__isnull=False)
+    is_paid= UserPayment.objects.filter(app_user = request.user.id,stripe_checkout_id__isnull=False)
     if not is_paid.exists():
-        return redirect("product_page")
+        return redirect("checkout")
     convert_excel_to_pdf()
     if request.method == "GET":
         try:
