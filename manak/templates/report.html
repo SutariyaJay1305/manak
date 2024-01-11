@@ -86,12 +86,12 @@
 
                     <thead class="table-dark">
                         <tr class="table_title">
-                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}} CT</b></td>
+                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}} </b></td>
                             <td class="bg-white text-dark" colspan="2"><b> {{x.parent_table.tabel_date | date:"m/d/y" }}</b></td>
                             <td class="bg-white text-dark text-center" colspan="3"><b>{{x.parent_table.shape}} </b></td>
                         </tr>
                         <tr class="text-center">
-                            <th style="font-size: 10px;" >Manak</th>
+                            <th style="font-size: 12px;" >Manak</th>
                             <th class="text-center">D</th>
                             <th class="text-center">E</th>
                             <th class="text-center">F</th>
@@ -188,12 +188,12 @@
 
                     <thead class="table-dark">
                         <tr class="table_title">
-                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}} CT</b></td>
+                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}} </b></td>
                             <td class="bg-white text-dark" colspan="2"><b> {{x.parent_table.tabel_date | date:"m/d/y" }}</b></td>
                             <td class="bg-white text-dark text-center" colspan="3"><b>{{x.parent_table.shape}} </b></td>
                         </tr>
                         <tr class="text-center">                       
-                            <th style="font-size: 10px;" >Manak</th>
+                            <th style="font-size: 12px;" >Manak</th>
                             <th class="text-center">D</th>
                             <th class="text-center">E</th>
                             <th class="text-center">F</th>
@@ -309,22 +309,33 @@
               }
           });
       })
+
+      $("#generatePDF").click(function(){
+        event.preventDefault();
+        let params = (new URL(document.location)).searchParams;
+        let dataa = {"shape":params.get("shape")};
+
         
-        $('#prtn_btn').click(function () {
-            $.ajax({
-                type: 'GET',
-                url: "{% url 'print' %}",
-                success: function(response) {
-                    // Handle the PDF on the frontend
-                    // For example, you can open it in a new tab
-                    const blob = new Blob([response], { type: 'application/pdf' });
-                    const url = URL.createObjectURL(blob);
-                    window.open(url, '_blank');
-                },
-                error: function(error) {
-                    console.error('Error:', error);
+        $.ajax({
+                type: 'POST',
+                url: "{% url 'admin_generate_pdf' %}",
+                data: dataa,
+                success: function (response) {
+                    console.log("response")
                 }
             });
+        });
+
+        $('#prtn_btn').click(function () {
+            let params = (new URL(document.location)).searchParams;
+            let shape = params.get("shape");
+            if (shape == null || shape == ""){
+                shape ="round"
+            }
+            var filename= shape+'.pdf';
+            console.log
+            window.open("{% url 'pdf_response'  file_name=0 %}".replace('0', filename));
+            
         });
       
 
