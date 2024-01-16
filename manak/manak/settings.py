@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-1-v^g1@q=i6xwscs4+nuwg#3d#no2)l5etmu3ewzb7fs=s@)i1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['manakreport.com']
+ALLOWED_HOSTS = ['manakreport.com','www.manakreport.com']
 
 
 # Application definition
