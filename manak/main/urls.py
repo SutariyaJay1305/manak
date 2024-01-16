@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("report", views.report, name="report"),
+    path("report/guest", views.guest, name="guest"),
     path("admin-report", views.admin_report, name="admin_report"),
     path("admin-generate-pdf", views.admin_generate_pdf, name="admin_generate_pdf"),
     path("pdf/<str:file_name>/", views.send_pdf_response, name="pdf_response"),

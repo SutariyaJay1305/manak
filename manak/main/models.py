@@ -12,7 +12,7 @@ class UIManager(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     text_description = models.TextField(max_length=200)
-    UI_position = models.IntegerField(null=False, blank=False)
+    UI_position = models.IntegerField(null=True, blank=True)
 
 
 class MainTables(models.Model):

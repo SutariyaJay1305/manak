@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-1-v^g1@q=i6xwscs4+nuwg#3d#no2)l5etmu3ewzb7fs=s@)i1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','142.93.182.50']
+ALLOWED_HOSTS = ['manakreport.com']
 
 
 # Application definition
@@ -142,3 +142,123 @@ PRODUCT_PRICE = 'price_1OOBwhSFHK4FQej3WVpwasGd'
 
 
 REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
+
+
+
+
+# gunicorn --bind 0.0.0.0:8000 manak.wsgi
+
+# sudo nano /etc/systemd/system/manak.socket
+
+
+# [Unit]
+# Description=manak socket
+
+
+# [Socket]
+# ListenStream=/run/manak.sock
+
+
+# [Install]
+# WantedBy=sockets.target
+
+
+# sudo nano /etc/systemd/system/manak.service
+
+
+# [Unit]
+# Description=manak daemon
+# Requires=manak.socket
+# After=network.target
+
+
+# [Service]
+# User=igor
+# Group=www-data
+# WorkingDirectory=/home/igor/manak/manak
+# ExecStart=/home/igor/manak/env/bin/gunicorn \
+#          --access-logfile - \
+#          --workers 3 \
+#          --bind unix:/run/manak.sock \
+#          manak.wsgi:application
+
+
+# [Install]
+# WantedBy=multi-user.target
+
+
+
+
+
+
+# sudo systemctl start manak.socket
+# sudo systemctl start manak.service
+# sudo systemctl enable manak.socket
+# sudo systemctl enable manak.service
+# # To check Status
+# sudo systemctl status manak
+
+
+# # Restart
+# sudo systemctl daemon-reload
+# sudo systemctl restart manak
+
+
+
+
+# # NGINX
+# sudo nano /etc/nginx/sites-available/manak  
+
+
+# server {
+#    listen 80;
+#    server_name manakreport.com www.manakreport.com;
+
+
+#    location = /favicon.ico { access_log off; log_not_found off; }
+#    location /static/ {
+#        root /home/igor/manak/manak;
+#    }
+
+
+#    location / {
+#        include proxy_params;
+#        proxy_pass http://unix:/run/manak.sock;
+#    }
+# }
+# sudo ln -s /etc/nginx/sites-available/manak /etc/nginx/sites-enabled
+# sudo systemctl restart nginx
+
+
+# sudo nano /etc/nginx/nginx.conf
+
+# server {
+#  listen 80;
+#  server_name fdcr.us 142.93.182.50;
+# location = /favicon.ico { access_log off; log_not_found off; }
+#  location /static/ {
+#  root /home/igor/fdcr/fdcrv;
+#  }
+# location / {
+#  proxy_set_header Host $http_host;
+#  proxy_set_header X-Real-IP $remote_addr;
+#  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#  proxy_set_header X-Forwarded-Proto $scheme;
+#  proxy_pass http://unix:/run/fdcr.sock;
+#  }
+# }
+# server {
+#  listen 80;
+#  server_name manakreport.com www.manakreport.com;
+# location = /favicon.ico { access_log off; log_not_found off; }
+#  location /static/ {
+#  root /home/igor/manak/manak;
+#  }
+# location / {
+#  proxy_set_header Host $http_host;
+#  proxy_set_header X-Real-IP $remote_addr;
+#  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#  proxy_set_header X-Forwarded-Proto $scheme;
+#  proxy_pass http://unix:/run/manak.sock;
+#  }
+# }

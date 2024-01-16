@@ -195,9 +195,13 @@ def index(request):
     
     text1 = UIManager.objects.get(UI_position=1).text_description
     text2 = UIManager.objects.get(UI_position=2).text_description
+    text3 = UIManager.objects.get(UI_position=3).text_description
+    if text3 == "-":
+        text3=""
     context = {
         "text1":text1,
         "text2":text2,
+        "text3":text3,
         
         }
     
@@ -271,7 +275,7 @@ def report(request):
     is_paid= UserPayment.objects.filter(app_user = request.user.id,stripe_checkout_id__isnull=False)
     if not is_paid.exists():
         return redirect("checkout")
-    convert_excel_to_pdf()
+    # convert_excel_to_pdf()
     if request.method == "GET":
         try:
             shape = request.GET['shape']
@@ -281,6 +285,20 @@ def report(request):
         data = DataManager.objects.filter(parent_table__in = main_tables)
     
     return render(request,'report.html',{"data":data,'type':shape})
+
+
+def guest(request):
+    if request.method == "GET":
+        try:
+            shape = request.GET['shape']
+        except :
+            shape = "round"
+        main_tables = MainTables.objects.filter(shape__iexact=shape)
+        data = DataManager.objects.filter(parent_table__in = main_tables)
+    
+    return render(request,'report.html',{"data":data,'type':shape})
+
+
 
 def admin_report(request):
     try:
