@@ -262,3 +262,9 @@ REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
 #  proxy_pass http://unix:/run/manak.sock;
 #  }
 # }
+
+
+# sudo systemctl restart manak
+# sudo systemctl daemon-reload
+# sudo systemctl restart manak.socket manak.service
+# sudo nginx -t && sudo systemctl restart nginx
