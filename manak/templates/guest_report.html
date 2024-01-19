@@ -303,9 +303,9 @@
               $("#shape").value = end;
 
               if (end == "round"){
-                  window.location.href = "{% url 'report' %}?shape=round";
+                  window.location.href = "{% url 'guest' %}?shape=round";
               }else{
-                  window.location.href = "{% url 'report' %}?shape=pear";
+                  window.location.href = "{% url 'guest' %}?shape=pear";
               }
           });
       })

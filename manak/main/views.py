@@ -296,7 +296,7 @@ def guest(request):
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
     
-    return render(request,'report.html',{"data":data,'type':shape})
+    return render(request,'guest_report.html',{"data":data,'type':shape})
 
 
 
