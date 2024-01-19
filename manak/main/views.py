@@ -301,14 +301,25 @@ def guest(request):
 
 
 def admin_report(request):
+    user=request.user
     try:
-        shape = request.GET['shape']
-    except :
-        shape = "round"
-    main_tables = MainTables.objects.filter(shape__iexact=shape)
-    data = DataManager.objects.filter(parent_table__in = main_tables)
-    print(data)
-    return render(request,'admin_report.html',{"data":data,'type':shape})
+        is_superuser = User.objects.get(id=user.id).is_superuser
+        if is_superuser == True:
+            
+            try:
+                shape = request.GET['shape']
+            except :
+                shape = "round"
+            main_tables = MainTables.objects.filter(shape__iexact=shape)
+            data = DataManager.objects.filter(parent_table__in = main_tables)
+            print(data)
+            return render(request,'admin_report.html',{"data":data,'type':shape})
+        else:
+            return redirect('index')
+    except Exception as e:
+        print(e)
+        return redirect('index')
+    
 
 @csrf_exempt
 def download_pdf(request):
