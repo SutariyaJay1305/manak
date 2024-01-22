@@ -110,24 +110,56 @@ def pdfcon(shape):
     
     contenttype =  '%s' % get_content_type(excel_file_path)
 
-    files = { "File": (excel_file_path, open(excel_file_path, 'rb')) }
+    files_dic = { "File": (excel_file_path, open(excel_file_path, 'rb')) }
     boundary = str(uuid.uuid4())
+    X_RapidAPI_Key = "4cebfa25b8msh2bd06fc9b25ed3dp13d394jsn1534b21262d4"
+    # X_RapidAPI_Key = "453596cdb6msh20a6e1af4fed997p1a862bjsn1db820ae4fc9"
+    
     headers = {
         "Accept-Encoding": "gzip, deflate, br",
         # "Content-Type": f"multipart/form-data; boundary={boundary}",
         "Accept": "*/*",
-        "X-RapidAPI-Key": "4cebfa25b8msh2bd06fc9b25ed3dp13d394jsn1534b21262d4",
+        'X-RapidAPI-Key': X_RapidAPI_Key,
+        
         "X-RapidAPI-Host": "pdf4me.p.rapidapi.com"
     }
 
     
-    response = requests.post(url, files=files, headers=headers)
-    
+    response = requests.post(url, files=files_dic, headers=headers)
+    # lll
 
     
 
     print(response.json())
-    b64 = response.json()['file']
+    try:
+        b64 = response.json()['file']
+    except Exception as e:
+        print("error 1:::",e)
+        files_dic1 = { "File": (excel_file_path, open(excel_file_path, 'rb')) }
+        X_RapidAPI_Key = "453596cdb6msh20a6e1af4fed997p1a862bjsn1db820ae4fc9"
+        # X_RapidAPI_Key = "4cebfa25b8msh2bd06fc9b25ed3dp13d394jsn1534b21262d4"
+        headers['X-RapidAPI-Key'] = X_RapidAPI_Key
+        print(headers)
+        response1 = requests.post(url, files=files_dic1, headers=headers)
+        print(response1.json())
+        try:
+            b64 = response1.json()['file']
+        except Exception as e:
+            print("error 2:::",e)
+            try:
+                print("error 1:::",e)
+                files_dic1 = { "File": (excel_file_path, open(excel_file_path, 'rb')) }
+                X_RapidAPI_Key = "d3e6296aabmsh39bcde3ff806342p1d79eajsn9ab46bf74945"
+                headers['X-RapidAPI-Key'] = X_RapidAPI_Key
+                print(headers)
+                response1 = requests.post(url, files=files_dic1, headers=headers)
+                print(response1.json())
+                
+                b64 = response1.json()['file']
+                
+            except Exception as e:
+                print("error 2:::",e)
+
     # print(b64)
     file1 = open("myfile.txt", "w")
     
