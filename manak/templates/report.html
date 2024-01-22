@@ -83,10 +83,10 @@
 
             {% for x in data %}
             <!-- {% comment %} {% if not forloop.counter|divisibleby:2 %} {% endcomment %} -->
-            <div class="row">
+            
 
                 {% if not x.postion|divisibleby:2 %}
-
+                <div class="row"></div>
                 <div class="col-lg-6">
                     <table class="table table-bordered">
 
@@ -489,10 +489,10 @@
                     </table>
                 </div>
 
-
+                </div>
 
                 {% endif %}
-            </div>
+            
             {% endfor %}
             <div class="mb-5">
                 <p>For Price update: <b>ManakReport.com</b></p>
