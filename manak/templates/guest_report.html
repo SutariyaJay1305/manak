@@ -87,11 +87,14 @@
 
                     <thead class="table-dark">
                         <tr class="table_title">
-                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}} {{ x.postion|divisibleby:2 }}</b></td>
+                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}}</b></td>
                             <td class="bg-white text-dark" colspan="2"><b> {{x.parent_table.tabel_date | date:"m/d/y" }}</b></td>
                             <td class="bg-white text-dark text-center" colspan="3"><b>{{x.parent_table.shape}} </b></td>
                         </tr>
-                        <tr class="text-center">
+                        
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" style="border-top-border:grey;">
                             <th style="font-size: 12px;" >Manak</th>
                             <th class="text-center">D</th>
                             <th class="text-center">E</th>
@@ -101,8 +104,6 @@
                             <th class="text-center">I</th>
                             <th class="text-center">J</th>
                         </tr>
-                    </thead>
-                    <tbody>
                         <tr class="text-center">
                             <td class="text-white bg-dark">IF</td>
                             {% if "D_IF" in x.dropped %}<td class="dropped_cell">{{x.D_IF |floatformat:"0" }}</td>{% elif "D_IF" in x.increased %}<td class="increased_cell">{{x.D_IF |floatformat:"0" }}</td> {% else %}<td>{{x.D_IF |floatformat:"0" }}</td>{% endif %}
@@ -189,7 +190,7 @@
 
                     <thead class="table-dark">
                         <tr class="table_title">
-                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}} {{ x.postion|divisibleby:2 }}</b></td>
+                            <td class="bg-white text-dark" colspan="3"><b>{{x.parent_table.carat_range}}</b></td>
                             <td class="bg-white text-dark" colspan="2"><b> {{x.parent_table.tabel_date | date:"m/d/y" }}</b></td>
                             <td class="bg-white text-dark text-center" colspan="3"><b>{{x.parent_table.shape}} </b></td>
                         </tr>
