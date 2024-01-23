@@ -327,6 +327,16 @@
                     <label class="form-check-label" for="decrease">Decrease</label>
                   </div>
               </div>
+              <div class="dropdown ">
+                <b><label for="table_position_update">Select Table:</label></b>
+                    <select name="table_position_update" id="table_position_update">
+                        
+                    <option value="All"  selected>All</option>
+                    {% for x in data %}
+                    <option value="{{x.postion}}" >{{x.parent_table.carat_range}}</option>
+                    {% endfor %}
+                    </select>
+              </div>
               <div class="col-md-3">
                 <button class="btn btn-dark " type="submit">Update</button>
 
@@ -384,7 +394,7 @@
             
             var shape = $('#shape :selected').val();
 
-            console.log(shape)
+            console.log(change_data)
             
             $.ajax({
                 type: 'POST',

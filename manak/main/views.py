@@ -383,9 +383,17 @@ def update_price(request):
         per_change = request.POST["per_change"]
         change = request.POST["change"]
         shape = request.POST["shape"]
+        table_position_update = request.POST["table_position_update"]
+        print(table_position_update)
+       
         main_tables = MainTables.objects.filter(shape__iexact=shape)
+       
         if change=="increase":
-            DataManager.objects.filter(parent_table__in = main_tables).update(
+            if table_position_update == "All":
+                datamanager = DataManager.objects.filter(parent_table__in = main_tables)
+            else:
+                datamanager = DataManager.objects.filter(parent_table__in = main_tables,postion=table_position_update)
+            datamanager.update(
                 current_percentage_change = int(per_change),
                 last_percentage_change= F('current_percentage_change'),
                 second_last_percentage_change = F('last_percentage_change'),
@@ -427,6 +435,7 @@ def update_price(request):
                 H_VS1=F('H_VS1')+F('H_VS1')*(int(per_change)/100),
                 H_VS2=F('H_VS2')+F('H_VS2')*(int(per_change)/100),
                 H_SI1=F('H_SI1')+F('H_SI1')*(int(per_change)/100),
+                H_SI2=F('H_SI2')+F('H_SI2')*(int(per_change)/100),
 
                 I_IF=F('I_IF')+F('I_IF')*(int(per_change)/100),
                 I_VV1=F('I_VV1')+F('I_VV1')*(int(per_change)/100),
@@ -446,7 +455,12 @@ def update_price(request):
                 )
 
         else:
-            DataManager.objects.filter(parent_table__in = main_tables).update(
+            if table_position_update == "All":
+                datamanager = DataManager.objects.filter(parent_table__in = main_tables)
+            else:
+                datamanager = DataManager.objects.filter(parent_table__in = main_tables,postion=table_position_update)
+            
+            datamanager.update(
                 current_percentage_change = int(per_change),
                 last_percentage_change= F('current_percentage_change'),
                 second_last_percentage_change = F('last_percentage_change'),
@@ -488,6 +502,7 @@ def update_price(request):
                 H_VS1=F('H_VS1')-F('H_VS1')*(int(per_change)/100),
                 H_VS2=F('H_VS2')-F('H_VS2')*(int(per_change)/100),
                 H_SI1=F('H_SI1')-F('H_SI1')*(int(per_change)/100),
+                H_SI2=F('H_SI2')-F('H_SI2')*(int(per_change)/100),
 
                 I_IF=F('I_IF')-F('I_IF')*(int(per_change)/100),
                 I_VV1=F('I_VV1')-F('I_VV1')*(int(per_change)/100),
