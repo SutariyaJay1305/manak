@@ -650,7 +650,7 @@ def excel_creation(data,shape):
     price_box_drop = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":9,
         "bold": 1,
         "border":1,
         "align": "center",
@@ -662,7 +662,7 @@ def excel_creation(data,shape):
     price_box_up = workbook.add_format(
        {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":9,
         "bold": 1,
         "border":1,
         "color":"white",
@@ -676,7 +676,7 @@ def excel_creation(data,shape):
     table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":9,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -687,7 +687,7 @@ def excel_creation(data,shape):
     last_row_table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":9,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -698,7 +698,7 @@ def excel_creation(data,shape):
     last_col_table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":9,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -709,7 +709,7 @@ def excel_creation(data,shape):
     table_tile = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":9,
         "bold": 1,
         "align": "center",
         "valign": "vcenter",
@@ -720,7 +720,7 @@ def excel_creation(data,shape):
     table_date = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":9,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -730,7 +730,7 @@ def excel_creation(data,shape):
     table_descritption = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":9,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -740,7 +740,7 @@ def excel_creation(data,shape):
     
     common_format = {
             "font":"Agency FB",
-            "font_size":8,
+            "font_size":9,
             "align": "center",
             "valign": "vcenter",
             "fg_color": "white",
@@ -854,8 +854,8 @@ def excel_creation(data,shape):
             worksheet.write('A'+str(row_1+7), 'SI1',table_heading)
             worksheet.write('A'+str(row_1+8), 'SI2',last_row_table_heading)
 
-            worksheet.merge_range('A'+str(row_1+9)+':C'+str(row_1+9), x.parent_table.text_description,table_descritption)
-            worksheet.merge_range('D'+str(row_1+9)+':H'+str(row_1+9), "",table_descritption)
+            worksheet.merge_range('A'+str(row_1+9)+':D'+str(row_1+9), x.parent_table.text_description,table_descritption)
+            worksheet.merge_range('E'+str(row_1+9)+':H'+str(row_1+9), "",table_descritption)
             
             # row_1 IF +str(row_1+2)
 
@@ -956,8 +956,8 @@ def excel_creation(data,shape):
             worksheet.write('K'+str(row_2+7), 'SI1',table_heading)
             worksheet.write('K'+str(row_2+8), 'SI2',last_row_table_heading)
 
-            worksheet.merge_range('K'+str(row_2+9)+':M'+str(row_2+9), x.parent_table.text_description,table_descritption)
-            worksheet.merge_range('N'+str(row_2+9)+':R'+str(row_2+9),"",table_descritption)
+            worksheet.merge_range('K'+str(row_2+9)+':N'+str(row_2+9), x.parent_table.text_description,table_descritption)
+            worksheet.merge_range('O'+str(row_2+9)+':R'+str(row_2+9),"",table_descritption)
             
             # row_2 IF +str(row_2+2)
             worksheet.write('L'+str(row_2+2),x.D_IF,down_common) if "D_IF" in x.dropped  else (worksheet.write('L'+str(row_2+2),x.D_IF,up_common) if "D_IF" in x.increased else worksheet.write('L'+str(row_2+2),x.D_IF,common))

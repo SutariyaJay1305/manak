@@ -34,7 +34,9 @@ body {
 
   } 
 
-
+td{
+    width: 50px;
+}
 /* section 1 start */
 .manak-img-div{
  background-color: #e3e7ff;
