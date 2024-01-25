@@ -649,7 +649,7 @@ def excel_creation(data,shape):
     title_format = workbook.add_format(
     {
         "bold": 1,
-        "font":"Arial Black",
+        "font":"Agency FB",
         "font_size":20,
         "align": "center",
         "valign": "vcenter",
