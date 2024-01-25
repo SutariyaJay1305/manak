@@ -315,8 +315,12 @@ def report(request):
             shape = "round"
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
-    
-    return render(request,'report.html',{"data":data,'type':shape})
+    text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
+    try:
+        text = UIManager.objects.get(id=4).text_description
+    except Exception as e:
+        print(e)
+    return render(request,'report.html',{"data":data,'type':shape,"text":text})
 
 
 def guest(request):
@@ -327,8 +331,14 @@ def guest(request):
             shape = "round"
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
+        text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
+        try:
+            text = UIManager.objects.get(id=4).text_description
+        except Exception as e:
+            print(e)
+
     
-    return render(request,'guest_report.html',{"data":data,'type':shape})
+    return render(request,'guest_report.html',{"data":data,'type':shape,"text":text})
 
 
 
@@ -344,8 +354,13 @@ def admin_report(request):
                 shape = "round"
             main_tables = MainTables.objects.filter(shape__iexact=shape)
             data = DataManager.objects.filter(parent_table__in = main_tables)
-            print(data)
-            return render(request,'admin_report.html',{"data":data,'type':shape})
+            
+            text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
+            try:
+                text = UIManager.objects.get(id=4).text_description
+            except Exception as e:
+                print(e)
+            return render(request,'admin_report.html',{"data":data,'type':shape,"text":text})
         else:
             return redirect('index')
     except Exception as e:
@@ -394,6 +409,7 @@ def update_price(request):
             else:
                 datamanager = DataManager.objects.filter(parent_table__in = main_tables,postion=table_position_update)
             datamanager.update(
+                increased = "D_IF,D_VV1,D_VV2,D_VS1,D_VS2,D_SI1,D_SI2,E_IF,E_VV1,E_VV2,E_VS1,E_VS2,E_SI1,E_SI2,F_IF,F_VV1,F_VV2,F_VS1,F_VS2,F_SI1,F_SI2,G_IF,G_VV1,G_VV2,G_VS1,G_VS2,G_SI1,G_SI2,H_IF,H_VV1,H_VV2,H_VS1,H_VS2,H_SI1,H_SI2,I_IF,I_VV1,I_VV2,I_VS1,I_VS2,I_SI1,I_SI2,J_IF,J_VV1,J_VV2,J_VS1,J_VS2,J_SI1,J_SI2",
                 current_percentage_change = int(per_change),
                 last_percentage_change= F('current_percentage_change'),
                 second_last_percentage_change = F('last_percentage_change'),
@@ -461,6 +477,8 @@ def update_price(request):
                 datamanager = DataManager.objects.filter(parent_table__in = main_tables,postion=table_position_update)
             
             datamanager.update(
+                dropped = "D_IF,D_VV1,D_VV2,D_VS1,D_VS2,D_SI1,D_SI2,E_IF,E_VV1,E_VV2,E_VS1,E_VS2,E_SI1,E_SI2,F_IF,F_VV1,F_VV2,F_VS1,F_VS2,F_SI1,F_SI2,G_IF,G_VV1,G_VV2,G_VS1,G_VS2,G_SI1,G_SI2,H_IF,H_VV1,H_VV2,H_VS1,H_VS2,H_SI1,H_SI2,I_IF,I_VV1,I_VV2,I_VS1,I_VS2,I_SI1,I_SI2,J_IF,J_VV1,J_VV2,J_VS1,J_VS2,J_SI1,J_SI2",
+
                 current_percentage_change = int(per_change),
                 last_percentage_change= F('current_percentage_change'),
                 second_last_percentage_change = F('last_percentage_change'),
@@ -752,24 +770,24 @@ def excel_creation(data,shape):
     down_common = workbook.add_format(dict(common_format, bold=True))
 
     row_common = workbook.add_format(dict(common_format, bottom=1))
-    up_row_common = workbook.add_format(dict(common_format, bottom=1))
-    down_row_common = workbook.add_format(dict(common_format, bottom=1))
+    up_row_common = workbook.add_format(dict(common_format, bottom=1, fg_color='#808080',font_color ="white"))
+    down_row_common = workbook.add_format(dict(common_format, bottom=1, bold=True))
     
     divider = workbook.add_format(dict(common_format, right=1))
     up_divider = workbook.add_format(dict(common_format, right=1, fg_color='#808080',font_color ="white"))
     down_divider = workbook.add_format(dict(common_format, right=1, bold=True))
 
     row_divider = workbook.add_format(dict(common_format, right=1, bottom=1))
-    up_row_divider = workbook.add_format(dict(common_format, right=1, bottom=1))
-    down_row_divider = workbook.add_format(dict(common_format, right=1, bottom=1))
+    up_row_divider = workbook.add_format(dict(common_format, right=1, bottom=1, fg_color='#808080',font_color ="white"))
+    down_row_divider = workbook.add_format(dict(common_format, right=1, bottom=1, bold=True))
     
     last_common = workbook.add_format(dict(common_format, bottom=1))  
-    up_last_common = workbook.add_format(dict(common_format, bottom=1))  
-    down_last_common = workbook.add_format(dict(common_format, bottom=1))  
+    up_last_common = workbook.add_format(dict(common_format, bottom=1, fg_color='#808080',font_color ="white"))  
+    down_last_common = workbook.add_format(dict(common_format, bottom=1, bold=True))  
     
     last_divider = workbook.add_format(dict(common_format, right=1, bottom=1))
-    up_last_divider = workbook.add_format(dict(common_format, right=1, bottom=1))
-    down_last_divider = workbook.add_format(dict(common_format, right=1, bottom=1))
+    up_last_divider = workbook.add_format(dict(common_format, right=1, bottom=1, fg_color='#808080',font_color ="white"))
+    down_last_divider = workbook.add_format(dict(common_format, right=1, bottom=1, bold=True))
 
 
 
@@ -793,7 +811,12 @@ def excel_creation(data,shape):
     worksheet.set_row(2,12)
 
     worksheet.set_row(3,11.25)
-    worksheet.merge_range("B4:R4", "Manak report is based on all major labs and its production of both HPHT & CVD (monthly/annually ). No liability is assumed as to accuracy of this information", subtitle_format)
+    text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
+    try:
+        text = UIManager.objects.get(id=4).text_description
+    except Exception as e:
+        print(e)
+    worksheet.merge_range("B4:R4", text, subtitle_format)
     
     worksheet.set_row(4,11.25)
     worksheet.set_row(5,7.5)
@@ -805,13 +828,13 @@ def excel_creation(data,shape):
     worksheet.merge_range("B10:G10", "Price change : Dark Cell - Increased / Bold - Dropped ", common)
     
 
-    worksheet.merge_range("H10:I10", '5.2 | increased',price_box_up)
-    worksheet.merge_range("K10:L10", '5.2 | dropped',price_box_drop)
+    worksheet.merge_range("H10:I10", 'increased',price_box_up)
+    worksheet.merge_range("K10:L10", 'dropped',price_box_drop)
    
     # Footer
     footer_font = workbook.add_format(
         {
-        "font":"Bahnschrift",
+        "font":"Agency FB",
         "font_size":10,
         "align": "center",
         "valign": "vcenter",
