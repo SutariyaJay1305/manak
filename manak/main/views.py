@@ -317,7 +317,7 @@ def report(request):
         data = DataManager.objects.filter(parent_table__in = main_tables)
     text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
     try:
-        text = UIManager.objects.get(id=4).text_description
+        text = UIManager.objects.get(UI_position=4).text_description
     except Exception as e:
         print(e)
     return render(request,'report.html',{"data":data,'type':shape,"text":text})
@@ -333,7 +333,7 @@ def guest(request):
         data = DataManager.objects.filter(parent_table__in = main_tables)
         text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
         try:
-            text = UIManager.objects.get(id=4).text_description
+            text = UIManager.objects.get(UI_position=4).text_description
         except Exception as e:
             print(e)
 
@@ -357,7 +357,7 @@ def admin_report(request):
             
             text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
             try:
-                text = UIManager.objects.get(id=4).text_description
+                text = UIManager.objects.get(UI_position=4).text_description
             except Exception as e:
                 print(e)
             return render(request,'admin_report.html',{"data":data,'type':shape,"text":text})
@@ -538,6 +538,8 @@ def update_price(request):
                 J_SI1=F('J_SI1')-F('J_SI1')*(int(per_change)/100),
                 J_SI2=F('J_SI2')-F('J_SI2')*(int(per_change)/100),
                 )
+        
+        admin_generate_pdf(request)
         return JsonResponse({'success': True})
 
 def update_report(request):
@@ -813,7 +815,7 @@ def excel_creation(data,shape):
     worksheet.set_row(3,11.25)
     text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
     try:
-        text = UIManager.objects.get(id=4).text_description
+        text = UIManager.objects.get(UI_position=4).text_description
     except Exception as e:
         print(e)
     worksheet.merge_range("B4:R4", text, subtitle_format)
