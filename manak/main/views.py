@@ -410,6 +410,7 @@ def update_price(request):
                 datamanager = DataManager.objects.filter(parent_table__in = main_tables,postion=table_position_update)
             datamanager.update(
                 increased = "D_IF,D_VV1,D_VV2,D_VS1,D_VS2,D_SI1,D_SI2,E_IF,E_VV1,E_VV2,E_VS1,E_VS2,E_SI1,E_SI2,F_IF,F_VV1,F_VV2,F_VS1,F_VS2,F_SI1,F_SI2,G_IF,G_VV1,G_VV2,G_VS1,G_VS2,G_SI1,G_SI2,H_IF,H_VV1,H_VV2,H_VS1,H_VS2,H_SI1,H_SI2,I_IF,I_VV1,I_VV2,I_VS1,I_VS2,I_SI1,I_SI2,J_IF,J_VV1,J_VV2,J_VS1,J_VS2,J_SI1,J_SI2",
+                dropped = "",
                 current_percentage_change = int(per_change),
                 last_percentage_change= F('current_percentage_change'),
                 second_last_percentage_change = F('last_percentage_change'),
@@ -478,7 +479,7 @@ def update_price(request):
             
             datamanager.update(
                 dropped = "D_IF,D_VV1,D_VV2,D_VS1,D_VS2,D_SI1,D_SI2,E_IF,E_VV1,E_VV2,E_VS1,E_VS2,E_SI1,E_SI2,F_IF,F_VV1,F_VV2,F_VS1,F_VS2,F_SI1,F_SI2,G_IF,G_VV1,G_VV2,G_VS1,G_VS2,G_SI1,G_SI2,H_IF,H_VV1,H_VV2,H_VS1,H_VS2,H_SI1,H_SI2,I_IF,I_VV1,I_VV2,I_VS1,I_VS2,I_SI1,I_SI2,J_IF,J_VV1,J_VV2,J_VS1,J_VS2,J_SI1,J_SI2",
-
+                increased = "",
                 current_percentage_change = int(per_change),
                 last_percentage_change= F('current_percentage_change'),
                 second_last_percentage_change = F('last_percentage_change'),
