@@ -539,7 +539,7 @@ def update_price(request):
                 J_SI2=F('J_SI2')-F('J_SI2')*(int(per_change)/100),
                 )
         
-        admin_generate_pdf(request)
+        # admin_generate_pdf(request)
         return JsonResponse({'success': True})
 
 def update_report(request):
