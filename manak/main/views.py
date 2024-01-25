@@ -661,7 +661,7 @@ def excel_creation(data,shape):
     subtitle_format = workbook.add_format(
        {
         "font":"Agency FB",
-        "font_size":8,
+        "font_size":10,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -670,7 +670,7 @@ def excel_creation(data,shape):
     price_box_drop = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":9,
+        "font_size":10,
         "bold": 1,
         "border":1,
         "align": "center",
@@ -682,7 +682,7 @@ def excel_creation(data,shape):
     price_box_up = workbook.add_format(
        {
         "font":"Agency FB",
-        "font_size":9,
+        "font_size":10,
         "bold": 1,
         "border":1,
         "color":"white",
@@ -696,7 +696,7 @@ def excel_creation(data,shape):
     table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":9,
+        "font_size":10,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -707,7 +707,7 @@ def excel_creation(data,shape):
     last_row_table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":9,
+        "font_size":10,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -718,7 +718,7 @@ def excel_creation(data,shape):
     last_col_table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":9,
+        "font_size":10,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -729,7 +729,7 @@ def excel_creation(data,shape):
     table_tile = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":9,
+        "font_size":10,
         "bold": 1,
         "align": "center",
         "valign": "vcenter",
@@ -740,7 +740,7 @@ def excel_creation(data,shape):
     table_date = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":9,
+        "font_size":10,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -750,7 +750,7 @@ def excel_creation(data,shape):
     table_descritption = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":9,
+        "font_size":10,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -760,7 +760,7 @@ def excel_creation(data,shape):
     
     common_format = {
             "font":"Agency FB",
-            "font_size":9,
+            "font_size":10,
             "align": "center",
             "valign": "vcenter",
             "fg_color": "white",
