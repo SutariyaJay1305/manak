@@ -832,7 +832,7 @@ def excel_creation(data,shape):
         text = UIManager.objects.get(UI_position=4).text_description
     except Exception as e:
         print(e)
-    worksheet.merge_range("C4:S5", text, subtitle_format)
+    worksheet.merge_range("C4:T5", text, subtitle_format)
     
     worksheet.set_row(4,11.25)
     worksheet.set_row(5,7.5)
@@ -886,8 +886,8 @@ def excel_creation(data,shape):
             worksheet.write('I'+str(row_1+1), 'J',last_col_table_heading)
 
             worksheet.write('B'+str(row_1+2), 'IF',table_heading)
-            worksheet.write('B'+str(row_1+3), 'VV1',table_heading)
-            worksheet.write('B'+str(row_1+4), 'VV2',table_heading)
+            worksheet.write('B'+str(row_1+3), 'VVS1',table_heading)
+            worksheet.write('B'+str(row_1+4), 'VVS2',table_heading)
             worksheet.write('B'+str(row_1+5), 'VS1',table_heading)
             worksheet.write('B'+str(row_1+6), 'VS2',table_heading)
             worksheet.write('B'+str(row_1+7), 'SI1',table_heading)
@@ -988,15 +988,15 @@ def excel_creation(data,shape):
             worksheet.write('S'+str(row_2+1), 'J',last_col_table_heading)
 
             worksheet.write('L'+str(row_2+2), 'IF',table_heading)
-            worksheet.write('L'+str(row_2+3), 'VV1',table_heading)
-            worksheet.write('L'+str(row_2+4), 'VV2',table_heading)
+            worksheet.write('L'+str(row_2+3), 'VVS1',table_heading)
+            worksheet.write('L'+str(row_2+4), 'VVS2',table_heading)
             worksheet.write('L'+str(row_2+5), 'VS1',table_heading)
             worksheet.write('L'+str(row_2+6), 'VS2',table_heading)
             worksheet.write('L'+str(row_2+7), 'SI1',table_heading)
             worksheet.write('L'+str(row_2+8), 'SI2',last_row_table_heading)
 
             worksheet.merge_range('K'+str(row_2+9)+':N'+str(row_2+9), x.parent_table.text_description,table_descritption)
-            worksheet.merge_range('O'+str(row_2+9)+':R'+str(row_2+9),"",table_descritption)
+            worksheet.merge_range('O'+str(row_2+9)+':S'+str(row_2+9),"",table_descritption)
             
             # row_2 IF +str(row_2+2)
             worksheet.write('M'+str(row_2+2),x.D_IF,down_common) if "D_IF" in x.dropped  else (worksheet.write('M'+str(row_2+2),x.D_IF,up_common) if "D_IF" in x.increased else worksheet.write('M'+str(row_2+2),x.D_IF,common))
