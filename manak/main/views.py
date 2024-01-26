@@ -386,7 +386,7 @@ def admin_generate_pdf(request):
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
         excel_creation(data,shape)
-        # pdfcon(shape)
+        pdfcon(shape)
         return JsonResponse({'success': True})
 
         
