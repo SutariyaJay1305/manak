@@ -813,6 +813,7 @@ def excel_creation(data,shape):
     # Column height
     worksheet.set_column(0, 0, 4)
     worksheet.set_column(1, 9, 3.83)
+    worksheet.set_column(9, 9, 7.34)
     worksheet.set_column(10, 10, 0.27)
     worksheet.set_column(11, 18, 3.83)
 
