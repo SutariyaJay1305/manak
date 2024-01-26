@@ -859,7 +859,7 @@ def excel_creation(data,shape):
 
         })
     worksheet.set_row(57,48)
-    worksheet.merge_range("B58:J58", "For Price Update : ManakReport.com ", footer_font)
+    worksheet.merge_range("A58:J58", "For Price Update : ManakReport.com ", footer_font)
 
     
 
