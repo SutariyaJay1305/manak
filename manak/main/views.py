@@ -540,7 +540,10 @@ def update_price(request):
                 J_SI2=F('J_SI2')-F('J_SI2')*(int(per_change)/100),
                 )
         
-        # admin_generate_pdf(request)
+        # main_tables = MainTables.objects.filter(shape__iexact=shape)
+        # data = DataManager.objects.filter(parent_table__in = main_tables)
+        # excel_creation(data,shape)
+        # pdfcon(shape)
         return JsonResponse({'success': True})
 
 def update_report(request):
@@ -631,10 +634,18 @@ def update_report(request):
         query['increased'] = increase
         query['dropped'] = drop
         q.update(**query)
+        # main_tables = MainTables.objects.filter(shape__iexact=shape)
+        # data = DataManager.objects.filter(parent_table__in = main_tables)
+        # excel_creation(data,shape)
+        # pdfcon(shape)
         return JsonResponse({'success': True})
 
 def remove_changes(request):
     DataManager.objects.all().update(increased="",dropped="")
+    # main_tables = MainTables.objects.filter(shape__iexact=shape)
+    # data = DataManager.objects.filter(parent_table__in = main_tables)
+    # excel_creation(data,shape)
+    # pdfcon(shape)
     return JsonResponse({'success': True})
 
 
@@ -897,7 +908,7 @@ def excel_creation(data,shape):
             worksheet.write('B'+str(row_1+3),x.D_VV1,down_common) if "D_VV1" in x.dropped  else (worksheet.write('B'+str(row_1+3),x.D_VV1,up_common) if "D_VV1" in x.increased else worksheet.write('B'+str(row_1+3),x.D_VV1,common))
             worksheet.write('C'+str(row_1+3),x.E_VV1,down_common) if "E_VV1" in x.dropped  else (worksheet.write('C'+str(row_1+3),x.E_VV1,up_common) if "E_VV1" in x.increased else worksheet.write('C'+str(row_1+3),x.E_VV1,common))
             worksheet.write('D'+str(row_1+3),x.F_VV1,down_divider) if "F_VV1" in x.dropped  else (worksheet.write('D'+str(row_1+3),x.F_VV1,up_divider) if "F_VV1" in x.increased else worksheet.write('D'+str(row_1+3),x.F_VV1,divider))
-            worksheet.write('E'+str(row_1+3),x.F_VV1,down_common) if "G_VV1" in x.dropped  else (worksheet.write('E'+str(row_1+3),x.G_VV1,up_common) if "G_VV1" in x.increased else worksheet.write('E'+str(row_1+3),x.G_VV1,common))
+            worksheet.write('E'+str(row_1+3),x.G_VV1,down_common) if "G_VV1" in x.dropped  else (worksheet.write('E'+str(row_1+3),x.G_VV1,up_common) if "G_VV1" in x.increased else worksheet.write('E'+str(row_1+3),x.G_VV1,common))
             worksheet.write('F'+str(row_1+3),x.H_VV1,down_divider) if "H_VV1" in x.dropped  else (worksheet.write('F'+str(row_1+3),x.H_VV1,up_divider) if "H_VV1" in x.increased else worksheet.write('F'+str(row_1+3),x.H_VV1,divider))
             worksheet.write('G'+str(row_1+3),x.I_VV1,down_common) if "I_VV1" in x.dropped  else (worksheet.write('G'+str(row_1+3),x.I_VV1,up_common) if "I_VV1" in x.increased else worksheet.write('G'+str(row_1+3),x.I_VV1,common))
             worksheet.write('H'+str(row_1+3),x.J_VV1,down_divider) if "J_VV1" in x.dropped  else (worksheet.write('H'+str(row_1+3),x.J_VV1,up_divider) if "J_VV1" in x.increased else worksheet.write('H'+str(row_1+3),x.J_VV1,divider))
@@ -908,7 +919,7 @@ def excel_creation(data,shape):
             worksheet.write('B'+str(row_1+4),x.D_VV2,down_row_common) if "D_VV2" in x.dropped  else (worksheet.write('B'+str(row_1+4),x.D_VV2,up_row_common) if "D_VV2" in x.increased else worksheet.write('B'+str(row_1+4),x.D_VV2,row_common))
             worksheet.write('C'+str(row_1+4),x.E_VV2,down_row_common) if "E_VV2" in x.dropped  else (worksheet.write('C'+str(row_1+4),x.E_VV2,up_row_common) if "E_VV2" in x.increased else worksheet.write('C'+str(row_1+4),x.E_VV2,row_common))
             worksheet.write('D'+str(row_1+4),x.F_VV2,down_row_divider) if "F_VV2" in x.dropped  else (worksheet.write('D'+str(row_1+4),x.F_VV2,up_row_divider) if "F_VV2" in x.increased else worksheet.write('D'+str(row_1+4),x.F_VV2,row_divider))
-            worksheet.write('E'+str(row_1+4),x.F_VV2,down_row_common) if "G_VV2" in x.dropped  else (worksheet.write('E'+str(row_1+4),x.G_VV2,up_row_common) if "G_VV2" in x.increased else worksheet.write('E'+str(row_1+4),x.G_VV2,row_common))
+            worksheet.write('E'+str(row_1+4),x.G_VV2,down_row_common) if "G_VV2" in x.dropped  else (worksheet.write('E'+str(row_1+4),x.G_VV2,up_row_common) if "G_VV2" in x.increased else worksheet.write('E'+str(row_1+4),x.G_VV2,row_common))
             worksheet.write('F'+str(row_1+4),x.H_VV2,down_row_divider) if "H_VV2" in x.dropped  else (worksheet.write('F'+str(row_1+4),x.H_VV2,up_row_divider) if "H_VV2" in x.increased else worksheet.write('F'+str(row_1+4),x.H_VV2,row_divider))
             worksheet.write('G'+str(row_1+4),x.I_VV2,down_row_common) if "I_VV2" in x.dropped  else (worksheet.write('G'+str(row_1+4),x.I_VV2,up_row_common) if "I_VV2" in x.increased else worksheet.write('G'+str(row_1+4),x.I_VV2,row_common))
             worksheet.write('H'+str(row_1+4),x.J_VV2,down_row_divider) if "J_VV2" in x.dropped  else (worksheet.write('H'+str(row_1+4),x.J_VV2,up_row_divider) if "J_VV2" in x.increased else worksheet.write('H'+str(row_1+4),x.J_VV2,row_divider))
@@ -917,7 +928,7 @@ def excel_creation(data,shape):
             worksheet.write('B'+str(row_1+5),x.D_VS1,down_common) if "D_VS1" in x.dropped  else (worksheet.write('B'+str(row_1+5),x.D_VS1,up_common) if "D_VS1" in x.increased else worksheet.write('B'+str(row_1+5),x.D_VS1,common))
             worksheet.write('C'+str(row_1+5),x.E_VS1,down_common) if "E_VS1" in x.dropped  else (worksheet.write('C'+str(row_1+5),x.E_VS1,up_common) if "E_VS1" in x.increased else worksheet.write('C'+str(row_1+5),x.E_VS1,common))
             worksheet.write('D'+str(row_1+5),x.F_VS1,down_divider) if "F_VS1" in x.dropped  else (worksheet.write('D'+str(row_1+5),x.F_VS1,up_divider) if "F_VS1" in x.increased else worksheet.write('D'+str(row_1+5),x.F_VS1,divider))
-            worksheet.write('E'+str(row_1+5),x.F_VS1,down_common) if "G_VS1" in x.dropped  else (worksheet.write('E'+str(row_1+5),x.G_VS1,up_common) if "G_VS1" in x.increased else worksheet.write('E'+str(row_1+5),x.G_VS1,common))
+            worksheet.write('E'+str(row_1+5),x.G_VS1,down_common) if "G_VS1" in x.dropped  else (worksheet.write('E'+str(row_1+5),x.G_VS1,up_common) if "G_VS1" in x.increased else worksheet.write('E'+str(row_1+5),x.G_VS1,common))
             worksheet.write('F'+str(row_1+5),x.H_VS1,down_divider) if "H_VS1" in x.dropped  else (worksheet.write('F'+str(row_1+5),x.H_VS1,up_divider) if "H_VS1" in x.increased else worksheet.write('F'+str(row_1+5),x.H_VS1,divider))
             worksheet.write('G'+str(row_1+5),x.I_VS1,down_common) if "I_VS1" in x.dropped  else (worksheet.write('G'+str(row_1+5),x.I_VS1,up_common) if "I_VS1" in x.increased else worksheet.write('G'+str(row_1+5),x.I_VS1,common))
             worksheet.write('H'+str(row_1+5),x.J_VS1,down_divider) if "J_VS1" in x.dropped  else (worksheet.write('H'+str(row_1+5),x.J_VS1,up_divider) if "J_VS1" in x.increased else worksheet.write('H'+str(row_1+5),x.J_VS1,divider))
@@ -928,7 +939,7 @@ def excel_creation(data,shape):
             worksheet.write('B'+str(row_1+6),x.D_VS2,down_row_common) if "D_VS2" in x.dropped  else (worksheet.write('B'+str(row_1+6),x.D_VS2,up_row_common) if "D_VS2" in x.increased else worksheet.write('B'+str(row_1+6),x.D_VS2,row_common))
             worksheet.write('C'+str(row_1+6),x.E_VS2,down_row_common) if "E_VS2" in x.dropped  else (worksheet.write('C'+str(row_1+6),x.E_VS2,up_row_common) if "E_VS2" in x.increased else worksheet.write('C'+str(row_1+6),x.E_VS2,row_common))
             worksheet.write('D'+str(row_1+6),x.F_VS2,down_row_divider) if "F_VS2" in x.dropped  else (worksheet.write('D'+str(row_1+6),x.F_VS2,up_row_divider) if "F_VS2" in x.increased else worksheet.write('D'+str(row_1+6),x.F_VS2,row_divider))
-            worksheet.write('E'+str(row_1+6),x.F_VS2,down_row_common) if "G_VS2" in x.dropped  else (worksheet.write('E'+str(row_1+6),x.G_VS2,up_row_common) if "G_VS2" in x.increased else worksheet.write('E'+str(row_1+6),x.G_VS2,row_common))
+            worksheet.write('E'+str(row_1+6),x.G_VS2,down_row_common) if "G_VS2" in x.dropped  else (worksheet.write('E'+str(row_1+6),x.G_VS2,up_row_common) if "G_VS2" in x.increased else worksheet.write('E'+str(row_1+6),x.G_VS2,row_common))
             worksheet.write('F'+str(row_1+6),x.H_VS2,down_row_divider) if "H_VS2" in x.dropped  else (worksheet.write('F'+str(row_1+6),x.H_VS2,up_row_divider) if "H_VS2" in x.increased else worksheet.write('F'+str(row_1+6),x.H_VS2,row_divider))
             worksheet.write('G'+str(row_1+6),x.I_VS2,down_row_common) if "I_VS2" in x.dropped  else (worksheet.write('G'+str(row_1+6),x.I_VS2,up_row_common) if "I_VS2" in x.increased else worksheet.write('G'+str(row_1+6),x.I_VS2,row_common))
             worksheet.write('H'+str(row_1+6),x.J_VS2,down_row_divider) if "J_VS2" in x.dropped  else (worksheet.write('H'+str(row_1+6),x.J_VS2,up_row_divider) if "J_VS2" in x.increased else worksheet.write('H'+str(row_1+6),x.J_VS2,row_divider))
@@ -939,7 +950,7 @@ def excel_creation(data,shape):
             worksheet.write('B'+str(row_1+7),x.D_SI1,down_common) if "D_SI1" in x.dropped  else (worksheet.write('B'+str(row_1+7),x.D_SI1,up_common) if "D_SI1" in x.increased else worksheet.write('B'+str(row_1+7),x.D_SI1,common))
             worksheet.write('C'+str(row_1+7),x.E_SI1,down_common) if "E_SI1" in x.dropped  else (worksheet.write('C'+str(row_1+7),x.E_SI1,up_common) if "E_SI1" in x.increased else worksheet.write('C'+str(row_1+7),x.E_SI1,common))
             worksheet.write('D'+str(row_1+7),x.F_SI1,down_divider) if "F_SI1" in x.dropped  else (worksheet.write('D'+str(row_1+7),x.F_SI1,up_divider) if "F_SI1" in x.increased else worksheet.write('D'+str(row_1+7),x.F_SI1,divider))
-            worksheet.write('E'+str(row_1+7),x.F_SI1,down_common) if "G_SI1" in x.dropped  else (worksheet.write('E'+str(row_1+7),x.G_SI1,up_common) if "G_SI1" in x.increased else worksheet.write('E'+str(row_1+7),x.G_SI1,common))
+            worksheet.write('E'+str(row_1+7),x.G_SI1,down_common) if "G_SI1" in x.dropped  else (worksheet.write('E'+str(row_1+7),x.G_SI1,up_common) if "G_SI1" in x.increased else worksheet.write('E'+str(row_1+7),x.G_SI1,common))
             worksheet.write('F'+str(row_1+7),x.H_SI1,down_divider) if "H_SI1" in x.dropped  else (worksheet.write('F'+str(row_1+7),x.H_SI1,up_divider) if "H_SI1" in x.increased else worksheet.write('F'+str(row_1+7),x.H_SI1,divider))
             worksheet.write('G'+str(row_1+7),x.I_SI1,down_common) if "I_SI1" in x.dropped  else (worksheet.write('G'+str(row_1+7),x.I_SI1,up_common) if "I_SI1" in x.increased else worksheet.write('G'+str(row_1+7),x.I_SI1,common))
             worksheet.write('H'+str(row_1+7),x.J_SI1,down_divider) if "J_SI1" in x.dropped  else (worksheet.write('H'+str(row_1+7),x.J_SI1,up_divider) if "J_SI1" in x.increased else worksheet.write('H'+str(row_1+7),x.J_SI1,divider))
@@ -949,7 +960,7 @@ def excel_creation(data,shape):
             worksheet.write('B'+str(row_1+8),x.D_SI2,down_last_common) if "D_SI2" in x.dropped  else (worksheet.write('B'+str(row_1+8),x.D_SI2,up_last_common) if "D_SI2" in x.increased else worksheet.write('B'+str(row_1+8),x.D_SI2,last_common))
             worksheet.write('C'+str(row_1+8),x.E_SI2,down_last_common) if "E_SI2" in x.dropped  else (worksheet.write('C'+str(row_1+8),x.E_SI2,up_last_common) if "E_SI2" in x.increased else worksheet.write('C'+str(row_1+8),x.E_SI2,last_common))
             worksheet.write('D'+str(row_1+8),x.F_SI2,down_last_divider) if "F_SI2" in x.dropped  else (worksheet.write('D'+str(row_1+8),x.F_SI2,up_last_divider) if "F_SI2" in x.increased else worksheet.write('D'+str(row_1+8),x.F_SI2,last_divider))
-            worksheet.write('E'+str(row_1+8),x.F_SI2,down_last_common) if "G_SI2" in x.dropped  else (worksheet.write('E'+str(row_1+8),x.G_SI2,up_last_common) if "G_SI2" in x.increased else worksheet.write('E'+str(row_1+8),x.G_SI2,last_common))
+            worksheet.write('E'+str(row_1+8),x.G_SI2,down_last_common) if "G_SI2" in x.dropped  else (worksheet.write('E'+str(row_1+8),x.G_SI2,up_last_common) if "G_SI2" in x.increased else worksheet.write('E'+str(row_1+8),x.G_SI2,last_common))
             worksheet.write('F'+str(row_1+8),x.H_SI2,down_last_divider) if "H_SI2" in x.dropped  else (worksheet.write('F'+str(row_1+8),x.H_SI2,up_last_divider) if "H_SI2" in x.increased else worksheet.write('F'+str(row_1+8),x.H_SI2,last_divider))
             worksheet.write('G'+str(row_1+8),x.I_SI2,down_last_common) if "I_SI2" in x.dropped  else (worksheet.write('G'+str(row_1+8),x.I_SI2,up_last_common) if "I_SI2" in x.increased else worksheet.write('G'+str(row_1+8),x.I_SI2,last_common))
             worksheet.write('H'+str(row_1+8),x.J_SI2,down_last_divider) if "J_SI2" in x.dropped  else (worksheet.write('H'+str(row_1+8),x.J_SI2,up_last_divider) if "J_SI2" in x.increased else worksheet.write('H'+str(row_1+8),x.J_SI2,last_divider))
