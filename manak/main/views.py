@@ -112,8 +112,8 @@ def pdfcon(shape):
 
     files_dic = { "File": (excel_file_path, open(excel_file_path, 'rb')) }
     boundary = str(uuid.uuid4())
-    X_RapidAPI_Key = "4cebfa25b8msh2bd06fc9b25ed3dp13d394jsn1534b21262d4"
-    # X_RapidAPI_Key = "453596cdb6msh20a6e1af4fed997p1a862bjsn1db820ae4fc9"
+    # X_RapidAPI_Key = "4cebfa25b8msh2bd06fc9b25ed3dp13d394jsn1534b21262d4" # Jay
+    X_RapidAPI_Key = "9b19c96319msh53929d7b44a7b05p1d7544jsn2399e66b2dbe" #Mahant
     
     headers = {
         "Accept-Encoding": "gzip, deflate, br",
@@ -136,8 +136,7 @@ def pdfcon(shape):
     except Exception as e:
         print("error 1:::",e)
         files_dic1 = { "File": (excel_file_path, open(excel_file_path, 'rb')) }
-        X_RapidAPI_Key = "453596cdb6msh20a6e1af4fed997p1a862bjsn1db820ae4fc9"
-        # X_RapidAPI_Key = "4cebfa25b8msh2bd06fc9b25ed3dp13d394jsn1534b21262d4"
+        X_RapidAPI_Key = "453596cdb6msh20a6e1af4fed997p1a862bjsn1db820ae4fc9" #fdcr
         headers['X-RapidAPI-Key'] = X_RapidAPI_Key
         print(headers)
         response1 = requests.post(url, files=files_dic1, headers=headers)
@@ -149,7 +148,7 @@ def pdfcon(shape):
             try:
                 print("error 1:::",e)
                 files_dic1 = { "File": (excel_file_path, open(excel_file_path, 'rb')) }
-                X_RapidAPI_Key = "d3e6296aabmsh39bcde3ff806342p1d79eajsn9ab46bf74945"
+                X_RapidAPI_Key = "d3e6296aabmsh39bcde3ff806342p1d79eajsn9ab46bf74945" #bymanelico
                 headers['X-RapidAPI-Key'] = X_RapidAPI_Key
                 print(headers)
                 response1 = requests.post(url, files=files_dic1, headers=headers)
@@ -387,7 +386,7 @@ def admin_generate_pdf(request):
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
         excel_creation(data,shape)
-        pdfcon(shape)
+        # pdfcon(shape)
         return JsonResponse({'success': True})
 
         
@@ -781,6 +780,7 @@ def excel_creation(data,shape):
             }
     
     common = workbook.add_format(common_format)
+    price_text = workbook.add_format(dict(common_format, align='right'))
     up_common = workbook.add_format(dict(common_format, fg_color='#808080',font_color="white"))
     down_common = workbook.add_format(dict(common_format, bold=True))
 
@@ -841,11 +841,11 @@ def excel_creation(data,shape):
     worksheet.set_row(8,4.5)
 
     worksheet.set_row(9,12)
-    worksheet.merge_range("B10:H10", "Price change : Dark Cell - Increased / Bold - Dropped ", common)
+    worksheet.merge_range("C10:J10", "Price change : Dark Cell - Increased / Bold - Dropped ", price_text)
     
 
-    worksheet.merge_range("I10:J10", 'increased',price_box_up)
-    worksheet.merge_range("L10:M10", 'dropped',price_box_drop)
+    worksheet.merge_range("L10:M10", 'increased',price_box_up)
+    worksheet.merge_range("N10:O10", 'dropped',price_box_drop)
    
     # Footer
     footer_font = workbook.add_format(
