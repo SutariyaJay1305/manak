@@ -708,7 +708,7 @@ def excel_creation(data,shape):
     table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":10,
+        "font_size":11,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -719,7 +719,7 @@ def excel_creation(data,shape):
     last_row_table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":10,
+        "font_size":11,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -730,7 +730,7 @@ def excel_creation(data,shape):
     last_col_table_heading = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":10,
+        "font_size":11,
         "color":"white",
         "align": "center",
         "valign": "vcenter",
@@ -741,7 +741,7 @@ def excel_creation(data,shape):
     table_tile = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":10,
+        "font_size":11,
         "bold": 1,
         "align": "center",
         "valign": "vcenter",
@@ -752,7 +752,7 @@ def excel_creation(data,shape):
     table_date = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":10,
+        "font_size":11,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -762,7 +762,7 @@ def excel_creation(data,shape):
     table_descritption = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":10,
+        "font_size":11,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -772,7 +772,7 @@ def excel_creation(data,shape):
     
     common_format = {
             "font":"Agency FB",
-            "font_size":10,
+            "font_size":11,
             "align": "center",
             "valign": "vcenter",
             "fg_color": "white",
@@ -811,7 +811,7 @@ def excel_creation(data,shape):
     
 
     # Column height
-    worksheet.set_column(0, 0, 3.67)
+    worksheet.set_column(0, 0, 4)
     worksheet.set_column(1, 9, 3.83)
     worksheet.set_column(10, 10, 0.27)
     worksheet.set_column(11, 18, 3.83)
