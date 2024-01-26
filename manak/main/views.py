@@ -833,7 +833,7 @@ def excel_creation(data,shape):
         text = UIManager.objects.get(UI_position=4).text_description
     except Exception as e:
         print(e)
-    worksheet.merge_range("C4:T5", text, subtitle_format)
+    worksheet.merge_range("C4:S5", text, subtitle_format)
     
     worksheet.set_row(4,11.25)
     worksheet.set_row(5,7.5)
