@@ -90,7 +90,7 @@
                             <td class="bg-white text-dark" colspan="2"><b> {{x.parent_table.tabel_date | date:"m/d/y" }}</b></td>
                             <td class="bg-white text-dark text-center" colspan="3"><b>{{x.parent_table.shape}} </b></td>
                         </tr>
-                        <tr class="text-center" style="border-top-border:grey;">
+                        <tr class="text-center border-white">
                             <th style="font-size: 12px;" >Manak</th>
                             <th class="text-center">D</th>
                             <th class="text-center">E</th>
@@ -98,7 +98,7 @@
                             <th class="text-center">G</th>
                             <th class="text-center">H</th>
                             <th class="text-center">I</th>
-                            <th class="text-center">J</th>
+                            <th class="text-center border-0">J</th>
                         </tr>
                         
                     </thead>
@@ -115,7 +115,7 @@
                             {% if "J_IF" in x.dropped %}<td class="dropped_cell">{{x.J_IF |floatformat:"0" }}</td>{% elif "J_IF" in x.increased %}<td class="increased_cell">{{x.J_IF |floatformat:"0" }}</td> {% else %}<td>{{x.J_IF |floatformat:"0" }}</td>{% endif %}
                         </tr>
                         <tr class="text-center">
-                            <td class="text-white bg-dark">VV1</td>
+                            <td class="text-white bg-dark">VVS1</td>
                             {% if "D_VV1" in x.dropped %}<td class="dropped_cell">{{x.D_VV1 |floatformat:"0" }}</td>{% elif "D_VV1" in x.increased %}<td class="increased_cell">{{x.D_VV1 |floatformat:"0" }}</td> {% else %}<td>{{x.D_VV1 |floatformat:"0" }}</td>{% endif %}
                             {% if "E_VV1" in x.dropped %}<td class="dropped_cell">{{x.E_VV1 |floatformat:"0" }}</td>{% elif "E_VV1" in x.increased %}<td class="increased_cell">{{x.E_VV1 |floatformat:"0" }}</td> {% else %}<td>{{x.E_VV1 |floatformat:"0" }}</td>{% endif %}
                             {% if "F_SI2" in x.dropped %}<td class="dropped_cell">{{x.F_VV1 |floatformat:"0" }}</td>{% elif "F_VV1" in x.increased %}<td class="increased_cell">{{x.F_VV1 |floatformat:"0" }}</td> {% else %}<td>{{x.F_VV1 |floatformat:"0" }}</td>{% endif %}
@@ -125,7 +125,7 @@
                             {% if "J_VV1" in x.dropped %}<td class="dropped_cell">{{x.J_VV1 |floatformat:"0" }}</td>{% elif "J_VV1" in x.increased %}<td class="increased_cell">{{x.J_VV1 |floatformat:"0" }}</td> {% else %}<td>{{x.J_VV1 |floatformat:"0" }}</td>{% endif %}
                         </tr>
                         <tr class="text-center">
-                            <td class="text-white bg-dark">VV2</td>
+                            <td class="text-white bg-dark">VVS2</td>
                             {% if "D_SI2" in x.dropped %}<td class="dropped_cell">{{x.D_VV2 |floatformat:"0" }}</td>{% elif "D_VV2" in x.increased %}<td class="increased_cell">{{x.D_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.D_VV2 |floatformat:"0" }}</td>{% endif %}
                             {% if "E_VV2" in x.dropped %}<td class="dropped_cell">{{x.E_VV2 |floatformat:"0" }}</td>{% elif "E_VV2" in x.increased %}<td class="increased_cell">{{x.E_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.E_VV2 |floatformat:"0" }}</td>{% endif %}
                             {% if "F_VV2" in x.dropped %}<td class="dropped_cell">{{x.F_VV2 |floatformat:"0" }}</td>{% elif "F_VV2" in x.increased %}<td class="increased_cell">{{x.F_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.F_VV2 |floatformat:"0" }}</td>{% endif %}
@@ -194,7 +194,7 @@
                             <td class="bg-white text-dark" colspan="2"><b> {{x.parent_table.tabel_date | date:"m/d/y" }}</b></td>
                             <td class="bg-white text-dark text-center" colspan="3"><b>{{x.parent_table.shape}} </b></td>
                         </tr>
-                        <tr class="text-center">                       
+                        <tr class="text-center border-white">                       
                             <th style="font-size: 12px;" >Manak</th>
                             <th class="text-center">D</th>
                             <th class="text-center">E</th>
@@ -202,7 +202,7 @@
                             <th class="text-center">G</th>
                             <th class="text-center">H</th>
                             <th class="text-center">I</th>
-                            <th class="text-center">J</th>
+                            <th class="text-center border-0">J</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -217,7 +217,7 @@
                             {% if "J_IF" in x.dropped %}<td class="dropped_cell">{{x.J_IF |floatformat:"0" }}</td>{% elif "J_IF" in x.increased %}<td class="increased_cell">{{x.J_IF |floatformat:"0" }}</td> {% else %}<td>{{x.J_IF |floatformat:"0" }}</td>{% endif %}
                         </tr>
                         <tr class="text-center">
-                            <td class="text-white bg-dark">VV1</td>
+                            <td class="text-white bg-dark">VVS1</td>
                             {% if "D_VV1" in x.dropped %}<td class="dropped_cell">{{x.D_VV1 |floatformat:"0" }}</td>{% elif "D_VV1" in x.increased %}<td class="increased_cell">{{x.D_VV1 |floatformat:"0" }}</td> {% else %}<td>{{x.D_VV1 |floatformat:"0" }}</td>{% endif %}
                             {% if "E_VV1" in x.dropped %}<td class="dropped_cell">{{x.E_VV1 |floatformat:"0" }}</td>{% elif "E_VV1" in x.increased %}<td class="increased_cell">{{x.E_VV1 |floatformat:"0" }}</td> {% else %}<td>{{x.E_VV1 |floatformat:"0" }}</td>{% endif %}
                             {% if "F_SI2" in x.dropped %}<td class="dropped_cell">{{x.F_VV1 |floatformat:"0" }}</td>{% elif "F_VV1" in x.increased %}<td class="increased_cell">{{x.F_VV1 |floatformat:"0" }}</td> {% else %}<td>{{x.F_VV1 |floatformat:"0" }}</td>{% endif %}
@@ -227,7 +227,7 @@
                             {% if "J_VV1" in x.dropped %}<td class="dropped_cell">{{x.J_VV1 |floatformat:"0" }}</td>{% elif "J_VV1" in x.increased %}<td class="increased_cell">{{x.J_VV1 |floatformat:"0" }}</td> {% else %}<td>{{x.J_VV1 |floatformat:"0" }}</td>{% endif %}
                         </tr>
                         <tr class="text-center">
-                            <td class="text-white bg-dark">VV2</td>
+                            <td class="text-white bg-dark">VVS2</td>
                             {% if "D_SI2" in x.dropped %}<td class="dropped_cell">{{x.D_VV2 |floatformat:"0" }}</td>{% elif "D_VV2" in x.increased %}<td class="increased_cell">{{x.D_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.D_VV2 |floatformat:"0" }}</td>{% endif %}
                             {% if "E_VV2" in x.dropped %}<td class="dropped_cell">{{x.E_VV2 |floatformat:"0" }}</td>{% elif "E_VV2" in x.increased %}<td class="increased_cell">{{x.E_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.E_VV2 |floatformat:"0" }}</td>{% endif %}
                             {% if "F_VV2" in x.dropped %}<td class="dropped_cell">{{x.F_VV2 |floatformat:"0" }}</td>{% elif "F_VV2" in x.increased %}<td class="increased_cell">{{x.F_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.F_VV2 |floatformat:"0" }}</td>{% endif %}

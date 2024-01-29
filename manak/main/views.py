@@ -716,6 +716,17 @@ def excel_creation(data,shape):
 
         })
     
+    table_heading_manak = workbook.add_format(
+        {
+        "font":"Agency FB",
+        "font_size":9,
+        "color":"white",
+        "align": "center",
+        "valign": "vcenter",
+        "fg_color": "#000000",
+
+        })
+    
     last_row_table_heading = workbook.add_format(
         {
         "font":"Agency FB",
@@ -877,7 +888,7 @@ def excel_creation(data,shape):
             worksheet.write('I'+str(row_1), x.parent_table.shape,table_tile) 
 
             # Table heading
-            worksheet.write('B'+str(row_1+1), 'MANAK',table_heading)
+            worksheet.write('B'+str(row_1+1), 'MANAK',table_heading_manak)
             worksheet.write('C'+str(row_1+1), 'D',table_heading)
             worksheet.write('D'+str(row_1+1), 'E',table_heading)
             worksheet.write('E'+str(row_1+1), 'F',table_heading)
@@ -979,7 +990,7 @@ def excel_creation(data,shape):
             worksheet.write('S'+str(row_2), x.parent_table.shape,table_tile) 
 
             # Table heading
-            worksheet.write('L'+str(row_2+1), 'MANAK',table_heading)
+            worksheet.write('L'+str(row_2+1), 'MANAK',table_heading_manak)
             worksheet.write('M'+str(row_2+1), 'N',table_heading)
             worksheet.write('N'+str(row_2+1), 'E',table_heading)
             worksheet.write('O'+str(row_2+1), 'F',table_heading)
