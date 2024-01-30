@@ -773,7 +773,7 @@ def excel_creation(data,shape):
     table_descritption = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":11,
+        "font_size":9,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
