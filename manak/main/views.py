@@ -905,8 +905,8 @@ def excel_creation(data,shape):
             worksheet.write('B'+str(row_1+7), 'SI1',table_heading)
             worksheet.write('B'+str(row_1+8), 'SI2',last_row_table_heading)
 
-            worksheet.merge_range('B'+str(row_1+9)+':E'+str(row_1+9), x.parent_table.text_description,table_descritption)
-            worksheet.merge_range('F'+str(row_1+9)+':I'+str(row_1+9), "",table_descritption)
+            worksheet.merge_range('B'+str(row_1+9)+':I'+str(row_1+9), x.parent_table.text_description,table_descritption)
+            # worksheet.merge_range('F'+str(row_1+9)+':I'+str(row_1+9), "",table_descritption)
             
             # row_1 IF +str(row_1+2)
 
@@ -1007,8 +1007,8 @@ def excel_creation(data,shape):
             worksheet.write('L'+str(row_2+7), 'SI1',table_heading)
             worksheet.write('L'+str(row_2+8), 'SI2',last_row_table_heading)
 
-            worksheet.merge_range('K'+str(row_2+9)+':N'+str(row_2+9), x.parent_table.text_description,table_descritption)
-            worksheet.merge_range('O'+str(row_2+9)+':S'+str(row_2+9),"",table_descritption)
+            worksheet.merge_range('K'+str(row_2+9)+':S'+str(row_2+9), x.parent_table.text_description,table_descritption)
+            # worksheet.merge_range('O'+str(row_2+9)+':S'+str(row_2+9),"",table_descritption)
             
             # row_2 IF +str(row_2+2)
             worksheet.write('M'+str(row_2+2),x.D_IF,down_common) if "D_IF" in x.dropped  else (worksheet.write('M'+str(row_2+2),x.D_IF,up_common) if "D_IF" in x.increased else worksheet.write('M'+str(row_2+2),x.D_IF,common))
