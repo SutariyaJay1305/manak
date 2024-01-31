@@ -192,7 +192,7 @@ def pdfcon(shape):
 
     from PyPDF2 import PdfWriter, PdfReader
     
-    infile = PdfReader(pdf_file, 'rb')
+    infile = PdfReader(pdf_file_update, 'rb')
     output = PdfWriter()
 
     p = infile.pages[0] 
