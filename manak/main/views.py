@@ -25,6 +25,8 @@ import pandas as pd
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from user_payment.models import UserPayment
+from datetime import date
+ 
 
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -469,6 +471,8 @@ def update_price(request):
                 J_SI1=F('J_SI1')+F('J_SI1')*(int(per_change)/100),
                 J_SI2=F('J_SI2')+F('J_SI2')*(int(per_change)/100),
                 )
+            today = date.today()
+            main_tables.update(tabel_date=today)
 
         else:
             if table_position_update == "All":
@@ -548,6 +552,7 @@ def update_price(request):
 def update_report(request):
     if request.method=="POST":
         position = request.POST["table_position"]
+        shape = request.POST["table_shape"]
         D_IF  = request.POST["D_IF"]
         D_VV1 = request.POST["D_VV1"]
         D_VV2 = request.POST["D_VV2"]
@@ -629,11 +634,14 @@ def update_report(request):
                     drop = ','.join([drop, str(x)])
                 query[x] = int(updated_val[count])    
                 flag = False
-            count += 1   
+            count += 1 
+         
         query['increased'] = increase
         query['dropped'] = drop
         q.update(**query)
-        # main_tables = MainTables.objects.filter(shape__iexact=shape)
+        today = date.today()
+        main_tables = MainTables.objects.filter(shape__iexact=shape)
+        main_tables.update(tabel_date=today) 
         # data = DataManager.objects.filter(parent_table__in = main_tables)
         # excel_creation(data,shape)
         # pdfcon(shape)
@@ -673,7 +681,7 @@ def excel_creation(data,shape):
        {
         "font":"Agency FB",
         "font_size":10,
-        "align": "center",
+        # "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
         'text_wrap': True
@@ -856,8 +864,8 @@ def excel_creation(data,shape):
     worksheet.merge_range("C10:J10", "Price change : Dark Cell - Increased / Bold - Dropped ", price_text)
     
 
-    worksheet.merge_range("L10:M10", 'increased',price_box_up)
-    worksheet.merge_range("N10:O10", 'dropped',price_box_drop)
+    worksheet.merge_range("L10:M10", 'Increased',price_box_up)
+    worksheet.merge_range("N10:O10", 'Dropped',price_box_drop)
    
     # Footer
     footer_font = workbook.add_format(
@@ -870,7 +878,7 @@ def excel_creation(data,shape):
 
         })
     worksheet.set_row(57,48)
-    worksheet.merge_range("A58:J58", "For Price Update : ManakReport.com ", footer_font)
+    worksheet.merge_range("A58:E58", "For Price Update : ManakReport.com ", footer_font)
 
     
 
