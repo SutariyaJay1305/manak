@@ -22,7 +22,7 @@ class MainTables(models.Model):
     carat_range = models.TextField(max_length=25)
     tabel_date = models.DateField()
     shape = models.TextField(max_length=25)
-    text_description = models.TextField(max_length=200)
+    text_description = models.TextField(max_length=500)
 
     def __str__(self):
         return self.carat_range + " - " + self.shape

@@ -184,11 +184,24 @@ def pdfcon(shape):
         raise ValueError('Missing the PDF file signature')
 
     # Write the PDF contents to a local file
-    pdf_file_name = "media/pdf/" + str(shape)+".pdf"
-    pdf_file = os.path.join(BASE_DIR,pdf_file_name)
-    f = open(pdf_file, 'wb')
+    pdf_file_name_update = "media/pdf/" + str(shape)+"_update.pdf"
+    pdf_file_update = os.path.join(BASE_DIR,pdf_file_name_update)
+    f = open(pdf_file_update, 'wb')
     f.write(bytes)
     f.close()
+
+    from PyPDF2 import PdfWriter, PdfReader
+    
+    infile = PdfReader(pdf_file, 'rb')
+    output = PdfWriter()
+
+    p = infile.pages[0] 
+    output.add_page(p)
+    pdf_file_name = "media/pdf/" + str(shape)+".pdf"
+    pdf_file = os.path.join(BASE_DIR,pdf_file_name)
+    with open(pdf_file, 'wb') as f:
+        output.write(f)
+    
 
  
 
@@ -325,6 +338,10 @@ def report(request):
 
 
 def guest(request):
+    
+    
+    
+
     if request.method == "GET":
         try:
             shape = request.GET['shape']
@@ -878,7 +895,7 @@ def excel_creation(data,shape):
 
         })
     worksheet.set_row(57,48)
-    worksheet.merge_range("A58:E58", "For Price Update : ManakReport.com ", footer_font)
+    worksheet.merge_range("B58:F58", "For Price Update : ManakReport.com ", footer_font)
 
     
 
