@@ -570,6 +570,7 @@ def update_report(request):
     if request.method=="POST":
         position = request.POST["table_position"]
         shape = request.POST["table_shape"]
+        table_id = request.POST["table_name"]
         D_IF  = request.POST["D_IF"]
         D_VV1 = request.POST["D_VV1"]
         D_VV2 = request.POST["D_VV2"]
@@ -628,7 +629,7 @@ def update_report(request):
 
         updated_val = [D_IF,D_VV1,D_VV2,D_VS1,D_VS2,D_SI1,D_SI2,E_IF,E_VV1,E_VV2,E_VS1,E_VS2,E_SI1,E_SI2,F_IF,F_VV1,F_VV2,F_VS1,F_VS2,F_SI1,F_SI2,G_IF,G_VV1,G_VV2,G_VS1,G_VS2,G_SI1,G_SI2,H_IF,H_VV1,H_VV2,H_VS1,H_VS2,H_SI1,H_SI2,I_IF,I_VV1,I_VV2,I_VS1,I_VS2,I_SI1,I_SI2,J_IF,J_VV1,J_VV2,J_VS1,J_VS2,J_SI1,J_SI2]
 
-        q = DataManager.objects.filter(postion=position)
+        q = DataManager.objects.filter(postion=position,parent_table=table_id)
         data = q.values('D_IF','D_VV1','D_VV2','D_VS1','D_VS2','D_SI1','D_SI2','E_IF','E_VV1','E_VV2','E_VS1','E_VS2','E_SI1','E_SI2','F_IF','F_VV1','F_VV2','F_VS1','F_VS2','F_SI1','F_SI2','G_IF','G_VV1','G_VV2','G_VS1','G_VS2','G_SI1','G_SI2','H_IF','H_VV1','H_VV2','H_VS1','H_VS2','H_SI1','H_SI2','I_IF','I_VV1','I_VV2','I_VS1','I_VS2','I_SI1','I_SI2','J_IF','J_VV1','J_VV2','J_VS1','J_VS2','J_SI1','J_SI2')[0]
         count = 0 
         increase = q.first().increased
