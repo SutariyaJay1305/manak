@@ -196,8 +196,8 @@
                 <form class="update">
                     {% csrf_token %}
                     
-                        <input type="hidden" name="table_position" value="{{x.parent_table.id}}"></input>
-                        <input type="hidden" name="table_shape" value="{{x.parent_table.shape}}"></input>
+                    <input type="hidden" name="table_position" value="{{x.postion}}"></input>
+                    <input type="hidden" name="table_shape" value="{{x.parent_table.shape}}"></input>
                 <table class="table table-bordered">
 
                     <thead class="table-dark">

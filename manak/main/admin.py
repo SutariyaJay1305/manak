@@ -10,7 +10,8 @@ class MainTablesAdmin(admin.ModelAdmin):
     fields = ['modified_date','carat_range','tabel_date','shape','text_description',]
 
 class DataManagerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['parent_table','postion']
+
 
 class UserAdmin(admin.ModelAdmin):
     pass
