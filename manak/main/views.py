@@ -1031,7 +1031,7 @@ def excel_creation(data,shape,filename):
 
             # Table heading
             worksheet.write('L'+str(row_2+1), 'MANAK',table_heading_manak)
-            worksheet.write('M'+str(row_2+1), 'N',table_heading)
+            worksheet.write('M'+str(row_2+1), 'D',table_heading)
             worksheet.write('N'+str(row_2+1), 'E',table_heading)
             worksheet.write('O'+str(row_2+1), 'F',table_heading)
             worksheet.write('P'+str(row_2+1), 'G',table_heading)
