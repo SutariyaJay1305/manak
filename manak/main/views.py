@@ -404,13 +404,17 @@ def admin_generate_pdf(request):
         except Exception as e:
             print(e)
             shape = "round"
+            filename = "round"
         if shape == "":
             shape = "round"
-        print(shape)
+            filename = "round"
+        if str(shape).strip() == 'pear' or str(shape) == 'pear' or str(shape) == 'pear ':
+            shape = "pear+"
+            filename = "pear"
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
-        excel_creation(data,shape)
-        pdfcon(shape)
+        excel_creation(data,shape,filename)
+        pdfcon(filename)
         return JsonResponse({'success': True})
 
         
@@ -688,8 +692,8 @@ def remove_changes(request):
 
 
 
-def excel_creation(data,shape):
-    file = 'media/pdf/'+ shape +".xlsx"
+def excel_creation(data,shape,filename):
+    file = 'media/pdf/'+ filename +".xlsx"
     workbook = xlsxwriter.Workbook(file)
     worksheet = workbook.add_worksheet()
 
