@@ -48,9 +48,9 @@
                 <b><label for="shapes">Select Report:</label></b>
                     <select name="shapes" id="shape">
                         
-                        {% if type == "round" %}<option value="round" disabled selected>Round</option> {% else %}<option value="pear" disabled selected>Pear</option>{% endif %}
+                        {% if type == "round" %}<option value="round" disabled selected>Round</option> {% else %}<option value="pear+" disabled selected>Pear+</option>{% endif %}
                     <option value="round">Round</option>
-                    <option value="pear" >Pear</option>
+                    <option value="pear+" >Pear+</option>
                     
                     </select>
               </div>
@@ -334,9 +334,9 @@
               </div>
               <div class="dropdown ">
                 <b><label for="table_position_update">Select Table:</label></b>
-                    <select name="table_position_update" id="table_position_update">
+                    <select name="table_position_update" id="table_position_update" required>
                         
-                    {% comment %} <option value="All"  selected>All</option> {% endcomment %}
+                    <option hidden>Choose Table</option>
                     {% for x in data %}
                     <option value="{{x.postion}}" >{{x.parent_table.carat_range}}</option>
                     {% endfor %}

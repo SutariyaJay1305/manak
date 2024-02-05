@@ -347,6 +347,9 @@ def guest(request):
             shape = request.GET['shape']
         except :
             shape = "round"
+
+        if shape == "pear":
+            shape = "pear+"
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
         text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
@@ -370,6 +373,8 @@ def admin_report(request):
                 shape = request.GET['shape']
             except :
                 shape = "round"
+            if shape == "pear":
+                shape = "pear+"
             main_tables = MainTables.objects.filter(shape__iexact=shape)
             data = DataManager.objects.filter(parent_table__in = main_tables)
             
@@ -409,7 +414,7 @@ def admin_generate_pdf(request):
         return JsonResponse({'success': True})
 
         
-    
+
 
 def update_price(request):
     if request.method=="POST":
@@ -417,8 +422,10 @@ def update_price(request):
         change = request.POST["change"]
         shape = request.POST["shape"]
         table_position_update = request.POST["table_position_update"]
-        print(table_position_update)
-       
+        
+        if str(shape).strip() == 'pear' or str(shape) == 'pear' or str(shape) == 'pear ':
+            shape = "pear+"
+
         main_tables = MainTables.objects.filter(shape__iexact=shape)
        
         if change=="increase":
@@ -658,6 +665,9 @@ def update_report(request):
         query['dropped'] = drop
         q.update(**query)
         today = date.today()
+        if str(shape).strip() == 'pear' or str(shape) == 'pear' or str(shape) == 'pear ':
+            shape = "pear+"
+
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         main_tables.update(tabel_date=today) 
         # data = DataManager.objects.filter(parent_table__in = main_tables)
@@ -689,7 +699,7 @@ def excel_creation(data,shape):
     {
         "bold": 1,
         "font":"Agency FB",
-        "font_size":20,
+        "font_size":24,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -1114,91 +1124,91 @@ def excel_creation(data,shape):
     
     
 
-def convert_excel_to_pdf():
-    import os
-    from pathlib import Path
+# def convert_excel_to_pdf():
+#     import os
+#     from pathlib import Path
 
-    # Build paths inside the project like this: BASE_DIR / 'subdir'.
-    BASE_DIR = Path(__file__).resolve().parent.parent
+#     # Build paths inside the project like this: BASE_DIR / 'subdir'.
+#     BASE_DIR = Path(__file__).resolve().parent.parent
     
-    excel_file_path = os.path.join(BASE_DIR,'files/hello.xlsx')
-    # Read the Excel file into a DataFrame using pandas
-    df = pd.read_excel(excel_file_path)
-    pdf_file_path = "oyi.pdf"
+#     excel_file_path = os.path.join(BASE_DIR,'files/hello.xlsx')
+#     # Read the Excel file into a DataFrame using pandas
+#     df = pd.read_excel(excel_file_path)
+#     pdf_file_path = "oyi.pdf"
 
-    # Create a PDF file
-    pdf_canvas = canvas.Canvas(pdf_file_path, pagesize=letter)
+#     # Create a PDF file
+#     pdf_canvas = canvas.Canvas(pdf_file_path, pagesize=letter)
 
-    # Set the starting position for drawing in the PDF
-    x_position = 50
-    y_position = letter[1] - 50
+#     # Set the starting position for drawing in the PDF
+#     x_position = 50
+#     y_position = letter[1] - 50
 
-    # Loop through the DataFrame and write to the PDF
-    for _, row in df.iterrows():
-        for col_name, cell_value in row.items():
-            pdf_canvas.drawString(x_position, y_position, f"{col_name}: {cell_value}")
-            x_position += 150  # Adjust as needed for your layout
+#     # Loop through the DataFrame and write to the PDF
+#     for _, row in df.iterrows():
+#         for col_name, cell_value in row.items():
+#             pdf_canvas.drawString(x_position, y_position, f"{col_name}: {cell_value}")
+#             x_position += 150  # Adjust as needed for your layout
 
-        x_position = 50  # Reset X position for the next row
-        y_position -= 20  # Move to the next row
+#         x_position = 50  # Reset X position for the next row
+#         y_position -= 20  # Move to the next row
 
-    # Save the PDF
-    pdf_canvas.save()
+#     # Save the PDF
+#     pdf_canvas.save()
 
-    print(f"Conversion from {excel_file_path} to {pdf_file_path} complete.")
+#     print(f"Conversion from {excel_file_path} to {pdf_file_path} complete.")
 
 
 
-def perform_excel_to_pdf():
-        import os
-        from pathlib import Path
+# def perform_excel_to_pdf():
+#         import os
+#         from pathlib import Path
 
-        # Build paths inside the project like this: BASE_DIR / 'subdir'.
-        BASE_DIR = Path(__file__).resolve().parent.parent
+#         # Build paths inside the project like this: BASE_DIR / 'subdir'.
+#         BASE_DIR = Path(__file__).resolve().parent.parent
         
-        excel_file = os.path.join(BASE_DIR,'files/hello.xlsx')
+#         excel_file = os.path.join(BASE_DIR,'files/hello.xlsx')
        
                 
-        if True: # excel_file.name.endswith('.xls') or excel_file.name.endswith('.xlsx'):
-            try:
-                df = pd.read_excel(excel_file)
-            except FileNotFoundError:
-                print("Excel file not found.")
-                return
-            except Exception as e:
-                print("Error reading Excel file:", e)
-                return
+#         if True: # excel_file.name.endswith('.xls') or excel_file.name.endswith('.xlsx'):
+#             try:
+#                 df = pd.read_excel(excel_file)
+#             except FileNotFoundError:
+#                 print("Excel file not found.")
+#                 return
+#             except Exception as e:
+#                 print("Error reading Excel file:", e)
+#                 return
 
-            pdf = FPDF()
-            pdf.add_page()
+#             pdf = FPDF()
+#             pdf.add_page()
 
-            pdf.set_font("Arial", size=12)
+#             pdf.set_font("Arial", size=12)
 
-            col_width = 40
-            row_height = 10
+#             col_width = 40
+#             row_height = 10
 
-            for col in df.columns:
-                pdf.cell(col_width, row_height, txt=str(col), border=1)
-            pdf.ln(row_height)
+#             for col in df.columns:
+#                 pdf.cell(col_width, row_height, txt=str(col), border=1)
+#             pdf.ln(row_height)
 
-            for index, row in df.iterrows():
-                for col in df.columns:
-                    pdf.cell(col_width, row_height, txt=str(row[col]), border=1)
-                pdf.ln(row_height)
+#             for index, row in df.iterrows():
+#                 for col in df.columns:
+#                     pdf.cell(col_width, row_height, txt=str(row[col]), border=1)
+#                 pdf.ln(row_height)
 
-            try:
-                pdf_file="output_pdf_file.pdf"
-                pdf.output(pdf_file)
-                print(f"PDF file '{pdf_file}' created successfully.")
-                with open("output_pdf_file.pdf", 'rb') as pdf:
-                    response = HttpResponse(pdf.read(), content_type='application/pdf')
-                    response['Content-Disposition'] = 'attachment; filename="output_pdf_file.pdf"'
-                    return response
+#             try:
+#                 pdf_file="output_pdf_file.pdf"
+#                 pdf.output(pdf_file)
+#                 print(f"PDF file '{pdf_file}' created successfully.")
+#                 with open("output_pdf_file.pdf", 'rb') as pdf:
+#                     response = HttpResponse(pdf.read(), content_type='application/pdf')
+#                     response['Content-Disposition'] = 'attachment; filename="output_pdf_file.pdf"'
+#                     return response
 
-            except Exception as e:
-                print("Error creating PDF file:", e)
+#             except Exception as e:
+#                 print("Error creating PDF file:", e)
 
-        return HttpResponse("Excel uploaded successfully")
+#         return HttpResponse("Excel uploaded successfully")
 
 
 
