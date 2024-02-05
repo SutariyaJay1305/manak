@@ -408,6 +408,8 @@ def admin_generate_pdf(request):
         if shape == "":
             shape = "round"
             filename = "round"
+        elif shape == "round":
+            filename = "round"
         if str(shape).strip() == 'pear' or str(shape) == 'pear' or str(shape) == 'pear ':
             shape = "pear+"
             filename = "pear"
