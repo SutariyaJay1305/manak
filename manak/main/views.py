@@ -911,8 +911,18 @@ def excel_creation(data,shape,filename):
         "fg_color": "white",
 
         })
+    footer_font_main = workbook.add_format(
+        {
+        "font":"Agency FB",
+        "font_size":13,
+        "align": "center",
+        "valign": "vcenter",
+        "fg_color": "white",
+        "bold": 1,
+        })
     worksheet.set_row(57,48)
-    worksheet.merge_range("B58:F58", "For Price Update : ManakReport.com ", footer_font)
+    worksheet.merge_range("B58:C58", "For Price Update", footer_font)
+    worksheet.merge_range("D58:F58", " : ManakReport.com ", footer_font_main)
 
     
 
