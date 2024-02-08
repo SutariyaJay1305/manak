@@ -416,7 +416,7 @@ def admin_generate_pdf(request):
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
         excel_creation(data,shape,filename)
-        pdfcon(filename)
+        # pdfcon(filename)
         return JsonResponse({'success': True})
 
         
@@ -876,12 +876,13 @@ def excel_creation(data,shape,filename):
     # Title
     worksheet.set_row(0,2)
     worksheet.set_row(1,23.25)
-    worksheet.set_row(4,16)
+    
     worksheet.merge_range("B1:S2", "MANAK LG-DIAMOND REPORT", title_format)
     
     worksheet.set_row(2,12)
 
     worksheet.set_row(3,11.25)
+    worksheet.set_row(4,16)
     text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
     try:
         text = UIManager.objects.get(UI_position=4).text_description
@@ -889,7 +890,6 @@ def excel_creation(data,shape,filename):
         print(e)
     worksheet.merge_range("C4:S5", text, subtitle_format)
     
-    worksheet.set_row(4,11.25)
     worksheet.set_row(5,7.5)
     worksheet.set_row(6,7.5)
     worksheet.set_row(7,7.5)
@@ -906,7 +906,7 @@ def excel_creation(data,shape,filename):
     footer_font = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":10,
+        "font_size":9,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -915,7 +915,7 @@ def excel_creation(data,shape,filename):
     footer_font_main = workbook.add_format(
         {
         "font":"Agency FB",
-        "font_size":13,
+        "font_size":12,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
