@@ -882,14 +882,14 @@ def excel_creation(data,shape,filename):
     worksheet.set_row(2,12)
 
     worksheet.set_row(3,11.25)
-    worksheet.set_row(4,16)
+  
     text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
     try:
         text = UIManager.objects.get(UI_position=4).text_description
     except Exception as e:
         print(e)
     worksheet.merge_range("C4:S5", text, subtitle_format)
-    
+    worksheet.set_row(4,16)
     worksheet.set_row(5,7.5)
     worksheet.set_row(6,7.5)
     worksheet.set_row(7,7.5)
