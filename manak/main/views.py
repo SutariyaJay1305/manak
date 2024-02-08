@@ -876,6 +876,7 @@ def excel_creation(data,shape,filename):
     # Title
     worksheet.set_row(0,2)
     worksheet.set_row(1,23.25)
+    worksheet.set_row(4,16)
     worksheet.merge_range("B1:S2", "MANAK LG-DIAMOND REPORT", title_format)
     
     worksheet.set_row(2,12)
@@ -922,7 +923,7 @@ def excel_creation(data,shape,filename):
         })
     worksheet.set_row(57,48)
     worksheet.merge_range("B58:C58", "For Price Update", footer_font)
-    worksheet.merge_range("D58:F58", " : ManakReport.com ", footer_font_main)
+    worksheet.merge_range("D58:G58", " : ManakReport.com ", footer_font_main)
 
     
 
