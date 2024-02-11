@@ -889,7 +889,7 @@ def excel_creation(data,shape,filename):
     except Exception as e:
         print(e)
     worksheet.merge_range("C4:S5", text, subtitle_format)
-    worksheet.set_row(4,16)
+    worksheet.set_row(4,24)
     worksheet.set_row(5,7.5)
     worksheet.set_row(6,7.5)
     worksheet.set_row(7,7.5)
