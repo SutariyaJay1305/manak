@@ -416,7 +416,7 @@ def admin_generate_pdf(request):
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
         excel_creation(data,shape,filename)
-        # pdfcon(filename)
+        pdfcon(filename)
         return JsonResponse({'success': True})
 
         
@@ -916,14 +916,14 @@ def excel_creation(data,shape,filename):
         {
         "font":"Agency FB",
         "font_size":12,
-        "align": "center",
+        "align": "left",
         "valign": "vcenter",
         "fg_color": "white",
         "bold": 1,
         })
     worksheet.set_row(57,48)
-    worksheet.merge_range("B58:C58", "For Price Update", footer_font)
-    worksheet.merge_range("D58:G58", " : ManakReport.com ", footer_font_main)
+    worksheet.merge_range("B58:C58", "For Price Update :", footer_font)
+    worksheet.merge_range("D58:G58", " ManakReport.com ", footer_font_main)
 
     
 
