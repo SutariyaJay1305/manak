@@ -141,7 +141,10 @@ STRIPE_WEBHOOK_SECRET_TEST = 'whsec_568e186636e2868d09cad2e55c993e3a163aa02d4a50
 PRODUCT_PRICE = 'price_1OOBwhSFHK4FQej3WVpwasGd'
 
 
-REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
+if DEBUG == True:
+    REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
+else:
+    REDIRECT_DOMAIN = 'manakreport.com'
 
 
 
