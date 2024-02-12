@@ -921,7 +921,7 @@ def excel_creation(data,shape,filename):
         "fg_color": "white",
         "bold": 1,
         })
-    worksheet.set_row(57,48)
+    worksheet.set_row(57,20)
     worksheet.merge_range("B58:C58", "For Price Update :", footer_font)
     worksheet.merge_range("D58:G58", " ManakReport.com ", footer_font_main)
 
