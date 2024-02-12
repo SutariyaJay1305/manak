@@ -144,7 +144,7 @@ PRODUCT_PRICE = 'price_1OOBwhSFHK4FQej3WVpwasGd'
 if DEBUG == True:
     REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
 else:
-    REDIRECT_DOMAIN = 'manakreport.com'
+    REDIRECT_DOMAIN = 'http://www.manakreport.com'
 
 
 
