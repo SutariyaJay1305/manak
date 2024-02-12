@@ -13,7 +13,7 @@ def product_page(request):
 	stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
 	is_paid= UserPayment.objects.filter(app_user = request.user,stripe_checkout_id__isnull=False)
 	if is_paid.exists():
-		return redirect("/")
+		return redirect("report")
 
 	# if request.method == 'POST':
 	checkout_session = stripe.checkout.Session.create(
@@ -41,14 +41,15 @@ def payment_successful(request):
 		session = stripe.checkout.Session.retrieve(checkout_session_id)
 		customer = stripe.Customer.retrieve(session.customer)	
 		user = request.user
+		print("checkout_session_id:: ",checkout_session_id)
 		user_payment = UserPayment.objects.get(app_user=user.id)
 		user_payment.stripe_checkout_id = checkout_session_id
 		user_payment.save()
 		print(user_payment)
 	except Exception as e:
 		print(e)
-	return render(request, 'user_payment/payment_successful.html', {'customer': customer})
-
+	# return render(request, 'user_payment/payment_successful.html', {'customer': customer})
+	return redirect("report")
 
 def payment_cancelled(request):
 	stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
