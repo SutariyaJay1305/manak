@@ -56,9 +56,10 @@
                 <b><label for="shapes">Select Report:</label></b>
                 <select name="shapes" id="shape">
                         
-                    {% if type == "round" %}<option value="round" disabled selected>Round</option> {% else %}<option value="pear+" disabled selected>Pear+</option>{% endif %}
+                    {% if type == "round" %}<option value="round" disabled selected>Round</option> {% elif type == "pointer" %}<option value="pointer" disabled selected>Pointer</option> {% else %}<option value="pear+" disabled selected>Pear+</option>{% endif %}
                 <option value="round">Round</option>
                 <option value="pear+" >Pear +</option>
+                <option value="pointer" >Pointer</option>
                 
                 </select>
               </div>
@@ -306,6 +307,8 @@
 
               if (end == "round"){
                   window.location.href = "{% url 'guest' %}?shape=round";
+            }else if (end == "pointer"){
+                    window.location.href = "{% url 'guest' %}?shape=pointer";
               }else{
                   window.location.href = "{% url 'guest' %}?shape=pear";
               }

@@ -327,6 +327,8 @@ def report(request):
             shape = request.GET['shape']
         except :
             shape = "round"
+        if shape == "pear":
+            shape = "pear+"
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
     text = "Manak rerport is based on all major labs and its production of both HPHT & CVD(monthly/annually). No liability is assumed as to accuracy of this information"
@@ -584,6 +586,12 @@ def update_report(request):
         position = request.POST["table_position"]
         shape = request.POST["table_shape"]
         table_id = request.POST["table_name"]
+        is_revision = "off"
+        try:
+            is_revision = request.POST["is_revision"]
+        except:
+            is_revision
+            
         D_IF  = request.POST["D_IF"]
         D_VV1 = request.POST["D_VV1"]
         D_VV2 = request.POST["D_VV2"]
@@ -639,7 +647,7 @@ def update_report(request):
         J_VS2 = request.POST["J_VS2"]
         J_SI1 = request.POST["J_SI1"]
         J_SI2 = request.POST["J_SI2"]
-
+        print(is_revision)
         updated_val = [D_IF,D_VV1,D_VV2,D_VS1,D_VS2,D_SI1,D_SI2,E_IF,E_VV1,E_VV2,E_VS1,E_VS2,E_SI1,E_SI2,F_IF,F_VV1,F_VV2,F_VS1,F_VS2,F_SI1,F_SI2,G_IF,G_VV1,G_VV2,G_VS1,G_VS2,G_SI1,G_SI2,H_IF,H_VV1,H_VV2,H_VS1,H_VS2,H_SI1,H_SI2,I_IF,I_VV1,I_VV2,I_VS1,I_VS2,I_SI1,I_SI2,J_IF,J_VV1,J_VV2,J_VS1,J_VS2,J_SI1,J_SI2]
 
         q = DataManager.objects.filter(postion=position,parent_table=table_id)
@@ -647,7 +655,10 @@ def update_report(request):
         count = 0 
         increase = q.first().increased
         drop = q.first().dropped
-        flag = True
+        if is_revision == 'off':
+            flag = True
+        else:
+            flag = False
         query = {}
         
         for x,y in data.items():

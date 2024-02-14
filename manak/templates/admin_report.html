@@ -48,9 +48,10 @@
                 <b><label for="shapes">Select Report:</label></b>
                     <select name="shapes" id="shape">
                         
-                        {% if type == "round" %}<option value="round" disabled selected>Round</option> {% else %}<option value="pear+" disabled selected>Pear+</option>{% endif %}
-                    <option value="round">Round</option>
+                        {% if type == "round" %}<option value="round" disabled selected>Round</option> {% elif type == "pointer" %}<option value="pointer" disabled selected>Pointer</option> {% else %}<option value="pear+" disabled selected>Pear+</option>{% endif %}
+                        <option value="round">Round</option>
                     <option value="pear+" >Pear+</option>
+                    <option value="pointer" >Pointer</option>
                     
                     </select>
               </div>
@@ -85,6 +86,9 @@
 
         <input type="hidden" name="table_name" value="{{x.parent_table.table_id}}"></input>
         <input type="hidden" name="table_position" value="{{x.postion}}"></input>
+       
+        
+         
         <input type="hidden" name="table_shape" value="{{x.parent_table.shape}}"></input>
 
         <div class="row">
@@ -96,6 +100,7 @@
                             <td class="bg-white text-dark" colspan="2"><b>{{x.parent_table.carat_range}} CT</b></td>
                             <td class="bg-white text-dark" colspan="2"><input type="date" name="date" value="{{x.parent_table.tabel_date | date:"Y-m-d" }}"></td>
                             <td class="bg-white text-dark text-center" colspan="2"><b>{{x.parent_table.shape}} </b></td>
+                            <td class="bg-white text-dark text-center" colspan="1"><input type="checkbox" name="is_revision" > Revision</td>
                             <td class="bg-white text-dark text-center" colspan="2"><button class="btn btn-dark " type="submit">Update</button></td>
 
                         </tr>
@@ -208,6 +213,7 @@
                             <td class="bg-white text-dark" colspan="2"><b>{{x.parent_table.carat_range}} CT</b></td>
                             <td class="bg-white text-dark" colspan="2"><input type="date" value="{{x.parent_table.tabel_date | date:"Y-m-d" }}"></td>
                             <td class="bg-white text-dark text-center" colspan="2"><b>{{x.parent_table.shape}} </b></td>
+                            <td class="bg-white text-dark text-center" colspan="1"><input type="checkbox" name="is_revision" > Revision</td>
                             <td class="bg-white text-dark text-center" colspan="2"><button class="btn btn-dark " type="submit">Update</button></td>
                             
 
@@ -432,6 +438,8 @@
 
                 if (end == "round"){
                     window.location.href = "{% url 'admin_report' %}?shape=round";
+                }else if (end == "pointer"){
+                    window.location.href = "{% url 'admin_report' %}?shape=pointer";
                 }else{
                     window.location.href = "{% url 'admin_report' %}?shape=pear";
                 }

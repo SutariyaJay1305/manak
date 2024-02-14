@@ -49,7 +49,7 @@ def payment_successful(request):
 	except Exception as e:
 		print(e)
 	# return render(request, 'user_payment/payment_successful.html', {'customer': customer})
-	return redirect("report")
+	return redirect('report')
 
 def payment_cancelled(request):
 	stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
