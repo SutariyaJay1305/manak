@@ -403,6 +403,7 @@ def admin_generate_pdf(request):
     if request.method == "POST":
         try:
             shape = request.POST["shape"]
+            filename = shape
         except Exception as e:
             print(e)
             shape = "round"
@@ -415,6 +416,7 @@ def admin_generate_pdf(request):
         if str(shape).strip() == 'pear' or str(shape) == 'pear' or str(shape) == 'pear ':
             shape = "pear+"
             filename = "pear"
+        print(filename)
         main_tables = MainTables.objects.filter(shape__iexact=shape)
         data = DataManager.objects.filter(parent_table__in = main_tables)
         excel_creation(data,shape,filename)
@@ -715,7 +717,7 @@ def excel_creation(data,shape,filename):
     title_format = workbook.add_format(
     {
         "bold": 1,
-        "font":"Agency FB",
+        "font":"Arial Black",
         "font_size":24,
         "align": "center",
         "valign": "vcenter",
