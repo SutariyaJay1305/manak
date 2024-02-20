@@ -698,7 +698,7 @@ def remove_changes(request):
     try:
         shape = request.GET['shape']
     except :
-        shape = "round"
+        pass
 
     if shape == "pear":
         shape = "pear+"
@@ -712,7 +712,6 @@ def remove_changes(request):
     # data = DataManager.objects.filter(parent_table__in = main_tables)
     # excel_creation(data,shape)
     # pdfcon(shape)
-    print(shape)
     return JsonResponse({'success': True})
 
 
