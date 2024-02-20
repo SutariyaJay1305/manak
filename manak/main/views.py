@@ -695,11 +695,24 @@ def update_report(request):
         return JsonResponse({'success': True})
 
 def remove_changes(request):
-    DataManager.objects.all().update(increased="",dropped="")
+    try:
+        shape = request.GET['shape']
+    except :
+        shape = "round"
+
+    if shape == "pear":
+        shape = "pear+"
+    main_tables = MainTables.objects.filter(shape__iexact=shape)
+    data = DataManager.objects.filter(parent_table__in = main_tables)
+    data.update(increased="",dropped="")
+    
+ 
+    # DataManager.objects.all().update(increased="",dropped="")
     # main_tables = MainTables.objects.filter(shape__iexact=shape)
     # data = DataManager.objects.filter(parent_table__in = main_tables)
     # excel_creation(data,shape)
     # pdfcon(shape)
+    print(shape)
     return JsonResponse({'success': True})
 
 

@@ -66,9 +66,11 @@
                             <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
                         </svg> Generate Pdf </button>
                     </form>
+                
+                {% if type == "round" %}<button type="button"  id="round" class="btn btn-dark remove_btn">Clear</button>{% elif type == "pointer" %}<button type="button"  id="pointer" class="btn btn-dark remove_btn">Clear</button> {% else %}<button type="button"  id="pear+" class="btn btn-dark remove_btn">Clear</button>{% endif %}
 
-                <button type="button" id="remove_btn" class="btn btn-dark">Clear</button>
-
+                
+      
                   
               </div>
         </div>
@@ -386,12 +388,11 @@
             
     
 
-        var myEl = document.getElementById('remove_btn');
-
+        var myEl = document.getElementsByClassName('remove_btn')[0];
         myEl.addEventListener('click', function() {
             $.ajax({
                 type: 'GET',
-                url: "{% url 'remove_changes' %}",
+                url: "{% url 'remove_changes' %}?shape="+myEl.id,
                 success: function (response) {
                     location.reload();
                 }
