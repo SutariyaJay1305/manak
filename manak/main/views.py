@@ -671,11 +671,14 @@ def update_report(request):
                 if flag :
                     increase = ''
                     drop = ''
-                print(round(int(y)) ,"::",updated_val[count])
-                if custom_round_up(y) < custom_round_up(updated_val[count]):
-                   increase = ','.join([increase, str(x)])
+                
+                if int(round(int(y))) < int(custom_round_up(updated_val[count])):
+                    # print(round(int(y)) ,"::",updated_val[count])
+                    increase = ','.join([increase, str(x)])
+                    drop = drop.replace(str(x),'') #remove str(x) from drop 
                 else:
                     drop = ','.join([drop, str(x)])
+                    increase = increase.replace(str(x),'') #remove str(x) from drop 
                 query[x] = int(updated_val[count])    
                 flag = False
             count += 1 
