@@ -231,7 +231,7 @@
                         </tr>
                         <tr class="text-center">
                             <td class="text-white bg-dark">VVS2</td>
-                            {% if "D_SI2" in x.dropped %}<td class="dropped_cell">{{x.D_VV2 |floatformat:"0" }}</td>{% elif "D_VV2" in x.increased %}<td class="increased_cell">{{x.D_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.D_VV2 |floatformat:"0" }}</td>{% endif %}
+                            {% if "D_VV2" in x.dropped %}<td class="dropped_cell">{{x.D_VV2 |floatformat:"0" }}</td>{% elif "D_VV2" in x.increased %}<td class="increased_cell">{{x.D_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.D_VV2 |floatformat:"0" }}</td>{% endif %}
                             {% if "E_VV2" in x.dropped %}<td class="dropped_cell">{{x.E_VV2 |floatformat:"0" }}</td>{% elif "E_VV2" in x.increased %}<td class="increased_cell">{{x.E_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.E_VV2 |floatformat:"0" }}</td>{% endif %}
                             {% if "F_VV2" in x.dropped %}<td class="dropped_cell">{{x.F_VV2 |floatformat:"0" }}</td>{% elif "F_VV2" in x.increased %}<td class="increased_cell">{{x.F_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.F_VV2 |floatformat:"0" }}</td>{% endif %}
                             {% if "G_VV2" in x.dropped %}<td class="dropped_cell">{{x.G_VV2 |floatformat:"0" }}</td>{% elif "G_VV2" in x.increased %}<td class="increased_cell">{{x.G_VV2 |floatformat:"0" }}</td> {% else %}<td>{{x.G_VV2 |floatformat:"0" }}</td>{% endif %}
