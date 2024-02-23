@@ -924,7 +924,7 @@ def excel_creation(data,shape,filename):
     worksheet.set_row(8,4.5)
 
     worksheet.set_row(9,12)
-    worksheet.merge_range("C10:J10", "Price change : Dark Cell - Highlighted / Bold - Dropped ", price_text)
+    worksheet.merge_range("C10:J10", "Price change : Highlighted - Increased / Bold - Dropped ", price_text)
     
 
     worksheet.merge_range("L10:M10", 'Increased',price_box_up)
