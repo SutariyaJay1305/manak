@@ -21,7 +21,15 @@
     {% block css %}
       <link rel="stylesheet" type="text/css" href="{% static 'style/all.css' %}">
     {% endblock %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-REF0NEVFJF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
+      gtag('config', 'G-REF0NEVFJF');
+    </script>
   </head>
 
   {% include 'general/navbar.html' %}
