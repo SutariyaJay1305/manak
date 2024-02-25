@@ -842,8 +842,8 @@ def excel_creation(data,shape,filename):
 #"font":"Agency FB",
     table_descritption = workbook.add_format(
         {
-        x
-         "font":"Eurostile",
+        
+        "font":"Eurostile",
         "font_size":6,
         "align": "center",
         "valign": "vcenter",
