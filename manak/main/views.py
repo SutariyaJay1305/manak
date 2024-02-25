@@ -839,11 +839,12 @@ def excel_creation(data,shape,filename):
         "fg_color": "white",
 
         })
-
+#"font":"Agency FB",
     table_descritption = workbook.add_format(
         {
-        "font":"Agency FB",
-        "font_size":8,
+        x
+         "font":"Eurostile",
+        "font_size":6,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
