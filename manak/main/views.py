@@ -924,11 +924,11 @@ def excel_creation(data,shape,filename):
     worksheet.set_row(8,4.5)
 
     worksheet.set_row(9,12)
-    worksheet.merge_range("C10:J10", "Price change : Highlighted - Increased / Bold - Dropped ", price_text)
+    worksheet.merge_range("C10:J10", "Price change : Highlighted = Higher/ Bold = Lower ", price_text)
     
 
-    worksheet.merge_range("L10:M10", 'Increased',price_box_up)
-    worksheet.merge_range("N10:O10", 'Dropped',price_box_drop)
+    worksheet.merge_range("L10:M10", 'Higher ↑',price_box_up)
+    worksheet.merge_range("N10:O10", 'Lower ↓',price_box_drop)
    
     # Footer
     footer_font = workbook.add_format(
@@ -964,7 +964,7 @@ def excel_creation(data,shape,filename):
     for x in data:
         if side == 0:
             # Table Title
-            worksheet.merge_range('B'+str(row_1)+':C'+str(row_1), x.parent_table.carat_range,table_tile)
+            worksheet.merge_range('B'+str(row_1)+':C'+str(row_1), str(x.parent_table.carat_range) + str(" CT"),table_tile)
             worksheet.merge_range('E'+str(row_1)+':F'+str(row_1), x.parent_table.tabel_date.strftime("%m/%d/%y"),table_date)
             worksheet.write('I'+str(row_1), x.parent_table.shape,table_tile) 
 
@@ -1066,7 +1066,7 @@ def excel_creation(data,shape,filename):
         else:
 
              # Table Title
-            worksheet.merge_range('L'+str(row_2)+':M'+str(row_2), x.parent_table.carat_range,table_tile)
+            worksheet.merge_range('L'+str(row_2)+':M'+str(row_2), str(x.parent_table.carat_range) + str(" CT"),table_tile)
             worksheet.merge_range('O'+str(row_2)+':P'+str(row_2), x.parent_table.tabel_date.strftime("%m/%d/%y"),table_date)
             worksheet.write('S'+str(row_2), x.parent_table.shape,table_tile) 
 
