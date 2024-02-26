@@ -848,7 +848,7 @@ def excel_creation(data,shape,filename):
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
-        'bottom' : 1
+        # 'bottom' : 1
         })
     
     
