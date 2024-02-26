@@ -843,14 +843,15 @@ def excel_creation(data,shape,filename):
     table_descritption = workbook.add_format(
         {
         
-        "font":"Microsoft Himalaya",
-        "font_size":9,
+        "font":"Tw Cen MT Condensed",
+        "font_size":8,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
-        'bottom' : 1
+        'bottom' : 1,
+       
         })
-    table_descritption.set_margins(top=1.0)
+    # table_descritption.set_margins(top=1)
     
     common_format = {
             "font":"Agency FB",
