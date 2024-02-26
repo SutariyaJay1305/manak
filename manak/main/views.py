@@ -843,8 +843,8 @@ def excel_creation(data,shape,filename):
     table_descritption = workbook.add_format(
         {
         
-        "font":"Myriad Pro Cond",
-        "font_size":8,
+        "font":"Microsoft Himalaya",
+        "font_size":7,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
@@ -1089,7 +1089,7 @@ def excel_creation(data,shape,filename):
             worksheet.write('L'+str(row_2+7), 'SI1',table_heading)
             worksheet.write('L'+str(row_2+8), 'SI2',last_row_table_heading)
 
-            worksheet.merge_range('K'+str(row_2+9)+':S'+str(row_2+9), x.parent_table.text_description,table_descritption)
+            worksheet.merge_range('L'+str(row_2+9)+':S'+str(row_2+9), x.parent_table.text_description,table_descritption)
             # worksheet.merge_range('O'+str(row_2+9)+':S'+str(row_2+9),"",table_descritption)
             
             # row_2 IF +str(row_2+2)
