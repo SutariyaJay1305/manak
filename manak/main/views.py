@@ -850,7 +850,7 @@ def excel_creation(data,shape,filename):
         "fg_color": "white",
         'bottom' : 1
         })
-    
+    table_descritption.set_margins(top=1.0)
     
     common_format = {
             "font":"Agency FB",
