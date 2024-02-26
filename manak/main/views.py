@@ -844,7 +844,7 @@ def excel_creation(data,shape,filename):
         {
         
         "font":"Microsoft Himalaya",
-        "font_size":7,
+        "font_size":8,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",
