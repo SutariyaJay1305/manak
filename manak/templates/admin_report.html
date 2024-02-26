@@ -38,11 +38,13 @@
         </div>
     </div>
     <div class="container">
-        <div class="d-flex ali justify-content-center align-items-center  col-3 col-md-6">
-            <div class="d-inline-block col-3">
+        <div class="d-flex ali justify-content-center align-items-center row ">
+            
+            <div class="d-inline-block col-12  col-sm-3 text-sm-end text-center">
                 <h4 class="title_3">Price change : <u>Highlighted = Higher</u> / <u>Bold = Lower </u> </h4>
             </div>
-            <div class="d-inline-block mx-3 col-md-6">
+            
+            <div class="d-inline-block mx-3 col-md-1 col-6 text-start">
                 <span class="row">
                     <table class="info_table">
                         <tr class="text-center">
@@ -54,34 +56,34 @@
                     </table>
                 </span>
             </div>
-            <div class="dropdown ms-4 col-3 col-md-6">
+            
+            <div class="dropdown ms-4 col-md-2 col-6 mt-1">
                 <b><label for="shapes">Select Report:</label></b>
-                    <select name="shapes" id="shape">
+                <select name="shapes" id="shape">
                         
-                        {% if type == "round" %}<option value="round" disabled selected>Round</option> {% elif type == "pointer" %}<option value="pointer" disabled selected>Pointer</option> {% else %}<option value="pear+" disabled selected>Pear+</option>{% endif %}
-                        <option value="round">Round</option>
-                    <option value="pear+" >Pear+</option>
-                    <option value="pointer" >Pointer</option>
-                    
-                    </select>
-              </div>
-              
-              <div class="ms-4 col-3 col-md-6">
-                    <form>
+                    {% if type == "round" %}<option value="round" disabled selected>Round</option> {% elif type == "pointer" %}<option value="pointer" disabled selected>Pointer</option> {% else %}<option value="pear+" disabled selected>Pear+</option>{% endif %}
+                <option value="round">Round</option>
+                <option value="pear+" >Pear +</option>
+                <option value="pointer" >Pointer</option>
+                
+                </select>
+            </div>
+            
+            <div class="ms-4  col-md-2 col-4 mt-1">
+                <form>
                     {% csrf_token %}
                         <button type="submit" id="generatePDF" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
                             <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
                             <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
                         </svg> Generate Pdf </button>
-                    </form>
-                
-                {% if type == "round" %}<button type="button"  id="round" class="btn btn-dark remove_btn">Clear</button>{% elif type == "pointer" %}<button type="button"  id="pointer" class="btn btn-dark remove_btn">Clear</button> {% else %}<button type="button"  id="pear" class="btn btn-dark remove_btn">Clear</button>{% endif %}
+                </form>
+            </div>
 
-                
-      
-                  
-              </div>
+
+
         </div>
+        {% if type == "round" %}<button type="button"  id="round" class="btn btn-dark remove_btn">Clear</button>{% elif type == "pointer" %}<button type="button"  id="pointer" class="btn btn-dark remove_btn">Clear</button> {% else %}<button type="button"  id="pear" class="btn btn-dark remove_btn">Clear</button>{% endif %}
+
         
     </div>
 
