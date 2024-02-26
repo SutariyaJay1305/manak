@@ -843,8 +843,8 @@ def excel_creation(data,shape,filename):
     table_descritption = workbook.add_format(
         {
         
-        "font":"Eurostile",
-        "font_size":6,
+        "font":"Myriad Pro Cond",
+        "font_size":8,
         "align": "center",
         "valign": "vcenter",
         "fg_color": "white",

@@ -38,11 +38,11 @@
         </div>
     </div>
     <div class="container">
-        <div class="d-flex ali justify-content-center align-items-center ">
-            <div class="d-inline-block ">
+        <div class="d-flex ali justify-content-center align-items-center  col-3 col-md-6">
+            <div class="d-inline-block col-3">
                 <h4 class="title_3">Price change : <u>Highlighted = Higher</u> / <u>Bold = Lower </u> </h4>
             </div>
-            <div class="d-inline-block mx-3">
+            <div class="d-inline-block mx-3 col-md-6">
                 <span class="row">
                     <table class="info_table">
                         <tr class="text-center">
@@ -54,7 +54,7 @@
                     </table>
                 </span>
             </div>
-            <div class="dropdown ms-4">
+            <div class="dropdown ms-4 col-3 col-md-6">
                 <b><label for="shapes">Select Report:</label></b>
                     <select name="shapes" id="shape">
                         
@@ -66,7 +66,7 @@
                     </select>
               </div>
               
-              <div class="ms-4">
+              <div class="ms-4 col-3 col-md-6">
                     <form>
                     {% csrf_token %}
                         <button type="submit" id="generatePDF" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
