@@ -315,6 +315,9 @@ def logoutUser(request):
     logout(request)
     return redirect('index')
 
+def terms(request):
+    return render(request,'terms.html')
+
 def report(request):
     # pdfcon()
     # excel_creation()
